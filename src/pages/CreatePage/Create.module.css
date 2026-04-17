@@ -13,13 +13,11 @@
   flex-direction: column;
   width: 100%;
   max-width: 648px;
-  min-height: 1107px;
   box-sizing: border-box;
   border-radius: 20px;
   background: var(--white_FFFFFF);
   padding: 24px 24px 40px 24px;
   align-items: stretch;
-
   margin: 0 auto;
 }
 

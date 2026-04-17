@@ -3,10 +3,9 @@ import '../../styles/reset.css';
 import styles from '../CreatePage/Create.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
-import PasswordInput from '../../components/input/PasswordInput';
+
 import Button from '../../components/Button/Button';
 
-import PasswordCheck from '../CreatePage/CreateComponents/PasswordCheck';
 import StudyName from '../CreatePage/CreateComponents/StudyName';
 import Introduce from '../CreatePage/CreateComponents/Introduce/Introduce';
 import BackGround from '../CreatePage/CreateComponents/BackGround/BackGround';
@@ -21,8 +20,7 @@ const StudyUpdate = () => {
   console.log('params id:', id);
 
   const [nickname, setNickname] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState('');
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [background, setBackground] = useState('');
@@ -47,18 +45,12 @@ const StudyUpdate = () => {
   }, [id]);
 
   const handleSubmit = async () => {
-    if (password !== passwordCheck) {
-      alert('비밀번호가 일치하지 않습니다');
-      return;
-    }
-
     try {
       const data = {
         nickname,
         title,
         description,
         background,
-        password,
       };
 
       await patchService(id, data);
@@ -87,16 +79,6 @@ const StudyUpdate = () => {
 
         <h3 className={styles.title}>배경</h3>
         <BackGround setBackground={setBackground} />
-
-        <h3 className={styles.title}>비밀번호</h3>
-        <PasswordInput password={password} setPassword={setPassword} />
-
-        <h3 className={styles.title}>비밀번호 확인</h3>
-        <PasswordCheck
-          password={password}
-          setPasswordCheck={setPasswordCheck}
-          passwordCheck={passwordCheck}
-        />
 
         <Button
           btnTxt="수정"
