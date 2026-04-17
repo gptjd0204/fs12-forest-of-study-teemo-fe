@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TodayHabitPage.module.css';
-import HabitList from '../../components/HabitComponents/HabitList';
-import HabitListHeader from '../../components/HabitComponents/HabitListHeader';
+import HabitList from './HabitComponents/HabitList';
+import HabitListHeader from './HabitComponents/HabitListHeader';
 import { useParams } from 'react-router-dom';
-import HabitConfirmModal from '../../components/HabitComponents/HabitConfirmModal';
+import HabitConfirmModal from './HabitComponents/HabitConfirmModal';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
-import HabitHeader from '../../components/HabitComponents/HabitHeader';
+import HabitHeader from './HabitComponents/HabitHeader';
 import {
   getTodayHabits,
   postHabit,
