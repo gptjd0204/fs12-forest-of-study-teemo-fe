@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/reset.css';
 import styles from '../CreatePage/Create.module.css';
+import modalstyles from '../CreatePage/CreateComponents/CreateModal.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
-
 import Button from '../../components/Button/Button';
 
 import StudyName from '../CreatePage/CreateComponents/StudyName';
 import Introduce from '../CreatePage/CreateComponents/Introduce/Introduce';
 import BackGround from '../CreatePage/CreateComponents/BackGround/BackGround';
+import ModalLayout from '../../components/Modal/ModalLayout';
 
 import { getStudy } from '../../services/CreateService';
 import { patchService } from '../../services/CreateService';
@@ -19,10 +20,12 @@ const StudyUpdate = () => {
   const { id } = useParams();
 
   const [nickname, setNickname] = useState('');
-
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [background, setBackground] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,11 +57,19 @@ const StudyUpdate = () => {
 
       await patchService(id, data);
 
-      alert('스터디 수정 완료!');
-      navigate(`/${id}/detail`);
+      setModalMessage('수정이 완료되었습니다');
+      setIsSuccess(true);
+      setModalOpen(true);
     } catch (error) {
       console.error(error);
-      alert('수정 실패');
+    }
+  };
+
+  const handleConfirm = () => {
+    setModalOpen(false);
+
+    if (isSuccess) {
+      navigate(`/${id}/detail`);
     }
   };
 
@@ -85,6 +96,21 @@ const StudyUpdate = () => {
           btnType="button"
           btnStyle="btnCreate"
         />
+
+        {modalOpen && (
+          <ModalLayout>
+            <div className={modalstyles.modalBox}>
+              <p className={modalstyles.modalText}>{modalMessage}</p>
+
+              <button
+                onClick={handleConfirm}
+                className={modalstyles.confirmBtn}
+              >
+                확인
+              </button>
+            </div>
+          </ModalLayout>
+        )}
       </div>
     </div>
   );
