@@ -9,7 +9,7 @@ import Button from '../../components/Button/Button';
 import StudyName from '../CreatePage/CreateComponents/StudyName';
 import Introduce from '../CreatePage/CreateComponents/Introduce/Introduce';
 import BackGround from '../CreatePage/CreateComponents/BackGround/BackGround';
-import ModalLayout from '../../components/Modal/ModalLayout';
+import CreateModal from '../CreatePage/CreateComponents/Modal/CreateModal';
 
 import { getStudy } from '../../services/CreateService';
 import { patchService } from '../../services/CreateService';
@@ -98,10 +98,9 @@ const StudyUpdate = () => {
         />
 
         {modalOpen && (
-          <ModalLayout>
+          <CreateModal onClose={() => setModalOpen(false)}>
             <div className={modalstyles.modalBox}>
               <p className={modalstyles.modalText}>{modalMessage}</p>
-
               <button
                 onClick={handleConfirm}
                 className={modalstyles.confirmBtn}
@@ -109,7 +108,7 @@ const StudyUpdate = () => {
                 확인
               </button>
             </div>
-          </ModalLayout>
+          </CreateModal>
         )}
       </div>
     </div>

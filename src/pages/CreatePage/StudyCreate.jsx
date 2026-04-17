@@ -6,7 +6,7 @@ import modalstyles from '../CreatePage/CreateComponents/CreateModal.module.css';
 import NicknameInput from '../../components/input/NicknameInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import Button from '../../components/Button/Button';
-import ModalLayout from '../../components/Modal/ModalLayout';
+import CreateModal from '../CreatePage/CreateComponents/Modal/CreateModal';
 
 import PasswordCheck from './CreateComponents/PasswordCheck';
 import StudyName from './CreateComponents/StudyName';
@@ -119,10 +119,9 @@ const StudyCreate = () => {
           />
 
           {modalOpen && (
-            <ModalLayout>
+            <CreateModal onClose={() => setModalOpen(false)}>
               <div className={modalstyles.modalBox}>
                 <p className={modalstyles.modalText}>{modalMessage}</p>
-
                 <button
                   className={modalstyles.confirmBtn}
                   onClick={handleConfirm}
@@ -130,7 +129,7 @@ const StudyCreate = () => {
                   확인
                 </button>
               </div>
-            </ModalLayout>
+            </CreateModal>
           )}
         </div>
       </div>
