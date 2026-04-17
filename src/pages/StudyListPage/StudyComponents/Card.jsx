@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Card.module.css';
-import Emoji from '../../Emoji/Emoji';
-import TotalPoint from '../../TotalPoint/TotalPoint';
+import Emoji from '../../../components/Emoji/Emoji';
+import TotalPoint from '../../../components/TotalPoint/TotalPoint';
 import { getEmojis } from '../../../services/StudyDetailService';
 import { saveRecentStudy } from '../../../services/StudyService';
 import {

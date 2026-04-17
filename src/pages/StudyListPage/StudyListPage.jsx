@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Card from '../../components/StudyComponents/StudyList/Card';
-import Pagination from '../../components/StudyComponents/StudyList/Pagination';
-import Search from '../../components/StudyComponents/StudyList/Search';
-import Sort from '../../components/StudyComponents/StudyList/Sort';
+import Card from './StudyComponents/Card';
+import Pagination from './StudyComponents/Pagination';
+import Search from './StudyComponents/Search';
+import Sort from './StudyComponents/Sort';
 import { getRecentStudyList, getStudyList } from '../../services/StudyService';
 import styles from './StudyListPage.module.css';
 

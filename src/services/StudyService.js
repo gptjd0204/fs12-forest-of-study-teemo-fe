@@ -1,4 +1,5 @@
-const STUDY_API_URL = 'http://localhost:8080/api/studies';
+const API_URL = import.meta.env.VITE_API_URL;
+const STUDY_API_URL = `${API_URL}/api/studies`;
 const RECENT_STUDY_LIST_KEY = 'recentStudyList';
 
 ////////////////// N일째 진행 중 데이터 계산 //////////////////
