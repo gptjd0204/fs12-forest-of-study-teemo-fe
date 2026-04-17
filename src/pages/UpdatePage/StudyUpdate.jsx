@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/reset.css';
 import styles from '../CreatePage/Create.module.css';
-import modalstyles from '../CreatePage/CreateComponents/CreateModal.module.css';
+import modalstyles from '../CreatePage/CreateComponents/Modal/CreateModal.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
 import Button from '../../components/Button/Button';
