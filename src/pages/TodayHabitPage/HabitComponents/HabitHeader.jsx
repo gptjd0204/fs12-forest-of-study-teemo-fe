@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../../pages/TodayHabitPage/TodayHabitPage.module.css';
-import LinkButton from '../../components/LinkButton/LinkButton';
+import styles from '../TodayHabitPage.module.css';
+import LinkButton from '../../../components/LinkButton/LinkButton';
 
 const HabitHeader = ({ studyName, id }) => {
   return (

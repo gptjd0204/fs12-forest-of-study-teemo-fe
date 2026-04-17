@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../pages/TodayHabitPage/TodayHabitPage.module.css';
+import styles from '../TodayHabitPage.module.css';
 
 const HabitList = ({ habits, onToggleHabit }) => {
   return (
