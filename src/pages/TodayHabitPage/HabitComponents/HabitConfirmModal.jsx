@@ -1,5 +1,5 @@
 import React from 'react';
-import HabitModal from '../Modal/HabitModal/HabitModal';
+import HabitModal from '../../../components/Modal/HabitModal/HabitModal';
 import HabitCreateForm from './HabitCreateForm';
 
 const HabitConfirmModal = ({ onClose, onConfirm, newHabit, setNewHabit }) => {

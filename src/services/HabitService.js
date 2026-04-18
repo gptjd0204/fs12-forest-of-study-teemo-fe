@@ -1,8 +1,8 @@
-const apiUrl = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 // 습관 조회
 export const getTodayHabits = async (id) => {
-  const response = await fetch(`${apiUrl}/api/habits/${id}/today`);
+  const response = await fetch(`${API_URL}/api/habits/${id}/today`);
   const result = await response.json();
 
   if (!response.ok || !result.success) {
@@ -14,7 +14,7 @@ export const getTodayHabits = async (id) => {
 
 // 습관 생성
 export const postHabit = async (id, name) => {
-  const response = await fetch(`${apiUrl}/api/habits/${id}`, {
+  const response = await fetch(`${API_URL}/api/habits/${id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const postHabit = async (id, name) => {
 // 습관 토글
 export const toggleHabit = async (studyId, habitId) => {
   const response = await fetch(
-    `${apiUrl}/api/habits/${studyId}/${habitId}/today`,
+    `${API_URL}/api/habits/${studyId}/${habitId}/today`,
     {
       method: 'PATCH',
     },
