@@ -95,18 +95,17 @@ const TodayHabitPage = () => {
   // 습관 수정
   const onConfirmEditHandler = () => {
     const hasEmptyHabit = editHabits.some((h) => !h.name.trim());
-
     if (hasEmptyHabit) {
       console.log('빈 값 있음');
 
       return;
     }
-
     console.log('현재 editHabits:', editHabits);
     console.log('종료 예정 ids:', endHabitIds);
     onCloseModalHandler();
   };
 
+  // 습관 추가
   const onAddHabitHandler = () => {
     setEditHabits((prev) => [
       ...prev,
@@ -116,6 +115,18 @@ const TodayHabitPage = () => {
         isNew: true,
       },
     ]);
+  };
+
+  // 습관 종료
+  const onRemoveHabitHandler = (habit) => {
+    if (habit.isNew) {
+      setEditHabits((prev) => prev.filter((h) => h.id !== habit.id));
+      return;
+    }
+    setEndHabitIds((prev) => [...prev, habit.id]);
+    setEditHabits((prev) => prev.filter((h) => h.id !== habit.id));
+    console.log('현재 editHabits:', editHabits);
+    console.log('종료 예정 ids:', endHabitIds);
   };
 
   return (
@@ -141,6 +152,7 @@ const TodayHabitPage = () => {
           editHabits={editHabits}
           setEditHabits={setEditHabits}
           onAddHabit={onAddHabitHandler}
+          onRemoveHabit={onRemoveHabitHandler}
         />
       )}
     </>
