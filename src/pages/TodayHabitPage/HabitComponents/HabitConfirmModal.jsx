@@ -7,11 +7,16 @@ const HabitConfirmModal = ({
   onConfirm,
   editHabits,
   setEditHabits,
+  onAddHabit,
 }) => {
   return (
     <>
       <HabitModal title="습관 목록" onClose={onClose} onConfirm={onConfirm}>
-        <HabitEditForm editHabits={editHabits} setEditHabits={setEditHabits} />
+        <HabitEditForm
+          editHabits={editHabits}
+          setEditHabits={setEditHabits}
+          onAddHabit={onAddHabit}
+        />
       </HabitModal>
     </>
   );

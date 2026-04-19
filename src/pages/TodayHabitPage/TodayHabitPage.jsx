@@ -107,6 +107,17 @@ const TodayHabitPage = () => {
     onCloseModalHandler();
   };
 
+  const onAddHabitHandler = () => {
+    setEditHabits((prev) => [
+      ...prev,
+      {
+        id: `temp-${Date.now()}`,
+        name: '',
+        isNew: true,
+      },
+    ]);
+  };
+
   return (
     <>
       <div className="wrapper">
@@ -129,6 +140,7 @@ const TodayHabitPage = () => {
           onConfirm={onConfirmEditHandler}
           editHabits={editHabits}
           setEditHabits={setEditHabits}
+          onAddHabit={onAddHabitHandler}
         />
       )}
     </>
