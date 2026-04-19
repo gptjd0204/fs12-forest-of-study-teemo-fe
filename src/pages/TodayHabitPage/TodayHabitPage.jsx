@@ -19,9 +19,12 @@ const TodayHabitPage = () => {
   const [habits, setHabits] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [togglingId, setTogglingId] = useState(null);
+  const [editHabits, setEditHabits] = useState([]);
+  const [endHabitIds, setEndHabitIds] = useState([]);
 
   const { id } = useParams();
 
+  // 오늘의 습관 조회
   const fetchHabits = async () => {
     try {
       const data = await getTodayHabits(id);
@@ -36,7 +39,7 @@ const TodayHabitPage = () => {
     fetchHabits();
   }, [id]);
 
-  // 습관 토글
+  // 습관 완료 토글
   const onToggleHabitHandler = async (habitId) => {
     if (togglingId === habitId) return;
 
@@ -57,17 +60,21 @@ const TodayHabitPage = () => {
     }
   };
 
-  // 모달 열기
+  // 습관 수정 모달 열기
   const onOpenModalHandler = () => {
+    setEditHabits(habits);
+    setEndHabitIds([]);
     setIsModalOpen(true);
   };
 
-  // 모달 닫기
+  // 습관 수정 모달 닫기
   const onCloseModalHandler = () => {
     setIsModalOpen(false);
-    setNewHabit('');
+    setEditHabits([]);
+    setEndHabitIds([]);
   };
 
+  // 습관 생성
   const createHabit = async () => {
     if (!newHabit.trim() || isSubmitting) {
       return;
