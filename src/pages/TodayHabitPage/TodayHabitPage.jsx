@@ -75,21 +75,36 @@ const TodayHabitPage = () => {
   };
 
   // 습관 생성
-  const createHabit = async () => {
-    if (!newHabit.trim() || isSubmitting) {
+  // const createHabit = async () => {
+  //   if (!newHabit.trim() || isSubmitting) {
+  //     return;
+  //   }
+
+  //   try {
+  //     setIsSubmitting(true);
+  //     await postHabit(id, newHabit);
+  //     onCloseModalHandler();
+  //     fetchHabits();
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
+  // 습관 수정
+  const onConfirmEditHandler = () => {
+    const hasEmptyHabit = editHabits.some((h) => !h.name.trim());
+
+    if (hasEmptyHabit) {
+      console.log('빈 값 있음');
+
       return;
     }
 
-    try {
-      setIsSubmitting(true);
-      await postHabit(id, newHabit);
-      onCloseModalHandler();
-      fetchHabits();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    console.log('현재 editHabits:', editHabits);
+    console.log('종료 예정 ids:', endHabitIds);
+    onCloseModalHandler();
   };
 
   return (
@@ -111,9 +126,9 @@ const TodayHabitPage = () => {
       {isModalOpen && (
         <HabitConfirmModal
           onClose={onCloseModalHandler}
-          onConfirm={createHabit}
-          newHabit={newHabit}
-          setNewHabit={setNewHabit}
+          onConfirm={onConfirmEditHandler}
+          editHabits={editHabits}
+          setEditHabits={setEditHabits}
         />
       )}
     </>
