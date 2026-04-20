@@ -6,8 +6,7 @@
   margin: 20px auto 0;
 }
 
-.navButton,
-.pageButton {
+.button {
   min-width: 40px;
   height: 40px;
   display: flex;
@@ -19,6 +18,11 @@
   border-radius: 10px;
   border: 1px solid transparent;
   background: transparent;
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .pageNumbers {
@@ -42,8 +46,7 @@
     gap: 4px;
   }
 
-  .navButton,
-  .pageButton {
+  .button {
     min-width: 34px;
     height: 34px;
     font-size: 14px;

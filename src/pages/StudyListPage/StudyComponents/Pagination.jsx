@@ -15,7 +15,7 @@ const Pagination = ({
     <nav className={styles.pagination} aria-label="페이지네이션">
       <button
         type="button"
-        className={styles.navButton}
+        className={`${styles.button} ${styles.pageButton}`}
         aria-label="첫 페이지"
         onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
@@ -24,7 +24,7 @@ const Pagination = ({
       </button>
       <button
         type="button"
-        className={styles.navButton}
+        className={`${styles.button} ${styles.pageButton}`}
         aria-label="이전 페이지"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -40,7 +40,7 @@ const Pagination = ({
             <button
               key={page}
               type="button"
-              className={`${styles.pageButton} ${isActive ? styles.active : ''}`}
+              className={`${styles.button} ${styles.pageButton} ${isActive ? styles.active : ''}`}
               aria-current={isActive ? 'page' : undefined}
               onClick={() => onPageChange(page)}
             >
@@ -52,7 +52,7 @@ const Pagination = ({
 
       <button
         type="button"
-        className={styles.navButton}
+        className={`${styles.button} ${styles.pageButton}`}
         aria-label="다음 페이지"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
@@ -61,7 +61,7 @@ const Pagination = ({
       </button>
       <button
         type="button"
-        className={styles.navButton}
+        className={`${styles.button} ${styles.pageButton}`}
         aria-label="마지막 페이지"
         onClick={() => onPageChange(totalPages)}
         disabled={currentPage === totalPages}
