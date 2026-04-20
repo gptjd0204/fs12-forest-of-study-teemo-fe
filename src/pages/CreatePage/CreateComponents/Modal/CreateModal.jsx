@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './CreateModal.module.css';
 
 const CreateModal = ({ children, onClose }) => {

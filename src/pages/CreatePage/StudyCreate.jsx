@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../styles/reset.css';
 import styles from './Create.module.css';
 import modalstyles from './CreateComponents/Modal/CreateModal.module.css';
