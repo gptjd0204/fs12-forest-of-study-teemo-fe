@@ -1,6 +1,6 @@
 import styles from '../LogPage.module.css';
 import { formattedTime } from '../../../utils/formattedTime';
-import { formatDate, formatKST } from "../../../utils/formattedDate";
+import { formatKST } from "../../../utils/formattedDate";
 import { calculateDailyTotals } from '../../../utils/logCalculator';
 
 const LogList = ({ logType, pointLogs, focusLogs }) => {
