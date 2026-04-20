@@ -276,8 +276,6 @@ const TodayFocus = () => {
             <Timer
               timer={timerCount}
               toggleForm={toggleForm}
-              targetDuration={targetDuration}
-              setTargetDuration={setTargetDuration}
               timerStatus={timerStatus}
               onStart={timerStartHandler}
               onPause={timerPauseHandler}
