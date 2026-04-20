@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from "./LogPage.module.css";
-import LogHeader from './LogHeader';
-import LogDateSelector from './LogDateSelector';
-import LogList from './LogList';
+import LogHeader from './components/LogHeader';
+import LogDateSelector from './components/LogDateSelector';
+import LogList from './components/LogList';
 import { getLogs } from '../../services/LogService';
 import { formatDate } from '../../utils/formattedDate';
 
 
-const Logs = () => {
+const LogPage = () => {
   const { studyId } = useParams();
   const [logType, setLogType] = useState("focus");
   const [date, setDate] = useState(new Date());
@@ -55,4 +55,4 @@ const Logs = () => {
   );
 };
 
-export default Logs;
+export default LogPage;
