@@ -1,11 +1,11 @@
 import styles from './TotalPoints.module.css';
 import TotalPoint from '../../../../components/TotalPoint/TotalPoint';
 
-const TotalPoints = ({ studyId }) => {
+const TotalPoints = ({ points }) => {
   return (
     <div className={styles.pointContainer}>
       <p>현재까지 획득한 포인트</p>
-      <TotalPoint id={studyId} size={'m'} />
+      <TotalPoint size={'m'} isIndividual={true} points={points} />
     </div>
   );
 };

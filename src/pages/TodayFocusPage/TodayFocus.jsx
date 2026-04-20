@@ -15,6 +15,7 @@ import {
   updateTargetDuration,
 } from '../../services/TimerService';
 import Toast from '../../components/Toast/Toast';
+import { getTotalPoint } from '../../services/PointService';
 
 const TodayFocus = () => {
   const { id } = useParams();
@@ -33,6 +34,7 @@ const TodayFocus = () => {
   const [toastShow, setToastShow] = useState(false);
   const [toastType, setToastType] = useState('');
   const [toastMsg, setToastMsg] = useState('');
+  const [totalPoint, setTotalPoint] = useState(0);
 
   const timerRef = useRef();
 
@@ -59,6 +61,7 @@ const TodayFocus = () => {
     try {
       const fetchTimer = async () => {
         const data = await getTimer(id);
+        const totalPointData = await getTotalPoint(id);
         setTitle(data.title);
         if (!data.timer) {
           initTimer();
@@ -67,6 +70,7 @@ const TodayFocus = () => {
         }
         const getTimerData = data.timer;
 
+        setTotalPoint(totalPointData);
         setTargetDuration(getTimerData.targetDuration);
         setTimerStatus(getTimerData.status);
         setTimerCount(
@@ -223,6 +227,7 @@ const TodayFocus = () => {
     const points = await updateComplete(id);
     clearInterval(timerRef.current);
     timerRef.current = null;
+    setTotalPoint((prev) => prev + points);
     initTimer();
     setTimerToast('success', points);
   };
@@ -233,7 +238,7 @@ const TodayFocus = () => {
         <div className={styles.focusWrapper}>
           <div>
             <FocusHeader studyId={id} title={title} />
-            <TotalPoints studyId={id} />
+            <TotalPoints points={totalPoint} />
           </div>
           <main className={styles.timerWrapper}>
             <div className={styles.timerHeader}>
