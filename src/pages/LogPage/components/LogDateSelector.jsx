@@ -1,17 +1,9 @@
-import styles from "./LogPage.module.css";
-import arrowLeft from '../../assets/icons/ic_arrow_left_big.svg';
-import arrowRight from '../../assets/icons/ic_arrow_right_big.svg';
+import styles from "../LogPage.module.css";
+import arrowLeft from '../../../assets/icons/ic_arrow_left_big.svg';
+import arrowRight from '../../../assets/icons/ic_arrow_right_big.svg';
+import { checkIsToday } from "../../../utils/formattedDate";
 
 const LogDateSelector = ({ date, setDate, formatDate }) => {
-  
-  const isToday = () => {
-    const today = new Date().toLocaleDateString();
-    const selectedDate = date.toLocaleDateString();
-
-    return today === selectedDate;
-  }
-
-
     const prevDateHandler = () => {
       const newDate = new Date(date);
       newDate.setDate(newDate.getDate() - 1);
@@ -42,7 +34,7 @@ const LogDateSelector = ({ date, setDate, formatDate }) => {
       </span>
       <button 
         onClick={nextDateHandler}
-        style={{ visibility: isToday() ? "hidden" : "visible"}}>
+        style={{ visibility: checkIsToday(date) ? "hidden" : "visible"}}>
         <img alt="다음 날짜" src={arrowRight}/>
       </button>
     </div>
