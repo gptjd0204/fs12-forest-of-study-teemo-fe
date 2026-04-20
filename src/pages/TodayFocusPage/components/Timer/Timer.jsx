@@ -6,7 +6,7 @@ import icStop from '../../../../assets/icons/ic_stop.svg';
 import { formattedTime } from '../../../../utils/formattedTime';
 
 const Timer = ({
-  timer,
+  timerCount,
   toggleForm,
   timerStatus,
   onStart,
@@ -17,10 +17,10 @@ const Timer = ({
   return (
     <div className={styles.timerContainer}>
       {timerStatus === 'COMPLETED' ? (
-        <h3 className={styles.complete}>-{formattedTime(timer)}</h3>
+        <h3 className={styles.complete}>-{formattedTime(timerCount)}</h3>
       ) : (
         <h3 className={timerStatus !== 'CANCELED' ? styles.inProgress : ''}>
-          {formattedTime(timer)}
+          {formattedTime(timerCount)}
         </h3>
       )}
       <div className={styles.timerControlContainer}>
