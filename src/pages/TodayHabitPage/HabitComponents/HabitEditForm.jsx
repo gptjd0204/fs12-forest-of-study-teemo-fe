@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../TodayHabitPage.module.css';
 
 const HabitEditForm = ({
@@ -6,6 +6,7 @@ const HabitEditForm = ({
   setEditHabits,
   onAddHabit,
   onRemoveHabit,
+  errorIndexes,
 }) => {
   const changeHabitHandler = (id, value) => {
     setEditHabits((prev) =>
@@ -16,12 +17,14 @@ const HabitEditForm = ({
   return (
     <>
       <div className={styles.modifyList}>
-        {editHabits.map((h) => (
+        {editHabits.map((h, index) => (
           <div key={h.id} className={styles.modifyItem}>
             <input
               value={h.name}
               onChange={(e) => changeHabitHandler(h.id, e.target.value)}
-              className={styles.habitInput}
+              className={`${styles.habitInput} ${
+                errorIndexes.includes(index) ? styles.error : ''
+              }`}
             />
             <button
               type="button"

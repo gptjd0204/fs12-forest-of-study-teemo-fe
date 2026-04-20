@@ -24,6 +24,7 @@ const TodayHabitPage = () => {
   const [togglingId, setTogglingId] = useState(null);
   const [editHabits, setEditHabits] = useState([]);
   const [endHabitIds, setEndHabitIds] = useState([]);
+  const [errorIndexes, setErrorIndexes] = useState([]);
 
   const { id } = useParams();
 
@@ -82,10 +83,16 @@ const TodayHabitPage = () => {
   const onConfirmEditHandler = async () => {
     if (isSubmitting) return;
 
-    const hasEmptyHabit = editHabits.some((h) => !h.name.trim());
+    const emptyIndexes = editHabits
+      .map((h, index) => (!h.name.trim() ? index : -1))
+      .filter((index) => index !== -1);
 
-    if (hasEmptyHabit) {
-      console.log('이름은 필수 입력값입니다.');
+    if (emptyIndexes.length > 0) {
+      setErrorIndexes(emptyIndexes);
+      setTimeout(() => {
+        setErrorIndexes([]);
+      }, 500);
+
       return;
     }
 
@@ -165,6 +172,7 @@ const TodayHabitPage = () => {
           setEditHabits={setEditHabits}
           onAddHabit={onAddHabitHandler}
           onRemoveHabit={onRemoveHabitHandler}
+          errorIndexes={errorIndexes}
         />
       )}
     </>
