@@ -61,21 +61,36 @@ const TodayFocus = () => {
     try {
       const fetchTimer = async () => {
         const data = await getTimer(id);
+        const timerData = data.timer;
         const totalPointData = await getTotalPoint(id);
         setTitle(data.title);
-        if (!data.timer) {
+        if (!timerData) {
           initTimer();
           await createTimer(id);
           return;
         }
-        const getTimerData = data.timer;
 
         setTotalPoint(totalPointData);
-        setTargetDuration(getTimerData.targetDuration);
-        setTimerStatus(getTimerData.status);
-        setTimerCount(
-          getTimerData.targetDuration - getTimerData.elapsedTime + 700,
-        );
+        setTargetDuration(timerData.targetDuration);
+        setTimerStatus(timerData.status);
+        // 타이머 남은 시간 계산 로직
+        if (timerData.status === 'IN_PROGRESS') {
+          const now = Date.now();
+          const lastStartedAt = new Date(timerData.lastStartedAt);
+
+          const timeDiff = now - lastStartedAt;
+          const totalElapsedTime = timerData.elapsedTime + timeDiff;
+          const remainingTime = timerData.targetDuration - totalElapsedTime;
+
+          if (remainingTime < 0) {
+            setTimerStatus('COMPLETED');
+            setTimerCount(totalElapsedTime - timerData.targetDuration + 700);
+          } else {
+            setTimerCount(remainingTime + 700);
+          }
+        } else {
+          setTimerCount(timerData.targetDuration - timerData.elapsedTime + 700);
+        }
       };
 
       fetchTimer();
@@ -105,7 +120,7 @@ const TodayFocus = () => {
     return () => {
       clearInterval(timerRef.current);
     };
-  }, [id, timerStatus]);
+  }, [timerStatus]);
 
   // 토스트 메시지 출력
   useEffect(() => {
