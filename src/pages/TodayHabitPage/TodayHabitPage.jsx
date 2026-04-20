@@ -80,6 +80,8 @@ const TodayHabitPage = () => {
 
   // 습관 수정
   const onConfirmEditHandler = async () => {
+    if (isSubmitting) return;
+
     const hasEmptyHabit = editHabits.some((h) => !h.name.trim());
 
     if (hasEmptyHabit) {
@@ -98,6 +100,7 @@ const TodayHabitPage = () => {
 
       return originalHabit.name !== eH.name.trim();
     });
+
     try {
       setIsSubmitting(true);
 
