@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/reset.css';
 import styles from '../CreatePage/Create.module.css';
-import modalstyles from '../CreatePage/CreateComponents/Modal/CreateModal.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
 import Button from '../../components/Button/Button';
@@ -9,7 +8,7 @@ import Button from '../../components/Button/Button';
 import StudyName from '../CreatePage/CreateComponents/StudyName';
 import Introduce from '../CreatePage/CreateComponents/Introduce/Introduce';
 import BackGround from '../CreatePage/CreateComponents/BackGround/BackGround';
-import CreateModal from '../CreatePage/CreateComponents/Modal/CreateModal';
+import ModalLayout from '../../components/Modal/ModalLayout';
 
 import { getStudy } from '../../services/CreateService';
 import { patchService } from '../../services/CreateService';
@@ -98,25 +97,20 @@ const StudyUpdate = () => {
         />
 
         {modalOpen && (
-          <CreateModal onClose={() => setModalOpen(false)}>
-            <div className={modalstyles.modalBox}>
-              <p className={modalstyles.modalText}>{modalMessage}</p>
-              {/* <button
-                onClick={handleConfirm}
-                className={modalstyles.confirmBtn}
-              >
-                확인
-              </button> */}
-              <div className={modalstyles.confirmBtn}>
-                <Button
-                  btnTxt="확인"
-                  btnStyle="btnCreate"
-                  onClick={handleConfirm}
-                  btnType="button"
-                />
-              </div>
+          <ModalLayout className={styles.modalBox}>
+            <div className={styles.modalText}>
+              <p>{modalMessage}</p>
             </div>
-          </CreateModal>
+
+            <div className={styles.confirmBtn}>
+              <Button
+                btnTxt={'확인'}
+                btnStyle="btnCreate"
+                onClick={handleConfirm}
+                btnType={'button'}
+              />
+            </div>
+          </ModalLayout>
         )}
       </div>
     </div>

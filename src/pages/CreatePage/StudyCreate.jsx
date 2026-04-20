@@ -1,11 +1,10 @@
 import '../../styles/reset.css';
 import styles from './Create.module.css';
-import modalstyles from './CreateComponents/Modal/CreateModal.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import Button from '../../components/Button/Button';
-import CreateModal from '../CreatePage/CreateComponents/Modal/CreateModal';
+import ModalLayout from '../../components/Modal/ModalLayout';
 
 import PasswordCheck from './CreateComponents/PasswordCheck';
 import StudyName from './CreateComponents/StudyName';
@@ -118,25 +117,20 @@ const StudyCreate = () => {
           />
 
           {modalOpen && (
-            <CreateModal onClose={() => setModalOpen(false)}>
-              <div className={modalstyles.modalBox}>
-                <p className={modalstyles.modalText}>{modalMessage}</p>
-                {/* <button
-                  className={modalstyles.confirmBtn}
-                  onClick={handleConfirm}
-                >
-                  확인
-                </button> */}
-                <div className={modalstyles.confirmBtn}>
-                  <Button
-                    btnTxt="확인"
-                    btnStyle="btnCreate"
-                    onClick={handleConfirm}
-                    btnType="button"
-                  />
-                </div>
+            <ModalLayout className={styles.modalBox}>
+              <div className={styles.modalText}>
+                <p>{modalMessage}</p>
               </div>
-            </CreateModal>
+
+              <div className={styles.confirmBtn}>
+                <Button
+                  btnTxt={'확인'}
+                  btnStyle="btnCreate"
+                  onClick={handleConfirm}
+                  btnType={'button'}
+                />
+              </div>
+            </ModalLayout>
           )}
         </div>
       </div>
