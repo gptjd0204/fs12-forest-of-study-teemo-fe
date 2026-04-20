@@ -6,17 +6,18 @@
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 200px;
+  height: 250px;
 }
 
 .modalText {
   text-align: center;
   font-size: 24px;
   font-weight: 900;
+  margin-top: 20px;
 }
 
 .confirmBtn {
-  margin-top: 85px;
+  margin-top: 80px;
   border-radius: 20px;
   background-color: var(--brand_99C08E);
   color: var(--white_FFFFFF);
@@ -41,16 +42,6 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 110;
-}
-
-.container {
-  padding: 40px 24px;
-  border-radius: 20px;
-  background-color: var(--white_FFFFFF);
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
 }
 
 @media (max-width: 768px) {

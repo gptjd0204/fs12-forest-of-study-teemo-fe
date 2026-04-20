@@ -101,12 +101,20 @@ const StudyUpdate = () => {
           <CreateModal onClose={() => setModalOpen(false)}>
             <div className={modalstyles.modalBox}>
               <p className={modalstyles.modalText}>{modalMessage}</p>
-              <button
+              {/* <button
                 onClick={handleConfirm}
                 className={modalstyles.confirmBtn}
               >
                 확인
-              </button>
+              </button> */}
+              <div className={modalstyles.confirmBtn}>
+                <Button
+                  btnTxt="확인"
+                  btnStyle="btnCreate"
+                  onClick={handleConfirm}
+                  btnType="button"
+                />
+              </div>
             </div>
           </CreateModal>
         )}
