@@ -27,8 +27,8 @@ const TotalPoint = ({ id, size, theme, isIndividual = false, points = 0 }) => {
       setTotal(totalPoint);
     };
 
-    fetchTotalPoint();
-  }, [id, total]);
+    !isIndividual && fetchTotalPoint();
+  }, [id, total, isIndividual]);
 
   return (
     <div
