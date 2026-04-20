@@ -15,6 +15,7 @@ import HabitListHeader from './HabitComponents/HabitListHeader';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 
 const TodayHabitPage = () => {
+  const [studyUser, setStudyUser] = useState('');
   const [studyName, setStudyName] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newHabit, setNewHabit] = useState('');
@@ -31,6 +32,7 @@ const TodayHabitPage = () => {
     try {
       const data = await getTodayHabits(id);
       setStudyName(data.studyTitle);
+      setStudyUser(data.studyNickname);
       setHabits(data.habits);
     } catch (error) {
       console.error(error);
@@ -141,7 +143,7 @@ const TodayHabitPage = () => {
       <div className="wrapper">
         <div className={styles.bodyWrapper}>
           <section className={styles.header}>
-            <HabitHeader studyName={studyName} id={id} />
+            <HabitHeader studyUser={studyUser} studyName={studyName} id={id} />
             <CurrentTime />
           </section>
           <section className={styles.mainSection}>
