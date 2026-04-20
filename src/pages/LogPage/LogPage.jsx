@@ -31,24 +31,29 @@ const LogPage = () => {
   return (
     // 페이지 전체 컨테이너
     <div className="wrapper">
+
+      {/** 헤더 */}
       <LogHeader 
         id={id}
         logType={logType}
         setLogType={setLogType}
       />
+
+      {/** 현재 시간, 라디오버튼 */}
       <div className={styles.logWrapper}>
         <LogDateSelector 
           date={date}
           setDate={setDate}
           formatDate={formatDate}
         />
+
+        {/** 로그 리스트 */}
         <LogList 
           logType={logType}
           pointLogs={pointLogs}
           focusLogs={focusLogs}
         />
       </div>
-      
     </div>
   );
 };
