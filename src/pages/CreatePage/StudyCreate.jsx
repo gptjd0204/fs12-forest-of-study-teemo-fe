@@ -1,10 +1,10 @@
-import React from 'react';
 import '../../styles/reset.css';
 import styles from './Create.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import Button from '../../components/Button/Button';
+import ModalLayout from '../../components/Modal/ModalLayout';
 
 import PasswordCheck from './CreateComponents/PasswordCheck';
 import StudyName from './CreateComponents/StudyName';
@@ -23,15 +23,20 @@ const StudyCreate = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [background, setBackground] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [redirectUrl, setRedirectUrl] = useState(null);
 
   const handleSubmit = async () => {
     if (!nickname.trim() || !title.trim() || !background || !password.trim()) {
-      alert('필수 조건을 충족하지 못했습니다.');
+      setModalMessage('필수 항목을 입력해주세요.');
+      setModalOpen(true);
       return;
     }
 
     if (password !== passwordCheck) {
-      alert('비밀번호가 일치하지 않습니다');
+      setModalMessage('비밀번호가 일치하지 않습니다');
+      setModalOpen(true);
       return;
     }
 
@@ -47,15 +52,26 @@ const StudyCreate = () => {
       const res = await postStudy(data);
 
       if (!res?.success) {
-        alert(res?.message || '스터디 생성 실패');
+        setModalMessage(res?.message || '스터디 생성 실패');
+        setModalOpen(true);
         return;
       }
 
-      alert('스터디 생성 완료!');
-      navigate(`/${res.data.id}/detail`);
+      setModalMessage('스터디 생성 완료!');
+      setRedirectUrl(`/${res.data.id}/detail`);
+      setModalOpen(true);
     } catch (error) {
       console.error(error);
-      alert('서버 오류로 스터디 생성 실패');
+      setModalMessage('스터디 생성 실패');
+      setModalOpen(true);
+    }
+  };
+
+  const handleConfirm = () => {
+    setModalOpen(false);
+
+    if (redirectUrl) {
+      navigate(redirectUrl);
     }
   };
 
@@ -99,6 +115,23 @@ const StudyCreate = () => {
             btnType="button"
             btnStyle="btnCreate"
           />
+
+          {modalOpen && (
+            <ModalLayout className={styles.modalBox}>
+              <div className={styles.modalText}>
+                <p>{modalMessage}</p>
+              </div>
+
+              <div className={styles.confirmBtn}>
+                <Button
+                  btnTxt={'확인'}
+                  btnStyle="btnCreate"
+                  onClick={handleConfirm}
+                  btnType={'button'}
+                />
+              </div>
+            </ModalLayout>
+          )}
         </div>
       </div>
     </>

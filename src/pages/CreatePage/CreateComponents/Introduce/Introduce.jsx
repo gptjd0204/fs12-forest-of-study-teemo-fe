@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Introduce.module.css';
 
 const Introduce = ({ description, setDescription }) => {
