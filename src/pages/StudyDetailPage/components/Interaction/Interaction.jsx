@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './Interaction.module.css';
 
-import Toast from '../../Toast/Toast';
+import Toast from '../../../../components/Toast/Toast';
 
 const Interaction = ({ onClick, onShare }) => {
   return (

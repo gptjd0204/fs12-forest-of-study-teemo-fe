@@ -1,0 +1,38 @@
+/* modal form */
+.formMessage {
+  text-align: center;
+  color: var(--gray_818181);
+  font-size: 18px;
+}
+
+.formInputField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+
+  margin: 28px 0 16px 0;
+}
+
+.formInputField > label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modalMsgBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 150px;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modalBtnBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
