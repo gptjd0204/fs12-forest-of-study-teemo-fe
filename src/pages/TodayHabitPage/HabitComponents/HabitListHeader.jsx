@@ -6,7 +6,7 @@ const HabitListHeader = ({ onOpenModal }) => {
     <>
       <div className={styles.listHeader}>
         <h2 className={styles.listTitle}>오늘의 습관</h2>
-        <button className={styles.listConfirm} onClick={onOpenModal}>
+        <button className={styles.listConfirmBtn} onClick={onOpenModal}>
           목록 수정
         </button>
       </div>

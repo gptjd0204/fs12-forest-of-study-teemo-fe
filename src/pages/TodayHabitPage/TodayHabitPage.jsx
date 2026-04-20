@@ -19,9 +19,12 @@ const TodayHabitPage = () => {
   const [habits, setHabits] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [togglingId, setTogglingId] = useState(null);
+  const [editHabits, setEditHabits] = useState([]);
+  const [endHabitIds, setEndHabitIds] = useState([]);
 
   const { id } = useParams();
 
+  // 오늘의 습관 조회
   const fetchHabits = async () => {
     try {
       const data = await getTodayHabits(id);
@@ -36,7 +39,7 @@ const TodayHabitPage = () => {
     fetchHabits();
   }, [id]);
 
-  // 습관 토글
+  // 습관 완료 토글
   const onToggleHabitHandler = async (habitId) => {
     if (togglingId === habitId) return;
 
@@ -57,32 +60,73 @@ const TodayHabitPage = () => {
     }
   };
 
-  // 모달 열기
+  // 습관 수정 모달 열기
   const onOpenModalHandler = () => {
+    setEditHabits(habits);
+    setEndHabitIds([]);
     setIsModalOpen(true);
   };
 
-  // 모달 닫기
+  // 습관 수정 모달 닫기
   const onCloseModalHandler = () => {
     setIsModalOpen(false);
-    setNewHabit('');
+    setEditHabits([]);
+    setEndHabitIds([]);
   };
 
-  const createHabit = async () => {
-    if (!newHabit.trim() || isSubmitting) {
+  // 습관 생성
+  // const createHabit = async () => {
+  //   if (!newHabit.trim() || isSubmitting) {
+  //     return;
+  //   }
+
+  //   try {
+  //     setIsSubmitting(true);
+  //     await postHabit(id, newHabit);
+  //     onCloseModalHandler();
+  //     fetchHabits();
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
+  // 습관 수정
+  const onConfirmEditHandler = () => {
+    const hasEmptyHabit = editHabits.some((h) => !h.name.trim());
+    if (hasEmptyHabit) {
+      console.log('빈 값 있음');
+
       return;
     }
+    console.log('현재 editHabits:', editHabits);
+    console.log('종료 예정 ids:', endHabitIds);
+    onCloseModalHandler();
+  };
 
-    try {
-      setIsSubmitting(true);
-      await postHabit(id, newHabit);
-      onCloseModalHandler();
-      fetchHabits();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
+  // 습관 추가
+  const onAddHabitHandler = () => {
+    setEditHabits((prev) => [
+      ...prev,
+      {
+        id: `temp-${Date.now()}`,
+        name: '',
+        isNew: true,
+      },
+    ]);
+  };
+
+  // 습관 종료
+  const onRemoveHabitHandler = (habit) => {
+    if (habit.isNew) {
+      setEditHabits((prev) => prev.filter((h) => h.id !== habit.id));
+      return;
     }
+    setEndHabitIds((prev) => [...prev, habit.id]);
+    setEditHabits((prev) => prev.filter((h) => h.id !== habit.id));
+    console.log('현재 editHabits:', editHabits);
+    console.log('종료 예정 ids:', endHabitIds);
   };
 
   return (
@@ -104,9 +148,11 @@ const TodayHabitPage = () => {
       {isModalOpen && (
         <HabitConfirmModal
           onClose={onCloseModalHandler}
-          onConfirm={createHabit}
-          newHabit={newHabit}
-          setNewHabit={setNewHabit}
+          onConfirm={onConfirmEditHandler}
+          editHabits={editHabits}
+          setEditHabits={setEditHabits}
+          onAddHabit={onAddHabitHandler}
+          onRemoveHabit={onRemoveHabitHandler}
         />
       )}
     </>
