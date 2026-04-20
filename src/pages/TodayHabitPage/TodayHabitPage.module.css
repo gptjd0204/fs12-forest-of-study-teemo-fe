@@ -63,8 +63,6 @@
   font-weight: 800;
 }
 
-/* 습관 수정 모달 */
-
 .listConfirmBtn {
   position: absolute;
   top: 0;
@@ -78,6 +76,8 @@
   background: none;
   border: none;
 }
+
+/* 습관 수정 모달 */
 .modifyList {
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@
   height: 54px;
 
   border-radius: 20px;
-  /* border: none; */
+
   border: 1px solid #ccc;
   transition: all 0.2s ease;
 
@@ -221,5 +221,14 @@
     min-height: 474px;
 
     font-size: 16px;
+  }
+  .modifyList {
+    gap: 8px;
+  }
+  .habitInput {
+    width: 256px;
+  }
+  .plusBtn {
+    margin-top: 24px;
   }
 }
