@@ -11,6 +11,7 @@ import StudyDetailPage from './pages/StudyDetailPage/StudyDetailPage';
 import TodayHabitPage from './pages/TodayHabitPage/TodayHabitPage';
 import StudyCreate from './pages/CreatePage/StudyCreate';
 import StudyUpdate from './pages/UpdatePage/StudyUpdate';
+import NotFound from './pages/NotFoundPage/NotFound';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path=":id/habit" element={<TodayHabitPage />} />
           <Route path=":id/update" element={<StudyUpdate />} />
           <Route path="/create" element={<StudyCreate />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>
