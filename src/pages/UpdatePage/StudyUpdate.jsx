@@ -3,13 +3,12 @@ import '../../styles/reset.css';
 import styles from '../CreatePage/Create.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
-import PasswordInput from '../../components/input/PasswordInput';
 import Button from '../../components/Button/Button';
 
-import PasswordCheck from '../CreatePage/CreateComponents/PasswordCheck';
 import StudyName from '../CreatePage/CreateComponents/StudyName';
 import Introduce from '../CreatePage/CreateComponents/Introduce/Introduce';
 import BackGround from '../CreatePage/CreateComponents/BackGround/BackGround';
+import ModalLayout from '../../components/Modal/ModalLayout';
 
 import { getStudy } from '../../services/CreateService';
 import { patchService } from '../../services/CreateService';
@@ -18,14 +17,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 const StudyUpdate = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log('params id:', id);
 
   const [nickname, setNickname] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [background, setBackground] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,27 +46,29 @@ const StudyUpdate = () => {
   }, [id]);
 
   const handleSubmit = async () => {
-    if (password !== passwordCheck) {
-      alert('비밀번호가 일치하지 않습니다');
-      return;
-    }
-
     try {
       const data = {
         nickname,
         title,
         description,
         background,
-        password,
       };
 
       await patchService(id, data);
 
-      alert('스터디 수정 완료!');
-      navigate(`/${id}/detail`);
+      setModalMessage('수정이 완료되었습니다');
+      setIsSuccess(true);
+      setModalOpen(true);
     } catch (error) {
       console.error(error);
-      alert('수정 실패');
+    }
+  };
+
+  const handleConfirm = () => {
+    setModalOpen(false);
+
+    if (isSuccess) {
+      navigate(`/${id}/detail`);
     }
   };
 
@@ -88,22 +89,29 @@ const StudyUpdate = () => {
         <h3 className={styles.title}>배경</h3>
         <BackGround setBackground={setBackground} />
 
-        <h3 className={styles.title}>비밀번호</h3>
-        <PasswordInput password={password} setPassword={setPassword} />
-
-        <h3 className={styles.title}>비밀번호 확인</h3>
-        <PasswordCheck
-          password={password}
-          setPasswordCheck={setPasswordCheck}
-          passwordCheck={passwordCheck}
-        />
-
         <Button
           btnTxt="수정"
           onClick={handleSubmit}
           btnType="button"
           btnStyle="btnCreate"
         />
+
+        {modalOpen && (
+          <ModalLayout className={styles.modalBox}>
+            <div className={styles.modalText}>
+              <p>{modalMessage}</p>
+            </div>
+
+            <div className={styles.confirmBtn}>
+              <Button
+                btnTxt={'확인'}
+                btnStyle="btnCreate"
+                onClick={handleConfirm}
+                btnType={'button'}
+              />
+            </div>
+          </ModalLayout>
+        )}
       </div>
     </div>
   );
