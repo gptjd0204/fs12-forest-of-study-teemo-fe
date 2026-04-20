@@ -4,6 +4,8 @@ import styles from "./LogPage.module.css";
 import LogHeader from './LogHeader';
 import LogDateSelector from './LogDateSelector';
 import LogList from './LogList';
+import { getLogs } from '../../services/LogService';
+import { formatDate } from '../../utils/formattedDate';
 
 
 const Logs = () => {
@@ -13,23 +15,17 @@ const Logs = () => {
   const [pointLogs, setPointLogs] = useState([]);
   const [focusLogs, setFocusLogs] = useState([]);
 
-  const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
 
-    return `${year}-${month}-${day}`;
-  }
 
   useEffect(() => {
     const fetchData = async () => {
       const formattedDate = formatDate(date);
-        const res = await fetch(`http://localhost:8080/api/logs/${studyId}/logs?date=${formattedDate}`);
-        const data = await res.json();
+        const data = await getLogs(studyId, formattedDate);
 
-        setPointLogs(data.data || []);
-        setFocusLogs(data.data || []);
+        setPointLogs(data);
+        setFocusLogs(data);
       } 
+
     fetchData();
   }, [date, studyId]);
 
