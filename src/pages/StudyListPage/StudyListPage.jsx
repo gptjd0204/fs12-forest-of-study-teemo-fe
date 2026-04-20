@@ -11,12 +11,12 @@ const PAGE_SIZE = 6;
 const StudyList = () => {
   const [studyList, setStudyList] = useState([]);
   const [recentStudyList, setRecentStudyList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [keyword, setKeyword] = useState('');
   const [orderBy, setOrderBy] = useState('latest');
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState({
-    currentPage: 1,
     pageSize: PAGE_SIZE,
     totalCount: 0,
     totalPages: 1,
@@ -24,6 +24,8 @@ const StudyList = () => {
 
   useEffect(() => {
     const fetchStudyList = async () => {
+      setIsLoading(true);
+
       try {
         const result = await getStudyList({
           page: currentPage,
@@ -36,7 +38,6 @@ const StudyList = () => {
         setStudyList(result.studies);
         setPagination(
           result.pagination ?? {
-            currentPage,
             pageSize: PAGE_SIZE,
             totalCount: result.studies.length,
             totalPages: 1,
@@ -45,6 +46,8 @@ const StudyList = () => {
         setRecentStudyList(recentStudies);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -106,8 +109,10 @@ const StudyList = () => {
           </div>
 
           <div className={styles.cardGrid}>
-            {studyList.length === 0 ? (
-              <h2>조건에 맞는 스터디가 없어요</h2>
+            {isLoading ? (
+              <h2>스터디 목록을 불러오는 중입니다.</h2>
+            ) : studyList.length === 0 ? (
+              <h2>스터디를 불러올 수 없습니다.</h2>
             ) : (
               studyList.map((study) => <Card key={study.id} study={study} />)
             )}
@@ -115,7 +120,7 @@ const StudyList = () => {
 
           <div className={styles.paginationWrapper}>
             <Pagination
-              currentPage={pagination.currentPage}
+              currentPage={currentPage}
               totalPages={pagination.totalPages}
               onPageChange={handlePageChange}
             />

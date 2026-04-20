@@ -1,5 +1,7 @@
 import styles from './Pagination.module.css';
 
+const PAGE_GROUP_SIZE = 5;
+
 const Pagination = ({
   currentPage = 1,
   totalPages = 1,
@@ -9,7 +11,14 @@ const Pagination = ({
     return null;
   }
 
-  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+  // 예를 들어 totalPages = 5 [1, 2, 3, 4, 5]
+  const currentGroup = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE);
+  const startPage = currentGroup * PAGE_GROUP_SIZE + 1;
+  const endPage = Math.min(startPage + PAGE_GROUP_SIZE - 1, totalPages);
+  const pages = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, index) => startPage + index,
+  );
 
   return (
     <nav className={styles.pagination} aria-label="페이지네이션">
@@ -34,6 +43,7 @@ const Pagination = ({
 
       <div className={styles.pageNumbers}>
         {pages.map((page) => {
+          //현재 페이지 번호인 버튼에만 active 표시
           const isActive = page === currentPage;
 
           return (
