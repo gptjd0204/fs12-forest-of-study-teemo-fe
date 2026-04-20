@@ -15,6 +15,7 @@ import {
   updateTargetDuration,
 } from '../../services/TimerService';
 import Toast from '../../components/Toast/Toast';
+import { getTotalPoint } from '../../services/PointService';
 
 const TodayFocus = () => {
   const { id } = useParams();
@@ -33,6 +34,7 @@ const TodayFocus = () => {
   const [toastShow, setToastShow] = useState(false);
   const [toastType, setToastType] = useState('');
   const [toastMsg, setToastMsg] = useState('');
+  const [totalPoint, setTotalPoint] = useState(0);
 
   const timerRef = useRef();
 
@@ -59,19 +61,36 @@ const TodayFocus = () => {
     try {
       const fetchTimer = async () => {
         const data = await getTimer(id);
+        const timerData = data.timer;
+        const totalPointData = await getTotalPoint(id);
         setTitle(data.title);
-        if (!data.timer) {
+        if (!timerData) {
           initTimer();
           await createTimer(id);
           return;
         }
-        const getTimerData = data.timer;
 
-        setTargetDuration(getTimerData.targetDuration);
-        setTimerStatus(getTimerData.status);
-        setTimerCount(
-          getTimerData.targetDuration - getTimerData.elapsedTime + 700,
-        );
+        setTotalPoint(totalPointData);
+        setTargetDuration(timerData.targetDuration);
+        setTimerStatus(timerData.status);
+        // 타이머 남은 시간 계산 로직
+        if (timerData.status === 'IN_PROGRESS') {
+          const now = Date.now();
+          const lastStartedAt = new Date(timerData.lastStartedAt);
+
+          const timeDiff = now - lastStartedAt;
+          const totalElapsedTime = timerData.elapsedTime + timeDiff;
+          const remainingTime = timerData.targetDuration - totalElapsedTime;
+
+          if (remainingTime < 0) {
+            setTimerStatus('COMPLETED');
+            setTimerCount(totalElapsedTime - timerData.targetDuration + 700);
+          } else {
+            setTimerCount(remainingTime + 700);
+          }
+        } else {
+          setTimerCount(timerData.targetDuration - timerData.elapsedTime + 700);
+        }
       };
 
       fetchTimer();
@@ -101,7 +120,7 @@ const TodayFocus = () => {
     return () => {
       clearInterval(timerRef.current);
     };
-  }, [id, timerStatus]);
+  }, [timerStatus]);
 
   // 토스트 메시지 출력
   useEffect(() => {
@@ -223,6 +242,7 @@ const TodayFocus = () => {
     const points = await updateComplete(id);
     clearInterval(timerRef.current);
     timerRef.current = null;
+    setTotalPoint((prev) => prev + points);
     initTimer();
     setTimerToast('success', points);
   };
@@ -233,7 +253,7 @@ const TodayFocus = () => {
         <div className={styles.focusWrapper}>
           <div>
             <FocusHeader studyId={id} title={title} />
-            <TotalPoints studyId={id} />
+            <TotalPoints points={totalPoint} />
           </div>
           <main className={styles.timerWrapper}>
             <div className={styles.timerHeader}>
@@ -256,8 +276,6 @@ const TodayFocus = () => {
             <Timer
               timer={timerCount}
               toggleForm={toggleForm}
-              targetDuration={targetDuration}
-              setTargetDuration={setTargetDuration}
               timerStatus={timerStatus}
               onStart={timerStartHandler}
               onPause={timerPauseHandler}
