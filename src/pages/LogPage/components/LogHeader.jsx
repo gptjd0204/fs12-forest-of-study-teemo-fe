@@ -13,26 +13,31 @@ const LogHeader = ({ id, study, logType, setLogType }) => {
             {nickname}의 {title}
           </h1>
           <div className={styles.linkContainer}>
+            <LinkButton 
+              className={styles.linkButton}
+              text="오늘의 습관" 
+              url={`/${id}/habit`}
+            />
             <LinkButton  
               className={styles.linkButton}
-              text="스터디" 
-              url={`/${id}/detail`}
+              text="오늘의 집중" 
+              url={`/${id}/focus`}
             />
             <LinkButton 
               className={styles.linkButton}
               text="홈" 
-              url="/"
+              url={`/${id}/detail`}
             />
           </div>
         </div>
         
         <div className={styles.dateWrapper}>
-        {/** 시간, 라디오버튼 */}
+          {/** 현재 시간 */}
           <div className={styles.timeContainer}>
             <CurrentTime />
           </div>
 
-          {/* 라디오 */}
+          {/** 라디오 버튼 */}
           <div className={styles.radioBox}>
             <label 
               className={`${styles.radioBoxItem} ${
