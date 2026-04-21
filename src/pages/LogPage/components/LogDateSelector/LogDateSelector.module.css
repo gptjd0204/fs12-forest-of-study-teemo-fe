@@ -11,3 +11,8 @@
   font-weight: 600;
   color: var(--gray_818181);
 }
+
+
+@media (min-width: 500px) {
+
+}

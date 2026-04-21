@@ -37,9 +37,9 @@
 
 .row {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  width: 400px;
+  gap: 200px;
   height: 54px;
   padding: 10px 16px;
   border-radius: 20px;
@@ -61,4 +61,16 @@
 .noData {
   margin-top: 100px;
   color: var(--gray_818181);
+}
+
+@media (max-width: 1024px) {
+  .row {
+    gap: 100px;
+  }
+}
+
+@media (max-width: 500px) {
+  .row {
+    gap: 50px;
+  }
 }

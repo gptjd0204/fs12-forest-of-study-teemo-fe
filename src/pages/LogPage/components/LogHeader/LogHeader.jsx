@@ -15,12 +15,12 @@ const LogHeader = ({ id, study, logType, setLogType }) => {
         <div className={styles.linkContainer}>
           <LinkButton 
             className={styles.linkButton}
-            text="오늘의 습관" 
+            text={<><span>오늘의</span> 습관</> }
             url={`/${id}/habit`}
           />
           <LinkButton  
             className={styles.linkButton}
-            text="오늘의 집중" 
+            text={<><span>오늘의</span> 집중</> } 
             url={`/${id}/focus`}
           />
           <LinkButton 

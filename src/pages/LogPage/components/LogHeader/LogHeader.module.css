@@ -62,15 +62,15 @@
   color: var(--white_FFFFFF);
 }
 
-@media (max-width: 1024px) {
-  
-}
-
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   .top {
     flex-direction: column;
     align-items: start;
     gap: 16px;
+  }
+
+  .linkContainer span {
+    display: none;
   }
 
   .radioBox {
