@@ -25,7 +25,7 @@ const useFetchTimer = (studyId) => {
         const data = await getTimer(studyId);
         const timerData = data.timer;
         const total = await getTotalPoint(studyId);
-        setTitle(data.title);
+        setTitle(`${data.nickname}의 ${data.title}`);
         if (!timerData) {
           initTimer();
           await createTimer(studyId);
