@@ -34,6 +34,7 @@ const NicknameInput = ({ nickname, setNickname }) => {
           setError(validateNickname(value));
         }}
         onBlur={() => setNewNickname(true)}
+        maxLength={10}
       />
       {newnickname && error && (
         <span className={styles.errorMessage}>{error}</span>

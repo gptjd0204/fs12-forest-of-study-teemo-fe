@@ -54,13 +54,21 @@ const StudyUpdate = () => {
         background,
       };
 
-      await patchService(id, data);
+      const res = await patchService(id, data);
+
+      if (!res.success) {
+        setModalMessage(res.message);
+        setModalOpen(true);
+        return;
+      }
 
       setModalMessage('수정이 완료되었습니다');
       setIsSuccess(true);
       setModalOpen(true);
     } catch (error) {
       console.error(error);
+      setModalMessage('수정 실패');
+      setModalOpen(true);
     }
   };
 

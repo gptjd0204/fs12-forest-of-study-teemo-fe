@@ -31,6 +31,7 @@ const StudyName = ({ title, setTitle }) => {
           setError(validateTitle(value));
         }}
         onBlur={() => setIsTouched(true)}
+        maxLength={20}
       />
       {isTouched && error && (
         <span className={styles.errorMessage}>{error}</span>
