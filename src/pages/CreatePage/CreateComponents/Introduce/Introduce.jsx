@@ -8,7 +8,7 @@ const Introduce = ({ description, setDescription }) => {
         placeholder="소개 멘트를 작성해 주세요"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        maxLength={200}
+        maxLength={500}
       />
     </div>
   );

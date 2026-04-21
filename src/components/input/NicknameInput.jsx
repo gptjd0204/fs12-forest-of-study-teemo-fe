@@ -15,6 +15,9 @@ const NicknameInput = ({ nickname, setNickname }) => {
     if (value.length < 2) {
       return '닉네임은 2자 이상이어야 합니다.';
     }
+    if (value.length > 10) {
+      return '닉네임은 10자 이하이어야 합니다.';
+    }
     return '';
   };
 
@@ -31,6 +34,7 @@ const NicknameInput = ({ nickname, setNickname }) => {
           setError(validateNickname(value));
         }}
         onBlur={() => setNewNickname(true)}
+        maxLength={10}
       />
       {newnickname && error && (
         <span className={styles.errorMessage}>{error}</span>
