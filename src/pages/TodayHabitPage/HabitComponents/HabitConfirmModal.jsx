@@ -1,6 +1,7 @@
 import React from 'react';
 import HabitModal from '../../../components/Modal/HabitModal/HabitModal';
 import HabitEditForm from './HabitEditForm';
+import styles from '../TodayHabitPage.module.css';
 
 const HabitConfirmModal = ({
   onClose,
@@ -9,7 +10,8 @@ const HabitConfirmModal = ({
   setEditHabits,
   onAddHabit,
   onRemoveHabit,
-  errorIndexes,
+  errorInfos,
+  setErrorInfos,
 }) => {
   return (
     <>
@@ -25,8 +27,12 @@ const HabitConfirmModal = ({
           setEditHabits={setEditHabits}
           onAddHabit={onAddHabit}
           onRemoveHabit={onRemoveHabit}
-          errorIndexes={errorIndexes}
+          errorInfos={errorInfos}
+          setErrorInfos={setErrorInfos}
         />
+        {errorInfos.length > 0 && (
+          <p className={styles.errorMessage}>{errorInfos[0].message}</p>
+        )}
       </HabitModal>
     </>
   );

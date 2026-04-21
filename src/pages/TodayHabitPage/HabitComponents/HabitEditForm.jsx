@@ -6,12 +6,15 @@ const HabitEditForm = ({
   setEditHabits,
   onAddHabit,
   onRemoveHabit,
-  errorIndexes,
+  errorInfos,
+  setErrorInfos,
 }) => {
   const changeHabitHandler = (id, value) => {
     setEditHabits((prev) =>
       prev.map((h) => (h.id === id ? { ...h, name: value } : h)),
     );
+
+    setErrorInfos([]);
   };
 
   return (
@@ -23,7 +26,9 @@ const HabitEditForm = ({
               value={h.name}
               onChange={(e) => changeHabitHandler(h.id, e.target.value)}
               className={`${styles.habitInput} ${
-                errorIndexes.includes(index) ? styles.error : ''
+                errorInfos.some((error) => error.index === index)
+                  ? styles.error
+                  : ''
               }`}
             />
             <button

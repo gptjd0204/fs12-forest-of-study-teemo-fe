@@ -58,7 +58,7 @@
   width: 100%;
   text-align: center;
 
-  color: var(--black_414141, #414141);
+  color: var(--black_414141);
   font-size: 24px;
   font-weight: 800;
 }
@@ -110,7 +110,12 @@
 }
 
 .error {
-  border: 1px solid #ff4d4f;
+  border: 1px solid var(--error_C41013);
+}
+
+.errorMessage {
+  margin-top: 20px;
+  color: var(--error_C41013);
 }
 
 .removeBtn {

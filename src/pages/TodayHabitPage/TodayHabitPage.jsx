@@ -24,7 +24,7 @@ const TodayHabitPage = () => {
   const [togglingId, setTogglingId] = useState(null);
   const [editHabits, setEditHabits] = useState([]);
   const [endHabitIds, setEndHabitIds] = useState([]);
-  const [errorIndexes, setErrorIndexes] = useState([]);
+  const [errorInfos, setErrorInfos] = useState([]);
 
   const { id } = useParams();
 
@@ -83,15 +83,30 @@ const TodayHabitPage = () => {
   const onConfirmEditHandler = async () => {
     if (isSubmitting) return;
 
-    const emptyIndexes = editHabits
-      .map((h, index) => (!h.name.trim() ? index : -1))
-      .filter((index) => index !== -1);
+    // 습관명 오류 메세지
+    const errors = editHabits
+      .map((h, index) => {
+        const name = h.name.trim();
 
-    if (emptyIndexes.length > 0) {
-      setErrorIndexes(emptyIndexes);
-      setTimeout(() => {
-        setErrorIndexes([]);
-      }, 500);
+        if (!name) {
+          return { index, message: '이름은 필수 입력입니다.' };
+        }
+
+        if (name.length < 2) {
+          return { index, message: '2자 이상 입력해주세요' };
+        }
+
+        if (name.length > 20) {
+          return { index, message: '20자 이하로 입력해주세요' };
+        }
+
+        return null;
+      })
+
+      .filter(Boolean);
+
+    if (errors.length > 0) {
+      setErrorInfos(errors);
 
       return;
     }
@@ -175,7 +190,8 @@ const TodayHabitPage = () => {
           setEditHabits={setEditHabits}
           onAddHabit={onAddHabitHandler}
           onRemoveHabit={onRemoveHabitHandler}
-          errorIndexes={errorIndexes}
+          errorInfos={errorInfos}
+          setErrorInfos={setErrorInfos}
         />
       )}
     </>
