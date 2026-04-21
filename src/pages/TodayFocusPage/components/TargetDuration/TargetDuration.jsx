@@ -35,7 +35,6 @@ const TargetDuration = ({
           <div className={styles.inputContainer}>
             <input
               type="text"
-              maxLength="2"
               value={hours}
               onChange={onChangeHours}
               onBlur={() => {
@@ -48,7 +47,6 @@ const TargetDuration = ({
             <p>시</p>
             <input
               type="text"
-              maxLength="2"
               value={minutes}
               onChange={onChangeMinutes}
               onBlur={() => {
@@ -61,7 +59,6 @@ const TargetDuration = ({
             <p>분</p>
             <input
               type="text"
-              maxLength="2"
               value={seconds}
               onChange={onChangeSeconds}
               onBlur={() => {
