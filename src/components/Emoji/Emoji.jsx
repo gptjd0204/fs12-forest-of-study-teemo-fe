@@ -1,14 +1,21 @@
 import styles from './Emoji.module.css';
 
-const Emoji = ({ emoji, count, type }) => {
-  return (
+const Emoji = ({ emoji, count, size = 'sm', onClick }) => {
+  const sizeClass = {
+    sm: styles.small,
+    lg: styles.large,
+  };
+
+  const content = (
     <div className={styles.item}>
-      <span className={type !== 'big' ? styles.small : ''} aria-hidden="true">
+      <span className={sizeClass[size]} aria-hidden="true">
         {emoji}
       </span>
-      <span className={type !== 'big' ? styles.small : ''}>{count}</span>
+      <span className={sizeClass[size]}>{count}</span>
     </div>
   );
+
+  return onClick ? <button onClick={onClick}>{content}</button> : content;
 };
 
 export default Emoji;

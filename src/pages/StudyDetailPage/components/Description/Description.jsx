@@ -1,5 +1,5 @@
 import styles from './Description.module.css';
-import TotalPoint from '../../TotalPoint/TotalPoint';
+import TotalPoint from '../../../../components/TotalPoint/TotalPoint';
 import { useParams } from 'react-router-dom';
 
 const Description = ({ descTitle, descContent, descType = 'text' }) => {

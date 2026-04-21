@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 
 import {
   createEmojis,
   updateEmojis,
-} from '../../../../../services/StudyDetailService';
+} from '../../../../../../services/StudyDetailService';
 
 import styles from '../../EmojiContainer.module.css';
-import smileIcon from '../../../../../assets/icons/ic_smile.svg';
+import smileIcon from '../../../../../../assets/icons/ic_smile.svg';
 
-const EmojiAdd = ({ emojis, setEmojis, id }) => {
+const EmojiAdd = ({ emojis, setEmojis, id, updateEmoji, toastHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const emojiRef = useRef(null);
 
   const emojiHandle = async (e) => {
     // emoji 가 현재 emoji 안에 있는 지 확인
@@ -18,18 +19,17 @@ const EmojiAdd = ({ emojis, setEmojis, id }) => {
     // 없으면 create 로 넘기자!
     const selectEmoji = emojis.find((emoji) => emoji.emoji === e.emoji);
 
-    if (!selectEmoji) {
+    if (!selectEmoji && emojiRef.current !== e.emoji) {
+      emojiRef.current = e.emoji;
       //create
       const newEmoji = await createEmojis(id, e.emoji);
 
       setEmojis((prev) => [...prev, newEmoji]);
+    } else if (!selectEmoji && emojiRef.current === e.emoji) {
+      toastHandler('emoji');
     } else {
       //update emoji id 같이
-      const updateEmoji = await updateEmojis(id, selectEmoji.id);
-
-      setEmojis((prev) =>
-        prev.map((p) => (p.emoji !== updateEmoji.emoji ? p : updateEmoji)),
-      );
+      updateEmoji(selectEmoji.id);
     }
   };
 
