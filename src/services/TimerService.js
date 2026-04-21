@@ -4,6 +4,9 @@ export const getTimer = async (studyId) => {
   try {
     const response = await fetch(`${API_URL}/api/timers/${studyId}`);
     const { data } = await response.json();
+    if (!response.ok) {
+      throw new Error('데이터 응답에 실패했습니다');
+    }
 
     return data;
   } catch (error) {
