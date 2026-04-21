@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import LinkButton from '../../LinkButton/LinkButton';
-import Description from '../../../components/StudyDetailComponents/Description/Description';
+import LinkButton from '../../../../components/LinkButton/LinkButton';
+import Description from '../Description/Description';
 
-import icArrowRight from '../../../assets/icons/ic_arrow_right.svg';
+import icArrowRight from '../../../../assets/icons/ic_arrow_right.svg';
 
 import styles from './StudyDetail.module.css';
 
-const StudyDetail = ({ onClick, setCrtPassword, id, study }) => {
+const StudyDetail = ({ onClick, id, study }) => {
   return (
     <>
       <div className={styles.titleContainer}>

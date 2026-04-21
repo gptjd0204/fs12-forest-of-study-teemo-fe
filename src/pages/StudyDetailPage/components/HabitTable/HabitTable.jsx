@@ -1,7 +1,10 @@
-import HabitItems from './HabitItems/HabitItems';
-import styles from '../HabitTable/HabitTable.module.css';
 import { useEffect, useState } from 'react';
-import { getWeeklyHabits } from '../../../services/StudyDetailService';
+
+import HabitItems from './HabitItems/HabitItems';
+
+import { getWeeklyHabits } from '../../../../services/StudyDetailService';
+
+import styles from '../HabitTable/HabitTable.module.css';
 
 const HabitTable = ({ id }) => {
   const [habits, setHabits] = useState([]);

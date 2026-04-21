@@ -15,17 +15,22 @@ import styles from './LinkButton.module.css';
   (ex: <LinkButton text="오늘의 집중" url="/:id/focus" />)
 */
 const LinkButton = ({ text, url, type, onClick }) => {
+  const content = (
+    <>
+      <p>{text}</p>
+      <img src={icArrowRight} alt="링크 이동" />
+    </>
+  );
+
   return (
     <>
       {type === 'button' ? (
         <button className={styles.linkBtn} onClick={onClick}>
-          <p>{text}</p>
-          <img src={icArrowRight} />
+          {content}
         </button>
       ) : (
         <Link to={url} className={styles.linkBtn}>
-          <p>{text}</p>
-          <img src={icArrowRight} />
+          {content}
         </Link>
       )}
     </>
