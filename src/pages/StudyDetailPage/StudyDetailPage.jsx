@@ -1,13 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useToast from '../../hooks/useToast.jsx';
 
 import HabitTable from './components/HabitTable/HabitTable';
 import Emojis from './components/Emoji/EmojiContainer';
 import Interaction from './components/Interaction/Interaction';
 import StudyDetail from './components/StudyDetail/StudyDetail';
 import Modals from './components/Modals/Modals';
-
-import Toast from '../../components/Toast/Toast';
 
 import { getStudyDetail } from '../../services/StudyService.js';
 
@@ -16,29 +15,12 @@ import styles from './StudyDetailPage.module.css';
 const StudyDetailPage = () => {
   const { id } = useParams();
 
+  const { toasts, addToast } = useToast();
+
   const [study, setStudy] = useState([]);
 
   const [modalStep, setModalStep] = useState(null);
   const [modalType, setModalType] = useState(null);
-
-  const toastTimerRef = useRef(null);
-  const [isToast, setIsToast] = useState(false);
-  const [toastType, setToastType] = useState('');
-
-  const toastTypes = {
-    error: {
-      type: 'error',
-      msg: '비밀번호가 일치하지 않습니다. 다시 입력해주세요.',
-    },
-    link: {
-      type: 'success',
-      msg: '링크가 복사되었습니다!',
-    },
-    emoji: {
-      type: 'error',
-      msg: '이모지 등록중입니다! 잠시 후 다시 시도해주세요!',
-    },
-  };
 
   const fetchStudy = async () => {
     try {
@@ -69,22 +51,14 @@ const StudyDetailPage = () => {
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl);
 
-    toastHandler('link');
-  };
-
-  const toastHandler = (type) => {
-    setToastType(type);
-
-    clearTimeout(toastTimerRef.current);
-    setIsToast(true);
-    toastTimerRef.current = setTimeout(() => setIsToast(false), 3000);
+    addToast('success', '링크가 복사되었습니다!');
   };
 
   return (
     <div className="wrapper">
       <div className={styles.ixWrapper}>
         <Interaction onClick={modalHandler} onShare={shareHandler} />
-        <Emojis toastHandler={toastHandler} />
+        <Emojis toastHandler={addToast} />
       </div>
 
       <div className={styles.introWrapper}>
@@ -107,15 +81,12 @@ const StudyDetailPage = () => {
         setModalStep={setModalStep}
         modalType={modalType}
         setModalType={setModalType}
-        toastHandler={toastHandler}
+        toastHandler={addToast}
       />
 
-      {isToast && (
+      {toasts.length > 0 && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Toast
-            toastType={toastTypes[toastType].type}
-            toastMsg={toastTypes[toastType].msg}
-          />
+          {toasts.map((toast) => toast.toast)}
         </div>
       )}
     </div>

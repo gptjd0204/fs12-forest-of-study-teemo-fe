@@ -26,7 +26,7 @@ const EmojiAdd = ({ emojis, setEmojis, id, updateEmoji, toastHandler }) => {
 
       setEmojis((prev) => [...prev, newEmoji]);
     } else if (!selectEmoji && emojiRef.current === e.emoji) {
-      toastHandler('emoji');
+      toastHandler('emoji', '이모지 등록중입니다! 잠시 후 다시 시도해주세요!');
     } else {
       //update emoji id 같이
       updateEmoji(selectEmoji.id);

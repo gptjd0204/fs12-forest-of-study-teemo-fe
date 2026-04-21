@@ -57,7 +57,7 @@ const Modals = ({
     if (!isCorrect) {
       // toast ui 튀어나오기
 
-      toastHandler('error');
+      toastHandler('error', '비밀번호가 일치하지 않습니다. 다시 입력해주세요.');
       return;
     }
 
@@ -86,7 +86,8 @@ const Modals = ({
             setModalStep(null);
             setPassword('');
           }}
-          title={`${studyInfo.nickname}의 ${studyInfo.title}`}
+          nickname={studyInfo.nickname}
+          title={studyInfo.title}
         >
           <form>
             <p className={styles.formMessage}>권한이 필요해요!</p>
