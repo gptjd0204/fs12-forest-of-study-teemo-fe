@@ -49,7 +49,7 @@ const TodayFocus = () => {
   );
 
   const {
-    toast,
+    toasts,
     timerStartHandler,
     timerPauseHandler,
     timerResetHandler,
@@ -65,6 +65,7 @@ const TodayFocus = () => {
     setTimerCount,
   );
 
+  console.log('toasts => ', toasts);
   return (
     <>
       {isNotFoundError ? (
@@ -110,7 +111,10 @@ const TodayFocus = () => {
               </main>
             </div>
           </div>
-          {toast.show && <Toast toastType={toast.type} toastMsg={toast.msg} />}
+          {toasts.length > 0 &&
+            toasts.map((t) => {
+              return <Toast key={t.id} toastType={t.type} toastMsg={t.msg} />;
+            })}
         </>
       )}
     </>
