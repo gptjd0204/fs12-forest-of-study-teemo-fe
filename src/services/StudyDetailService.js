@@ -1,4 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
+import { removeRecentStudy } from './StudyService.js';
 
 export const getStudyDetail = async (id) => {
   const res = await fetch(`${API_URL}/api/studies/${id}`);
@@ -27,7 +28,11 @@ export const deleteStudy = async (id) => {
   const res = await fetch(`${API_URL}/api/studies/${id}`, {
     method: 'DELETE',
   });
-  const data = res.json();
+  const data = await res.json();
+
+  if (res.ok) {
+    removeRecentStudy(id);
+  }
 
   return data.data;
 };
