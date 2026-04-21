@@ -151,7 +151,7 @@ export const saveRecentStudy = (study) => {
   );
 };
 
-//스터디 삭제 시 로컬 스토리지에서도 삭제
+//////////////////스터디 삭제 시 로컬 스토리지에서도 삭제//////////////////
 export const removeRecentStudy = (studyId) => {
   const recentStudyList = getRecentStudyList();
   const nextRecentStudyList = recentStudyList.filter(
@@ -162,4 +162,27 @@ export const removeRecentStudy = (studyId) => {
     RECENT_STUDY_LIST_KEY,
     JSON.stringify(nextRecentStudyList),
   );
+};
+
+//////////////////스터디 수정 로컬스토리지 반영//////////////////
+export const updateRecentStudy = (studyId, studyData) => {
+  const recentStudyList = getRecentStudyList();
+
+  const updatedList = recentStudyList.map((study) => {
+    const isTargetStudy = String(study.id) === String(studyId);
+
+    if (!isTargetStudy) {
+      return study;
+    }
+
+    const updatedStudy = {
+      ...study,
+      ...studyData,
+      id: study.id,
+    };
+
+    return normalizeStudy(updatedStudy);
+  });
+
+  localStorage.setItem(RECENT_STUDY_LIST_KEY, JSON.stringify(updatedList));
 };
