@@ -110,9 +110,18 @@ const StudyList = () => {
 
           <div className={styles.cardGrid}>
             {isLoading ? (
-              <h2>스터디 목록을 불러오는 중입니다.</h2>
+              <div className={styles.loadingState}>
+                <div className={styles.loadingBadge}>
+                  <span className={styles.loadingDot} />
+                  <span className={styles.loadingDot} />
+                  <span className={styles.loadingDot} />
+                </div>
+                <h2 className={styles.loadingText}>
+                  스터디 목록을 불러오는 중입니다
+                </h2>
+              </div>
             ) : studyList.length === 0 ? (
-              <h2>스터디를 불러올 수 없습니다.</h2>
+              <h2>아직 둘러 볼 스터디가 없어요</h2>
             ) : (
               studyList.map((study) => <Card key={study.id} study={study} />)
             )}
