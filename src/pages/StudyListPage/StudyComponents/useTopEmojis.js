@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getEmojis } from '../../../services/StudyDetailService';
+import { getEmojis } from '../../../services/EmojiService';
 
 const useTopEmojis = (studyId) => {
   const [topEmojis, setTopEmojis] = useState([]);
