@@ -2,7 +2,7 @@
 .topwrapper {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   justify-content: space-between;
   align-content: center;
   margin-bottom: 20px;
@@ -60,4 +60,22 @@
   background: var(--brand_99C08E);
   border: 1px solid var(--brand_99C08E);
   color: var(--white_FFFFFF);
+}
+
+@media (max-width: 1024px) {
+  
+}
+
+@media (max-width: 768px) {
+  .top {
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+  }
+
+  .radioBox {
+    flex-direction: column;
+    align-items: end;
+    gap: 16px;
+  }
 }
