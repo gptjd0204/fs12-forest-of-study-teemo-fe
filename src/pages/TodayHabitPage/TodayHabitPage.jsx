@@ -15,6 +15,7 @@ import HabitListHeader from './HabitComponents/HabitListHeader';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 
 const TodayHabitPage = () => {
+  const [studyUser, setStudyUser] = useState('');
   const [studyName, setStudyName] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newHabit, setNewHabit] = useState('');
@@ -23,6 +24,7 @@ const TodayHabitPage = () => {
   const [togglingId, setTogglingId] = useState(null);
   const [editHabits, setEditHabits] = useState([]);
   const [endHabitIds, setEndHabitIds] = useState([]);
+  const [errorIndexes, setErrorIndexes] = useState([]);
 
   const { id } = useParams();
 
@@ -31,6 +33,7 @@ const TodayHabitPage = () => {
     try {
       const data = await getTodayHabits(id);
       setStudyName(data.studyTitle);
+      setStudyUser(data.studyNickname);
       setHabits(data.habits);
     } catch (error) {
       console.error(error);
@@ -78,10 +81,18 @@ const TodayHabitPage = () => {
 
   // 습관 수정
   const onConfirmEditHandler = async () => {
-    const hasEmptyHabit = editHabits.some((h) => !h.name.trim());
+    if (isSubmitting) return;
 
-    if (hasEmptyHabit) {
-      console.log('이름은 필수 입력값입니다.');
+    const emptyIndexes = editHabits
+      .map((h, index) => (!h.name.trim() ? index : -1))
+      .filter((index) => index !== -1);
+
+    if (emptyIndexes.length > 0) {
+      setErrorIndexes(emptyIndexes);
+      setTimeout(() => {
+        setErrorIndexes([]);
+      }, 500);
+
       return;
     }
 
@@ -96,6 +107,7 @@ const TodayHabitPage = () => {
 
       return originalHabit.name !== eH.name.trim();
     });
+
     try {
       setIsSubmitting(true);
 
@@ -141,7 +153,7 @@ const TodayHabitPage = () => {
       <div className="wrapper">
         <div className={styles.bodyWrapper}>
           <section className={styles.header}>
-            <HabitHeader studyName={studyName} id={id} />
+            <HabitHeader studyUser={studyUser} studyName={studyName} id={id} />
             <CurrentTime />
           </section>
           <section className={styles.mainSection}>
@@ -160,6 +172,7 @@ const TodayHabitPage = () => {
           setEditHabits={setEditHabits}
           onAddHabit={onAddHabitHandler}
           onRemoveHabit={onRemoveHabitHandler}
+          errorIndexes={errorIndexes}
         />
       )}
     </>

@@ -9,6 +9,7 @@ const HabitConfirmModal = ({
   setEditHabits,
   onAddHabit,
   onRemoveHabit,
+  errorIndexes,
 }) => {
   return (
     <>
@@ -18,6 +19,7 @@ const HabitConfirmModal = ({
           setEditHabits={setEditHabits}
           onAddHabit={onAddHabit}
           onRemoveHabit={onRemoveHabit}
+          errorIndexes={errorIndexes}
         />
       </HabitModal>
     </>

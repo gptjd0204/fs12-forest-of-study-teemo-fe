@@ -2,11 +2,13 @@ import React from 'react';
 import styles from '../TodayHabitPage.module.css';
 import LinkButton from '../../../components/LinkButton/LinkButton';
 
-const HabitHeader = ({ studyName, id }) => {
+const HabitHeader = ({ studyUser, studyName, id }) => {
   return (
     <>
       <div className={styles.top}>
-        <h1 className={styles.title}>{studyName}</h1>
+        <h1 className={styles.title}>
+          {studyUser}의 {studyName}
+        </h1>
         <nav className={styles.navContainer}>
           <LinkButton text="오늘의 집중" url={`/${id}/focus`} />
           <LinkButton text="로그" url={`/${id}/logs`} />
