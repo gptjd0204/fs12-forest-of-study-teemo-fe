@@ -9,7 +9,7 @@ import Button from '../../../../components/Button/Button';
 import {
   deleteStudy,
   validatePassword,
-} from '../../../../services/StudyDetailService.js';
+} from '../../../../services/StudyService.js';
 
 import styles from './Modals.module.css';
 

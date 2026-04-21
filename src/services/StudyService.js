@@ -77,6 +77,45 @@ export const getStudyList = async ({
   };
 };
 
+// 스터디 상세 조회
+export const getStudyDetail = async (id) => {
+  const res = await fetch(`${API_URL}/api/studies/${id}`);
+  const data = await res.json();
+
+  return data.data;
+};
+
+// 스터디 삭제
+export const deleteStudy = async (id) => {
+  const res = await fetch(`${API_URL}/api/studies/${id}`, {
+    method: 'DELETE',
+  });
+  const data = await res.json();
+
+  if (res.ok) {
+    removeRecentStudy(id);
+  }
+
+  return data.data;
+};
+
+// 비밀번호 체크
+export const validatePassword = async (id, password) => {
+  const res = await fetch(`${API_URL}/api/studies/${id}/pw`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      password,
+    }),
+  });
+
+  const data = await res.json();
+
+  return data.data;
+};
+
 ////////////////// 로컬 스토리지 사용하여 최근 스터디 목록 불러오기 //////////////////
 export const getRecentStudyList = () => {
   const storedValue = localStorage.getItem(RECENT_STUDY_LIST_KEY);
