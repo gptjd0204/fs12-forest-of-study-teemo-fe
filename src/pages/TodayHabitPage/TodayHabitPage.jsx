@@ -5,6 +5,8 @@ import {
   getTodayHabits,
   postHabit,
   toggleHabit,
+  editHabit,
+  deleteHabit,
 } from '../../services/HabitService';
 import HabitHeader from './HabitComponents/HabitHeader';
 import HabitConfirmModal from './HabitComponents/HabitConfirmModal';
@@ -74,35 +76,42 @@ const TodayHabitPage = () => {
     setEndHabitIds([]);
   };
 
-  // 습관 생성
-  // const createHabit = async () => {
-  //   if (!newHabit.trim() || isSubmitting) {
-  //     return;
-  //   }
-
-  //   try {
-  //     setIsSubmitting(true);
-  //     await postHabit(id, newHabit);
-  //     onCloseModalHandler();
-  //     fetchHabits();
-  //   } catch (error) {
-  //     console.error(error);
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-
   // 습관 수정
-  const onConfirmEditHandler = () => {
+  const onConfirmEditHandler = async () => {
     const hasEmptyHabit = editHabits.some((h) => !h.name.trim());
-    if (hasEmptyHabit) {
-      console.log('빈 값 있음');
 
+    if (hasEmptyHabit) {
+      console.log('이름은 필수 입력값입니다.');
       return;
     }
-    console.log('현재 editHabits:', editHabits);
-    console.log('종료 예정 ids:', endHabitIds);
-    onCloseModalHandler();
+
+    const newHabits = editHabits.filter((h) => h.isNew);
+
+    const updatedHabits = editHabits.filter((eH) => {
+      if (eH.isNew) return false;
+
+      const originalHabit = habits.find((h) => h.id === eH.id);
+
+      if (!originalHabit) return false;
+
+      return originalHabit.name !== eH.name.trim();
+    });
+    try {
+      setIsSubmitting(true);
+
+      await Promise.all([
+        ...newHabits.map((h) => postHabit(id, h.name.trim())),
+        ...updatedHabits.map((h) => editHabit(id, h.id, h.name.trim())),
+        ...endHabitIds.map((h) => deleteHabit(id, h)),
+      ]);
+
+      await fetchHabits();
+      onCloseModalHandler();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // 습관 추가
@@ -125,8 +134,6 @@ const TodayHabitPage = () => {
     }
     setEndHabitIds((prev) => [...prev, habit.id]);
     setEditHabits((prev) => prev.filter((h) => h.id !== habit.id));
-    console.log('현재 editHabits:', editHabits);
-    console.log('종료 예정 ids:', endHabitIds);
   };
 
   return (
