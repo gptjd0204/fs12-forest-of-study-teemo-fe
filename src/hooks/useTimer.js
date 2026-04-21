@@ -19,22 +19,27 @@ const useTimer = (
   timerCount,
   setTimerCount,
 ) => {
-  const [toast, setToast] = useState({ show: false, type: '', msg: '' });
-  const timerRef = useRef();
+  const [isUpdating, setIsUpdating] = useState(false);
+  const timerRef = useRef(null);
+  const [toasts, setToasts] = useState([]);
 
   // 타이머 초기화 함수
   const initTimer = () => {
-    setTargetDuration(1500000);
-    setTimerCount(1500000);
+    setTimerCount(targetDuration);
     setTimerStatus('CANCELED');
   };
 
-  // 토스트 메시지 출력
-  useEffect(() => {
+  // 토스트 메시지 추가
+  const addToast = (type, msg) => {
+    const id = Date.now();
+
+    setToasts((prev) => [...prev, { id, type, msg }]);
+
+    // 3초 뒤 해당 ID의 토스트만 삭제
     setTimeout(() => {
-      setToast({ show: false, type: '', msg: '' });
+      setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }, 3000);
-  }, [toast]);
+  };
 
   // 타이머 시간 출력
   useEffect(() => {
@@ -71,33 +76,32 @@ const useTimer = (
     clearInterval(timerRef.current);
     timerRef.current = null;
     setTimerStatus('PAUSED');
-    setToast({ show: true, type: 'error', msg: '집중이 중단되었습니다.' });
+    addToast('error', '집중이 중단되었습니다.');
     await updatePause(studyId);
   };
 
   const timerResetHandler = async () => {
     clearInterval(timerRef.current);
     timerRef.current = null;
-    setTimerStatus('CANCELED');
-    setTimerCount(targetDuration);
+    initTimer();
     await updateReset(studyId);
   };
 
   const timerCompleteHandler = async () => {
-    const points = await updateComplete(studyId);
-    clearInterval(timerRef.current);
-    timerRef.current = null;
-    setTotalPoint((prev) => prev + points);
-    initTimer();
-    setToast({
-      show: true,
-      type: 'success',
-      msg: `${points}포인트를 획득했습니다!`,
-    });
+    if (!isUpdating) {
+      setIsUpdating(true);
+      const points = await updateComplete(studyId);
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+      setTotalPoint((prev) => prev + points);
+      initTimer();
+      addToast('success', `${points}포인트를 획득했습니다!`);
+      setIsUpdating(false);
+    }
   };
 
   return {
-    toast,
+    toasts,
     timerStartHandler,
     timerPauseHandler,
     timerResetHandler,

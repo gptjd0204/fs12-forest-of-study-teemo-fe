@@ -8,6 +8,7 @@ import Toast from '../../components/Toast/Toast';
 import useFetchTimer from '../../hooks/useFetchTimer';
 import useTargetDuration from '../../hooks/useTargetDuration';
 import useTimer from '../../hooks/useTimer';
+import NotFound from '../NotFoundPage/NotFound';
 
 const TodayFocus = () => {
   const { id } = useParams();
@@ -21,13 +22,17 @@ const TodayFocus = () => {
     totalPoint,
     setTotalPoint,
     title,
+    isNotFoundError,
   } = useFetchTimer(id);
 
   const {
     toggleForm,
     hours,
+    setHours,
     minutes,
+    setMinutes,
     seconds,
+    setSeconds,
     error,
     setError,
     toggleFormHandler,
@@ -44,7 +49,7 @@ const TodayFocus = () => {
   );
 
   const {
-    toast,
+    toasts,
     timerStartHandler,
     timerPauseHandler,
     timerResetHandler,
@@ -62,43 +67,55 @@ const TodayFocus = () => {
 
   return (
     <>
-      <div className={`wrapper ${styles.wrapper}`}>
-        <div className={styles.focusWrapper}>
-          <div>
-            <FocusHeader studyId={id} title={title} />
-            <TotalPoints points={totalPoint} />
-          </div>
-          <main className={styles.timerWrapper}>
-            <div className={styles.timerHeader}>
-              <h2>오늘의 집중</h2>
-              <TargetDuration
-                targetDuration={targetDuration}
-                toggleForm={toggleForm}
-                error={error}
-                setError={setError}
-                hours={hours}
-                minutes={minutes}
-                seconds={seconds}
-                onToggleForm={toggleFormHandler}
-                onChangeHours={hoursInputHandler}
-                onChangeMinutes={minutesInputHandler}
-                onChangeSeconds={secondsInputHandler}
-                onSubmitTarget={submitHandler}
-              />
+      {isNotFoundError ? (
+        <NotFound />
+      ) : (
+        <>
+          <div className={`wrapper ${styles.wrapper}`}>
+            <div className={styles.focusWrapper}>
+              <div>
+                <FocusHeader studyId={id} title={title} />
+                <TotalPoints points={totalPoint} />
+              </div>
+              <main className={styles.timerWrapper}>
+                <div className={styles.timerHeader}>
+                  <h2>오늘의 집중</h2>
+                  <TargetDuration
+                    targetDuration={targetDuration}
+                    toggleForm={toggleForm}
+                    error={error}
+                    setError={setError}
+                    hours={hours}
+                    setHours={setHours}
+                    minutes={minutes}
+                    setMinutes={setMinutes}
+                    seconds={seconds}
+                    setSeconds={setSeconds}
+                    onToggleForm={toggleFormHandler}
+                    onChangeHours={hoursInputHandler}
+                    onChangeMinutes={minutesInputHandler}
+                    onChangeSeconds={secondsInputHandler}
+                    onSubmitTarget={submitHandler}
+                  />
+                </div>
+                <Timer
+                  timerCount={timerCount}
+                  toggleForm={toggleForm}
+                  timerStatus={timerStatus}
+                  onStart={timerStartHandler}
+                  onPause={timerPauseHandler}
+                  onReset={timerResetHandler}
+                  onComplete={timerCompleteHandler}
+                />
+              </main>
             </div>
-            <Timer
-              timerCount={timerCount}
-              toggleForm={toggleForm}
-              timerStatus={timerStatus}
-              onStart={timerStartHandler}
-              onPause={timerPauseHandler}
-              onReset={timerResetHandler}
-              onComplete={timerCompleteHandler}
-            />
-          </main>
-        </div>
-      </div>
-      {toast.show && <Toast toastType={toast.type} toastMsg={toast.msg} />}
+          </div>
+          {toasts.length > 0 &&
+            toasts.map((t) => {
+              return <Toast key={t.id} toastType={t.type} toastMsg={t.msg} />;
+            })}
+        </>
+      )}
     </>
   );
 };

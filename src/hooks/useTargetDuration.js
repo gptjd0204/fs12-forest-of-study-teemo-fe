@@ -44,6 +44,7 @@ const useTargetDuration = (
       setError('숫자를 입력해주세요');
     } else if (newHours >= 24) {
       setError('23시 이하로 입력해주세요');
+      setHours(23);
     } else {
       setHours(newHours);
       setError('');
@@ -56,6 +57,7 @@ const useTargetDuration = (
       setError('숫자를 입력해주세요');
     } else if (newMinutes >= 60) {
       setError('59분 이하로 입력해주세요');
+      setMinutes(59);
     } else {
       setMinutes(newMinutes);
       setError('');
@@ -68,6 +70,7 @@ const useTargetDuration = (
       setError('숫자를 입력해주세요');
     } else if (newSeconds >= 60) {
       setError('59초 이하로 입력해주세요');
+      setSeconds(59);
     } else {
       setSeconds(newSeconds);
       setError('');
@@ -92,10 +95,10 @@ const useTargetDuration = (
       Number(minutes) * 1000 * 60 +
       Number(seconds) * 1000;
 
-    // if (formattedMs < 600000) {
-    //   setError('10분 이상으로 입력해주세요');
-    //   return;
-    // }
+    if (formattedMs < 1000) {
+      setError('1초 이상으로 입력해주세요');
+      return;
+    }
 
     setTargetDuration(formattedMs);
     setTimerCount(formattedMs);
@@ -107,8 +110,11 @@ const useTargetDuration = (
   return {
     toggleForm,
     hours,
+    setHours,
     minutes,
+    setMinutes,
     seconds,
+    setSeconds,
     error,
     setError,
     toggleFormHandler,
