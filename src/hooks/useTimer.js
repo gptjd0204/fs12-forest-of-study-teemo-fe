@@ -20,6 +20,7 @@ const useTimer = (
   setTimerCount,
 ) => {
   const [toast, setToast] = useState({ show: false, type: '', msg: '' });
+  const [isUpdating, setIsUpdating] = useState(false);
   const timerRef = useRef();
 
   // 타이머 초기화 함수
@@ -84,16 +85,20 @@ const useTimer = (
   };
 
   const timerCompleteHandler = async () => {
-    const points = await updateComplete(studyId);
-    clearInterval(timerRef.current);
-    timerRef.current = null;
-    setTotalPoint((prev) => prev + points);
-    initTimer();
-    setToast({
-      show: true,
-      type: 'success',
-      msg: `${points}포인트를 획득했습니다!`,
-    });
+    if (!isUpdating) {
+      setIsUpdating(true);
+      const points = await updateComplete(studyId);
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+      setTotalPoint((prev) => prev + points);
+      initTimer();
+      setToast({
+        show: true,
+        type: 'success',
+        msg: `${points}포인트를 획득했습니다!`,
+      });
+      setIsUpdating(false);
+    }
   };
 
   return {
