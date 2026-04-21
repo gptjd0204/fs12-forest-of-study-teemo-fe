@@ -9,8 +9,7 @@ import Modals from './components/Modals/Modals';
 
 import Toast from '../../components/Toast/Toast';
 
-import { getStudyDetail } from '../../services/StudyDetailService.js';
-import { saveRecentStudy } from '../../services/StudyService.js';
+import { getStudyDetail, saveRecentStudy } from '../../services/StudyService.js';
 
 import styles from './StudyDetailPage.module.css';
 
