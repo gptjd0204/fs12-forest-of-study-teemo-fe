@@ -105,11 +105,25 @@
     font-size: 28px;
   }
 
+  .recentGrid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 16px) / 2);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    padding-bottom: 8px;
+  }
+
+  .recentGrid > * {
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
   .controlsRow > :first-child {
     max-width: 214px;
   }
 
-  .recentGrid,
   .cardGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -147,7 +161,21 @@
     align-self: flex-end;
   }
 
-  .recentGrid,
+  .recentGrid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    padding-bottom: 8px;
+  }
+
+  .recentGrid > * {
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
   .cardGrid {
     grid-template-columns: 1fr;
   }
