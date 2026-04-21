@@ -83,8 +83,8 @@ const StudyDetailPage = () => {
   return (
     <div className="wrapper">
       <div className={styles.ixWrapper}>
-        <Emojis toastHandler={toastHandler} />
         <Interaction onClick={modalHandler} onShare={shareHandler} />
+        <Emojis toastHandler={toastHandler} />
       </div>
 
       <div className={styles.introWrapper}>

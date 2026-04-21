@@ -67,3 +67,14 @@
   top: 40px;
   left: 0px;
 }
+
+@media (max-width: 660px) {
+  .emojiPickerWrapper {
+    position: unset;
+  }
+
+  .emojiPickerBox {
+    left: auto;
+    right: 0;
+  }
+}
