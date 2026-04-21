@@ -25,8 +25,7 @@ const useTimer = (
 
   // 타이머 초기화 함수
   const initTimer = () => {
-    setTargetDuration(1500000);
-    setTimerCount(1500000);
+    setTimerCount(targetDuration);
     setTimerStatus('CANCELED');
   };
 
@@ -84,8 +83,7 @@ const useTimer = (
   const timerResetHandler = async () => {
     clearInterval(timerRef.current);
     timerRef.current = null;
-    setTimerStatus('CANCELED');
-    setTimerCount(targetDuration);
+    initTimer();
     await updateReset(studyId);
   };
 
