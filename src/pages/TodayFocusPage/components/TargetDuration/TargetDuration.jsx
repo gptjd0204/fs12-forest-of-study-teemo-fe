@@ -8,8 +8,11 @@ const TargetDuration = ({
   error,
   setError,
   hours,
+  setHours,
   minutes,
+  setMinutes,
   seconds,
+  setSeconds,
   onToggleForm,
   onChangeHours,
   onChangeMinutes,
@@ -32,26 +35,38 @@ const TargetDuration = ({
           <div className={styles.inputContainer}>
             <input
               type="text"
-              maxLength="2"
               value={hours}
               onChange={onChangeHours}
-              onBlur={() => setError('')}
+              onBlur={() => {
+                setError('');
+                if (!hours) {
+                  setHours(0);
+                }
+              }}
             />
             <p>시</p>
             <input
               type="text"
-              maxLength="2"
               value={minutes}
               onChange={onChangeMinutes}
-              onBlur={() => setError('')}
+              onBlur={() => {
+                setError('');
+                if (!minutes) {
+                  setMinutes(0);
+                }
+              }}
             />
             <p>분</p>
             <input
               type="text"
-              maxLength="2"
               value={seconds}
               onChange={onChangeSeconds}
-              onBlur={() => setError('')}
+              onBlur={() => {
+                setError('');
+                if (!seconds) {
+                  setSeconds(0);
+                }
+              }}
             />
             <p>초</p>
           </div>
