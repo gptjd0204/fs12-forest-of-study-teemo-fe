@@ -154,6 +154,12 @@ const TodayHabitPage = () => {
         isNew: true,
       },
     ]);
+
+    setTimeout(() => {
+      const inputs = document.querySelectorAll(`.${styles.habitInput}`);
+      const lastInput = inputs[inputs.length - 1];
+      lastInput?.focus();
+    }, 0);
   };
 
   // 습관 종료
