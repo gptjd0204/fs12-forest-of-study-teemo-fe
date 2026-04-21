@@ -83,7 +83,7 @@ const StudyList = () => {
           <h2 className={styles.sectionTitle}>최근 조회한 스터디</h2>
           <div className={styles.recentGrid}>
             {recentStudyList.length === 0 ? (
-              <h2>아직 조회한 스터디가 없어요</h2>
+              <h2>아직 조회한 스터디가 없어요.</h2>
             ) : (
               recentStudyList.map((study) => (
                 <Card key={study.id} study={study} />
@@ -117,11 +117,15 @@ const StudyList = () => {
                   <span className={styles.loadingDot} />
                 </div>
                 <h2 className={styles.loadingText}>
-                  스터디 목록을 불러오는 중입니다
+                  스터디 목록을 불러오는 중입니다.
                 </h2>
               </div>
             ) : studyList.length === 0 ? (
-              <h2>아직 둘러 볼 스터디가 없어요</h2>
+              <h2>
+                {keyword
+                  ? '검색 결과가 존재하지 않습니다.'
+                  : '아직 둘러볼 스터디가 없어요.'}
+              </h2>
             ) : (
               studyList.map((study) => <Card key={study.id} study={study} />)
             )}
