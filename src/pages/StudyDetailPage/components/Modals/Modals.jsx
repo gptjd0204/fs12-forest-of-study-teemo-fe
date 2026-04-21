@@ -57,7 +57,11 @@ const Modals = ({
     if (!isCorrect) {
       // toast ui 튀어나오기
 
-      toastHandler('error', '비밀번호가 일치하지 않습니다. 다시 입력해주세요.');
+      toastHandler(
+        'error',
+        '비밀번호가 일치하지 않습니다. 다시 입력해주세요.',
+        'password',
+      );
       return;
     }
 

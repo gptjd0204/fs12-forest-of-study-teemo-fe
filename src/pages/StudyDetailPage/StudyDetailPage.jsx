@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useToast from '../../hooks/useToast.jsx';
+import useToast from '../../hooks/useToast';
 
 import HabitTable from './components/HabitTable/HabitTable';
 import Emojis from './components/Emoji/EmojiContainer';
@@ -8,7 +8,9 @@ import Interaction from './components/Interaction/Interaction';
 import StudyDetail from './components/StudyDetail/StudyDetail';
 import Modals from './components/Modals/Modals';
 
-import { getStudyDetail } from '../../services/StudyService.js';
+import Toast from '../../components/Toast/Toast';
+
+import { getStudyDetail } from '../../services/StudyService';
 
 import styles from './StudyDetailPage.module.css';
 
@@ -51,7 +53,7 @@ const StudyDetailPage = () => {
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl);
 
-    addToast('success', '링크가 복사되었습니다!');
+    addToast('success', '링크가 복사되었습니다!', 'link');
   };
 
   return (
@@ -86,7 +88,9 @@ const StudyDetailPage = () => {
 
       {toasts.length > 0 && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {toasts.map((toast) => toast.toast)}
+          {toasts.map((toast) => (
+            <Toast key={toast.id} toastType={toast.type} toastMsg={toast.msg} />
+          ))}
         </div>
       )}
     </div>
