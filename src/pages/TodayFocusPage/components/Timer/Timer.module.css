@@ -25,6 +25,7 @@
 .startBtn {
   display: flex;
   align-items: center;
+  height: 64px;
   gap: 16px;
   border-radius: 50px;
   background: var(--brand_99C08E);
@@ -65,6 +66,7 @@
   }
 
   .startBtn {
+    height: 48.39px;
     gap: 8px;
     padding: 11px 28px 11px 20px;
     font-size: 18px;
