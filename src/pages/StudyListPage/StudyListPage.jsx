@@ -93,8 +93,8 @@ const StudyList = () => {
         </section>
       </div>
 
-      <div className="wrapper">
-        <section className={styles.section}>
+      <div className={`wrapper ${styles.browseWrapper}`}>
+        <section className={`${styles.section} ${styles.browseSection}`}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>스터디 둘러보기</h2>
           </div>

@@ -32,6 +32,11 @@
   gap: 16px;
 }
 
+.cardGrid {
+  align-content: start;
+  min-height: 500px;
+}
+
 .controlsRow {
   display: flex;
   justify-content: space-between;
