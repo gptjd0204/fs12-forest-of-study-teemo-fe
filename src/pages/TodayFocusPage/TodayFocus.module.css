@@ -1,3 +1,7 @@
+.wrapper {
+  margin-bottom: 80px;
+}
+
 .focusWrapper {
   display: flex;
   flex-direction: column;

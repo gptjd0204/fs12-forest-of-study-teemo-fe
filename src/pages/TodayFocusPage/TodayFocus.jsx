@@ -62,7 +62,7 @@ const TodayFocus = () => {
 
   return (
     <>
-      <div className="wrapper">
+      <div className={`wrapper ${styles.wrapper}`}>
         <div className={styles.focusWrapper}>
           <div>
             <FocusHeader studyId={id} title={title} />
