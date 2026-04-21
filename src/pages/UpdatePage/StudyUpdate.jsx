@@ -105,7 +105,7 @@ const StudyUpdate = () => {
             <div className={styles.confirmBtn}>
               <Button
                 btnTxt={'확인'}
-                btnStyle="btnCreate"
+                btnStyle="btnDefault"
                 onClick={handleConfirm}
                 btnType={'button'}
               />
