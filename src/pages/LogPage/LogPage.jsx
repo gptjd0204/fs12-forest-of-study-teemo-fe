@@ -6,10 +6,12 @@ import LogDateSelector from './components/LogDateSelector';
 import LogList from './components/LogList';
 import { getLogs } from '../../services/LogService';
 import { formatDate } from '../../utils/formattedDate';
+import { getStudyDetail } from '../../services/StudyService';
 
 
 const LogPage = () => {
   const { id } = useParams();
+  const [study, setStudy] = useState([]);
   const [logType, setLogType] = useState("focus");
   const [date, setDate] = useState(new Date());
   const [pointLogs, setPointLogs] = useState([]);
@@ -22,6 +24,9 @@ const LogPage = () => {
 
         setPointLogs(data);
         setFocusLogs(data);
+
+        const studyData = await getStudyDetail(id);
+        setStudy(studyData);
       } 
 
     fetchData();
@@ -35,6 +40,7 @@ const LogPage = () => {
       {/** 헤더 */}
       <LogHeader 
         id={id}
+        study={study}
         logType={logType}
         setLogType={setLogType}
       />

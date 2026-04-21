@@ -2,13 +2,15 @@ import styles from "../LogPage.module.css";
 import LinkButton from '../../../components/LinkButton/LinkButton';
 import CurrentTime from '../../../components/CurrentTime/CurrentTime';
 
-const LogHeader = ({ id, logType, setLogType }) => {
+const LogHeader = ({ id, study, logType, setLogType }) => {
+  const { nickname, title } = study || {};
+
   return (
     <div className={styles.topwrapper}>
         {/** 스터디이름, 링크 */}
         <div className={styles.top}>
-          <h1 className={styles.title}>
-            연우의 개발공장
+          <h1>
+            {nickname}의 {title}
           </h1>
           <div className={styles.linkContainer}>
             <LinkButton  
