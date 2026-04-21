@@ -9,6 +9,7 @@ import img5 from '../../../../assets/images/img5.png';
 import img6 from '../../../../assets/images/img6.png';
 import img7 from '../../../../assets/images/img7.png';
 import img8 from '../../../../assets/images/img8.png';
+import checkimg from '../../../../assets/icons/ic_bg_check.svg';
 
 const images = [
   { id: 'green', src: img1 },
@@ -37,7 +38,15 @@ const BackGround = ({ setBackground }) => {
           className={`${styles.card} ${selectedImage === img.id ? styles.active : ''}`}
           onClick={() => handleClick(img)}
         >
-          <img src={img.src} alt={img.id} />
+          <div className={styles.imgWrapper}>
+            <img src={img.src} alt={img.id} />
+          </div>
+
+          {selectedImage === img.id && (
+            <div className={styles.checkIcon}>
+              <img src={checkimg} alt="check" />
+            </div>
+          )}
         </div>
       ))}
     </div>
