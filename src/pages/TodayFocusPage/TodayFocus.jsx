@@ -65,7 +65,6 @@ const TodayFocus = () => {
     setTimerCount,
   );
 
-  console.log('toasts => ', toasts);
   return (
     <>
       {isNotFoundError ? (
