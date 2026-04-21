@@ -111,3 +111,16 @@ export const saveRecentStudy = (study) => {
     JSON.stringify(nextRecentStudyList),
   );
 };
+
+//스터디 삭제 시 로컬 스토리지에서도 삭제
+export const removeRecentStudy = (studyId) => {
+  const recentStudyList = getRecentStudyList();
+  const nextRecentStudyList = recentStudyList.filter(
+    (recentStudy) => String(recentStudy.id) !== String(studyId),
+  );
+
+  localStorage.setItem(
+    RECENT_STUDY_LIST_KEY,
+    JSON.stringify(nextRecentStudyList),
+  );
+};
