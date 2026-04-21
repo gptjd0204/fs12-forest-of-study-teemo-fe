@@ -1,11 +1,13 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  gap: 10px;
 }
 
 .navContainer {
   display: flex;
+  min-width: 357px;
+  max-height: 50px;
   gap: 16px;
 }
 
@@ -22,6 +24,8 @@
   }
 
   .navContainer {
+    min-width: 0;
+    max-height: 42px;
     gap: 8px;
   }
 }
