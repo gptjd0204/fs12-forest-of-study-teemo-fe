@@ -111,8 +111,11 @@ const TodayHabitPage = () => {
     try {
       setIsSubmitting(true);
 
+      for (const h of newHabits) {
+        await postHabit(id, h.name.trim());
+      }
+
       await Promise.all([
-        ...newHabits.map((h) => postHabit(id, h.name.trim())),
         ...updatedHabits.map((h) => editHabit(id, h.id, h.name.trim())),
         ...endHabitIds.map((h) => deleteHabit(id, h)),
       ]);

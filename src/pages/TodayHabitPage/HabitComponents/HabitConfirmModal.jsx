@@ -13,7 +13,13 @@ const HabitConfirmModal = ({
 }) => {
   return (
     <>
-      <HabitModal title="습관 목록" onClose={onClose} onConfirm={onConfirm}>
+      <HabitModal
+        title="습관 목록"
+        onClose={onClose}
+        onConfirm={onConfirm}
+        closeBtnType="button"
+        confirmBtnType="button"
+      >
         <HabitEditForm
           editHabits={editHabits}
           setEditHabits={setEditHabits}
