@@ -4,7 +4,7 @@ import EmojiPicker from 'emoji-picker-react';
 import {
   createEmojis,
   updateEmojis,
-} from '../../../../../../services/StudyDetailService';
+} from '../../../../../../services/EmojiService';
 
 import styles from '../../EmojiContainer.module.css';
 import smileIcon from '../../../../../../assets/icons/ic_smile.svg';

@@ -9,7 +9,7 @@ import Button from '../../../../components/Button/Button';
 import {
   deleteStudy,
   validatePassword,
-} from '../../../../services/StudyDetailService.js';
+} from '../../../../services/StudyService.js';
 
 import styles from './Modals.module.css';
 
@@ -32,15 +32,15 @@ const Modals = ({
       txt: '수정하러 가기',
     },
     log: {
-      link: `/${id}/update`,
+      link: `/${id}/logs`,
       txt: '로그로 가기',
     },
     habit: {
-      link: `/${id}/update`,
+      link: `/${id}/habit`,
       txt: '습관으로 가기',
     },
     focus: {
-      link: `/${id}/update`,
+      link: `/${id}/focus`,
       txt: '집중으로 가기',
     },
     delete: {
