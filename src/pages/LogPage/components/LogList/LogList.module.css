@@ -1,0 +1,64 @@
+/* LogList.module.css */
+.totalBox {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 30px;
+  gap: 20px;
+  font-size: 20px;
+}
+
+.logType {
+  display: flex;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.totalFocusValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--red_F50E0E);
+}
+
+.totalPointValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--blue_text_418099);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  height: 54px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--green_E1EDDE);
+  background: var(--white_FFFFFF);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rowDate {
+  color: var(--gray_818181);
+}
+
+.rowValue {
+  color: var(--green_text_578246);
+  font-size: 16px;
+}
+
+.noData {
+  margin-top: 100px;
+  color: var(--gray_818181);
+}

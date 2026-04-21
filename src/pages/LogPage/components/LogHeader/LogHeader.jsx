@@ -1,6 +1,6 @@
-import styles from "../LogPage.module.css";
-import LinkButton from '../../../components/LinkButton/LinkButton';
-import CurrentTime from '../../../components/CurrentTime/CurrentTime';
+import styles from "./LogHeader.module.css";
+import LinkButton from '../../../../components/LinkButton/LinkButton';
+import CurrentTime from '../../../../components/CurrentTime/CurrentTime';
 
 const LogHeader = ({ id, study, logType, setLogType }) => {
   const { nickname, title } = study || {};

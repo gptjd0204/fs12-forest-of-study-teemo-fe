@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from "./LogPage.module.css";
-import LogHeader from './components/LogHeader';
-import LogDateSelector from './components/LogDateSelector';
-import LogList from './components/LogList';
+import LogHeader from './components/LogHeader/LogHeader';
+import LogDateSelector from './components/LogDateSelector/LogDateSelector';
+import LogList from './components/LogList/LogList';
 import { getLogs } from '../../services/LogService';
 import { formatDate } from '../../utils/formattedDate';
 import { getStudyDetail } from '../../services/StudyService';

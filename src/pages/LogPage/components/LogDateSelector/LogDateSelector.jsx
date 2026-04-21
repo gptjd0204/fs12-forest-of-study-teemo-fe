@@ -1,7 +1,7 @@
-import styles from "../LogPage.module.css";
-import arrowLeft from '../../../assets/icons/ic_arrow_left_big.svg';
-import arrowRight from '../../../assets/icons/ic_arrow_right_big.svg';
-import { checkIsToday } from "../../../utils/formattedDate";
+import styles from "./LogDateSelector.module.css";
+import arrowLeft from '../../../../assets/icons/ic_arrow_left_big.svg';
+import arrowRight from '../../../../assets/icons/ic_arrow_right_big.svg';
+import { checkIsToday } from "../../../../utils/formattedDate";
 
 const LogDateSelector = ({ date, setDate, formatDate }) => {
     const prevDateHandler = () => {

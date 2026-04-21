@@ -1,0 +1,63 @@
+/* LogHeader.module.css */
+.topwrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  align-content: center;
+  margin-bottom: 20px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dateWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  color: var(--gray_818181);
+}
+
+.radioBox {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  appearance: none;
+  gap: 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.radioBox input { 
+  display: none;
+}
+
+.radioBoxItem {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  padding: 6px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--gray_EEEEEE);
+  background: var(--gray_EEEEEE);
+  color: var(--gray_818181);
+}
+
+.active {
+  background: var(--brand_99C08E);
+  border: 1px solid var(--brand_99C08E);
+  color: var(--white_FFFFFF);
+}
