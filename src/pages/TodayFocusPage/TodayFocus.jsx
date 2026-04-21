@@ -28,8 +28,11 @@ const TodayFocus = () => {
   const {
     toggleForm,
     hours,
+    setHours,
     minutes,
+    setMinutes,
     seconds,
+    setSeconds,
     error,
     setError,
     toggleFormHandler,
@@ -83,8 +86,11 @@ const TodayFocus = () => {
                     error={error}
                     setError={setError}
                     hours={hours}
+                    setHours={setHours}
                     minutes={minutes}
+                    setMinutes={setMinutes}
                     seconds={seconds}
+                    setSeconds={setSeconds}
                     onToggleForm={toggleFormHandler}
                     onChangeHours={hoursInputHandler}
                     onChangeMinutes={minutesInputHandler}
