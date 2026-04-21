@@ -12,6 +12,7 @@ import ModalLayout from '../../components/Modal/ModalLayout';
 
 import { getStudy } from '../../services/CreateService';
 import { patchService } from '../../services/CreateService';
+import { updateRecentStudy } from '../../services/StudyService';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const StudyUpdate = () => {
@@ -61,6 +62,8 @@ const StudyUpdate = () => {
         setModalOpen(true);
         return;
       }
+      await patchService(id, data);
+      updateRecentStudy(id, data);
 
       setModalMessage('수정이 완료되었습니다');
       setIsSuccess(true);
