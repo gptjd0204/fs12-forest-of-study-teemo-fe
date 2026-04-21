@@ -10,7 +10,10 @@ import Modals from './components/Modals/Modals';
 
 import Toast from '../../components/Toast/Toast';
 
-import { getStudyDetail } from '../../services/StudyService';
+import {
+  getStudyDetail,
+  saveRecentStudy,
+} from '../../services/StudyService.js';
 
 import styles from './StudyDetailPage.module.css';
 
@@ -33,6 +36,7 @@ const StudyDetailPage = () => {
       }
 
       setStudy(data);
+      saveRecentStudy(data);
     } catch (error) {
       console.log(error);
       throw error;

@@ -11,6 +11,7 @@ const useFetchTimer = (studyId) => {
   const [timerStatus, setTimerStatus] = useState('CANCELED');
   const [totalPoint, setTotalPoint] = useState(0);
   const [title, setTitle] = useState('');
+  const [isNotFoundError, setIsNotFoundError] = useState(false);
 
   // 타이머 초기화 함수
   const initTimer = () => {
@@ -23,35 +24,40 @@ const useFetchTimer = (studyId) => {
     try {
       const fetchTimer = async () => {
         const data = await getTimer(studyId);
-        const timerData = data.timer;
+        if (!data) {
+          setIsNotFoundError(true);
+          return;
+        }
+        const timer = data.timer;
         const total = await getTotalPoint(studyId);
+
         setTitle(`${data.nickname}의 ${data.title}`);
-        if (!timerData) {
+        if (!timer) {
           initTimer();
           await createTimer(studyId);
           return;
         }
 
         setTotalPoint(total);
-        setTargetDuration(timerData.targetDuration);
-        setTimerStatus(timerData.status);
+        setTargetDuration(timer.targetDuration);
+        setTimerStatus(timer.status);
         // 타이머 남은 시간 계산 로직
-        if (timerData.status === 'IN_PROGRESS') {
+        if (timer.status === 'IN_PROGRESS') {
           const now = Date.now();
-          const lastStartedAt = new Date(timerData.lastStartedAt);
+          const lastStartedAt = new Date(timer.lastStartedAt);
 
           const timeDiff = now - lastStartedAt;
-          const totalElapsedTime = timerData.elapsedTime + timeDiff;
-          const remainingTime = timerData.targetDuration - totalElapsedTime;
+          const totalElapsedTime = timer.elapsedTime + timeDiff;
+          const remainingTime = timer.targetDuration - totalElapsedTime;
 
           if (remainingTime < 0) {
             setTimerStatus('COMPLETED');
-            setTimerCount(totalElapsedTime - timerData.targetDuration + 700);
+            setTimerCount(totalElapsedTime - timer.targetDuration + 700);
           } else {
             setTimerCount(remainingTime + 700);
           }
         } else {
-          setTimerCount(timerData.targetDuration - timerData.elapsedTime + 700);
+          setTimerCount(timer.targetDuration - timer.elapsedTime + 700);
         }
       };
 
@@ -71,6 +77,7 @@ const useFetchTimer = (studyId) => {
     totalPoint,
     setTotalPoint,
     title,
+    isNotFoundError,
   };
 };
 

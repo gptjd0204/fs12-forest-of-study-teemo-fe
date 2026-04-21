@@ -71,6 +71,7 @@
 
 .cardTitle {
   min-width: 0;
+  max-width: 100%;
   flex: 1;
   font-size: 18px;
   font-style: normal;
@@ -80,6 +81,8 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
 }
 
 .nickname {
@@ -122,6 +125,7 @@
 
 .cardDescription {
   align-self: start;
+  max-width: 100%;
   font-size: 16px;
   font-style: normal;
   line-height: 24px; /* 150% */
@@ -129,6 +133,8 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
   margin: 0;
 }
 
