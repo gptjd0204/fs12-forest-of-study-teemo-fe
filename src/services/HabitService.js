@@ -12,6 +12,30 @@ export const getTodayHabits = async (id) => {
   return result.data;
 };
 
+// 주간 습관 조회
+export const getWeeklyHabits = async (id) => {
+  const res = await fetch(`${API_URL}/api/habits/${id}/weekly`);
+  const data = await res.json();
+
+  const habits = data.data.habits;
+
+  const weeklyHabits = habits.map((habit) => {
+    let isCompleted = [false, false, false, false, false, false, false];
+
+    const days = habit.records.forEach((record) => {
+      const date = new Date(record.date);
+      const day = date.getDay() - 1; // date 는 일요일 시작이라 1 빼줌
+
+      isCompleted[day] = record.isCompleted;
+      return;
+    });
+
+    return { title: habit.name, isCompleted };
+  });
+
+  return weeklyHabits;
+};
+
 // 습관 생성
 export const postHabit = async (id, name) => {
   const response = await fetch(`${API_URL}/api/habits/${id}`, {
@@ -49,18 +73,15 @@ export const toggleHabit = async (studyId, habitId) => {
   return result.data;
 };
 
-
 // 습관 수정
 export const editHabit = async (studyId, habitId, name) => {
-  const response = await fetch(`${API_URL}/api/habits/${studyId}/${habitId}`,
-    {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({name}),
+  const response = await fetch(`${API_URL}/api/habits/${studyId}/${habitId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
     },
-  );
+    body: JSON.stringify({ name }),
+  });
 
   const result = await response.json();
 
@@ -71,14 +92,11 @@ export const editHabit = async (studyId, habitId, name) => {
   return result.data;
 };
 
-
 // 습관 삭제
 export const deleteHabit = async (studyId, habitId) => {
-  const response = await fetch(`${API_URL}/api/habits/${studyId}/${habitId}`,
-    {
-      method: 'DELETE',
-    },
-  );
+  const response = await fetch(`${API_URL}/api/habits/${studyId}/${habitId}`, {
+    method: 'DELETE',
+  });
 
   const result = await response.json();
 

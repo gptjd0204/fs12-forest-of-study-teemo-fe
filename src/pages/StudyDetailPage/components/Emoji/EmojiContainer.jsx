@@ -2,11 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Emoji from '../../../../components/Emoji/Emoji';
-
-import { getEmojis } from '../../../../services/StudyDetailService';
 import EmojiAdd from './EmojiPopOver/EmojiAdd/EmojiAdd';
 
-import { updateEmojis } from '../../../../services/StudyDetailService';
+import { getEmojis, updateEmojis } from '../../../../services/EmojiService';
 
 import styles from './EmojiContainer.module.css';
 import plusIcon from '../../../../assets/icons/ic_plus.svg';

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import HabitItems from './HabitItems/HabitItems';
 
-import { getWeeklyHabits } from '../../../../services/StudyDetailService';
+import { getWeeklyHabits } from '../../../../services/HabitService';
 
 import styles from '../HabitTable/HabitTable.module.css';
 
