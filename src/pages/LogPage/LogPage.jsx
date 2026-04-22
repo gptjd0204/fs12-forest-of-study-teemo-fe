@@ -7,6 +7,7 @@ import LogList from './components/LogList/LogList';
 import { getLogs } from '../../services/LogService';
 import { formatDate } from '../../utils/formattedDate';
 import { getStudyDetail } from '../../services/StudyService';
+import Pagenation from '../../components/Pagination/Pagination';
 
 
 const LogPage = () => {
@@ -14,23 +15,47 @@ const LogPage = () => {
   const [study, setStudy] = useState([]);
   const [logType, setLogType] = useState("focus");
   const [date, setDate] = useState(new Date());
+
   const [pointLogs, setPointLogs] = useState([]);
   const [focusLogs, setFocusLogs] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    totalPages: 1,
+  });
+
+  const pageChangeHandler = (page) => {
+    if (page < 1 || page > pagination.totalPages || page === currentPage) {
+      return;
+    }
+    setCurrentPage(page);
+  }
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [date, logType]);
+
+  useEffect(() => {
+      const fetchStudyData = async () => {
+        const studyData = await getStudyDetail(id);
+        setStudy(studyData);
+      };
+      fetchStudyData();
+    }, [id]);
 
   useEffect(() => {
     const fetchData = async () => {
       const formattedDate = formatDate(date);
-        const data = await getLogs(id, formattedDate);
+      const result = await getLogs(id, formattedDate, currentPage);
 
-        setPointLogs(data);
-        setFocusLogs(data);
-
-        const studyData = await getStudyDetail(id);
-        setStudy(studyData);
-      } 
-
+      if (result.success) {
+        setPointLogs(result.data.logs);
+        setFocusLogs(result.data.logs);
+        setPagination(result.data.pagination);
+      }
+    };
     fetchData();
-  }, [date, id]);
+  }, [date, id, currentPage]);
 
 
   return (
@@ -58,6 +83,9 @@ const LogPage = () => {
           logType={logType}
           pointLogs={pointLogs}
           focusLogs={focusLogs}
+          currentPage={currentPage}
+          totalPages={pagination.totalPages}
+          onPageChange={pageChangeHandler}
         />
       </div>
     </div>
