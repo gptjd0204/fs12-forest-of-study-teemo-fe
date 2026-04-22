@@ -68,23 +68,35 @@ const useTimer = (
             타이머 조작 핸들러(시작, 일시정지, 리셋)
     ------------------------------------------------------*/
   const timerStartHandler = async () => {
-    setTimerStatus('IN_PROGRESS');
-    await updateStart(studyId);
+    if (!isUpdating) {
+      setIsUpdating(true);
+      setTimerStatus('IN_PROGRESS');
+      await updateStart(studyId);
+      setIsUpdating(false);
+    }
   };
 
   const timerPauseHandler = async () => {
-    clearInterval(timerRef.current);
-    timerRef.current = null;
-    setTimerStatus('PAUSED');
-    addToast('error', '집중이 중단되었습니다.');
-    await updatePause(studyId);
+    if (!isUpdating) {
+      setIsUpdating(true);
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+      setTimerStatus('PAUSED');
+      addToast('error', '집중이 중단되었습니다.');
+      await updatePause(studyId);
+      setIsUpdating(false);
+    }
   };
 
   const timerResetHandler = async () => {
-    clearInterval(timerRef.current);
-    timerRef.current = null;
-    initTimer();
-    await updateReset(studyId);
+    if (!isUpdating) {
+      setIsUpdating(true);
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+      initTimer();
+      await updateReset(studyId);
+      setIsUpdating(false);
+    }
   };
 
   const timerCompleteHandler = async () => {
