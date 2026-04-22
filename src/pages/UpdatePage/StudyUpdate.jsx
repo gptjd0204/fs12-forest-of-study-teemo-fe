@@ -55,6 +55,13 @@ const StudyUpdate = () => {
         background,
       };
 
+      const res = await patchService(id, data);
+
+      if (!res.success) {
+        setModalMessage(res.message);
+        setModalOpen(true);
+        return;
+      }
       await patchService(id, data);
       updateRecentStudy(id, data);
 
@@ -63,6 +70,8 @@ const StudyUpdate = () => {
       setModalOpen(true);
     } catch (error) {
       console.error(error);
+      setModalMessage('수정 실패');
+      setModalOpen(true);
     }
   };
 
@@ -107,7 +116,7 @@ const StudyUpdate = () => {
             <div className={styles.confirmBtn}>
               <Button
                 btnTxt={'확인'}
-                btnStyle="btnCreate"
+                btnStyle="btnDefault"
                 onClick={handleConfirm}
                 btnType={'button'}
               />
