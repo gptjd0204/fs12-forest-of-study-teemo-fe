@@ -33,7 +33,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .searchField {
     width: 100%;
     max-width: none;

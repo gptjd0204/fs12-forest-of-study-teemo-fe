@@ -40,7 +40,7 @@
   color: var(--white_FFFFFF);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .pagination,
   .pageNumbers {
     gap: 4px;
