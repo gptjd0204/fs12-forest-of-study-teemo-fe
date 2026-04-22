@@ -13,6 +13,7 @@ import HabitConfirmModal from './HabitComponents/HabitConfirmModal';
 import HabitList from './HabitComponents/HabitList';
 import HabitListHeader from './HabitComponents/HabitListHeader';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
+import ContentSpinner from '../../components/Loading/ContentSpinner';
 
 const TodayHabitPage = () => {
   const [studyUser, setStudyUser] = useState('');
@@ -25,11 +26,14 @@ const TodayHabitPage = () => {
   const [editHabits, setEditHabits] = useState([]);
   const [endHabitIds, setEndHabitIds] = useState([]);
   const [errorInfos, setErrorInfos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
 
   // 오늘의 습관 조회
   const fetchHabits = async () => {
+    setIsLoading(true);
+
     try {
       const data = await getTodayHabits(id);
       setStudyName(data.studyTitle);
@@ -37,6 +41,8 @@ const TodayHabitPage = () => {
       setHabits(data.habits);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -177,13 +183,27 @@ const TodayHabitPage = () => {
       <div className="wrapper">
         <div className={styles.bodyWrapper}>
           <section className={styles.header}>
-            <HabitHeader studyUser={studyUser} studyName={studyName} id={id} />
+            <HabitHeader
+              studyUser={studyUser}
+              studyName={studyName}
+              id={id}
+              isLoading={isLoading}
+            />
             <CurrentTime />
           </section>
           <section className={styles.mainSection}>
             <div className={styles.todayHabit}>
-              <HabitListHeader onOpenModal={onOpenModalHandler} />
-              <HabitList habits={habits} onToggleHabit={onToggleHabitHandler} />
+              <HabitListHeader onOpenModal={onOpenModalHandler} />{' '}
+              {isLoading ? (
+                <div className={styles.loadingBox}>
+                  <ContentSpinner />
+                </div>
+              ) : (
+                <HabitList
+                  habits={habits}
+                  onToggleHabit={onToggleHabitHandler}
+                />
+              )}
             </div>
           </section>
         </div>
