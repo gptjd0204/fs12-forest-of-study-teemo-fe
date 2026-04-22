@@ -24,4 +24,9 @@
   .grayText {
     font-size: 12px;
   }
+
+  .interContainer {
+    justify-content: flex-end;
+    margin-bottom: 16px;
+  }
 }

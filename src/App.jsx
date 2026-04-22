@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import './styles/pattern.css';
 import './styles/reset.css';
@@ -7,8 +6,8 @@ import StudyLayout from './layouts/StudyLayout';
 import StudyListPage from './pages/StudyListPage/StudyListPage';
 import TodayFocus from './pages/TodayFocusPage/TodayFocus';
 import LogPage from './pages/LogPage/LogPage';
-import StudyDetailPage from './pages/StudyDetailPage/StudyDetailPage';
 import TodayHabitPage from './pages/TodayHabitPage/TodayHabitPage';
+import StudyDetailPage from './pages/StudyDetailPage/StudyDetailPage';
 import StudyCreate from './pages/CreatePage/StudyCreate';
 import StudyUpdate from './pages/UpdatePage/StudyUpdate';
 import NotFound from './pages/NotFoundPage/NotFound';

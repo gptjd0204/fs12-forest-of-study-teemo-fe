@@ -5,6 +5,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+
+  width: 100%;
 }
 
 .descTitle {
@@ -13,6 +15,8 @@
 }
 
 .descContent {
+  width: 100%;
+  overflow-wrap: break-word;
   font-size: 18px;
 }
 
