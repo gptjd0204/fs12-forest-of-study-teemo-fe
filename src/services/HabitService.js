@@ -20,17 +20,18 @@ export const getWeeklyHabits = async (id) => {
   const habits = data.data.habits;
 
   const weeklyHabits = habits.map((habit) => {
-    let isCompleted = [false, false, false, false, false, false, false];
+    const DAYS_IN_WEEK = 7;
+    const compeletedDays = new Array(DAYS_IN_WEEK).fill(false);
 
     const days = habit.records.forEach((record) => {
       const date = new Date(record.date);
       const day = date.getDay() - 1; // date 는 일요일 시작이라 1 빼줌
 
-      isCompleted[day] = record.isCompleted;
+      compeletedDays[day] = record.isCompleted;
       return;
     });
 
-    return { title: habit.name, isCompleted };
+    return { title: habit.name, compeletedDays };
   });
 
   return weeklyHabits;
