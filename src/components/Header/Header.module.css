@@ -46,7 +46,7 @@
 }
 
 /* 모바일 */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .gnbContainer {
     margin: 0 16px;
     padding: 32px 0;

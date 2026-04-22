@@ -41,7 +41,7 @@
 }
 
 /* 모바일 */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .errCode {
     font-size: 36px;
   }

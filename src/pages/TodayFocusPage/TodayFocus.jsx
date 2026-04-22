@@ -9,9 +9,15 @@ import useFetchTimer from '../../hooks/useFetchTimer';
 import useTargetDuration from '../../hooks/useTargetDuration';
 import useTimer from '../../hooks/useTimer';
 import NotFound from '../NotFoundPage/NotFound';
+import { useState } from 'react';
+import ContentSpinner from '../../components/Loading/ContentSpinner';
+import StudyNameSkeleton from '../../components/Loading/StudyNameSkeleton';
+import TotalPointSkeleton from '../../components/Loading/TotalPointSkeleton';
 
 const TodayFocus = () => {
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+
   const {
     targetDuration,
     setTargetDuration,
@@ -23,7 +29,7 @@ const TodayFocus = () => {
     setTotalPoint,
     title,
     isNotFoundError,
-  } = useFetchTimer(id);
+  } = useFetchTimer(id, setIsLoading);
 
   const {
     toggleForm,
@@ -74,39 +80,56 @@ const TodayFocus = () => {
           <div className={`wrapper ${styles.wrapper}`}>
             <div className={styles.focusWrapper}>
               <div>
-                <FocusHeader studyId={id} title={title} />
-                <TotalPoints points={totalPoint} />
+                {isLoading ? (
+                  <>
+                    <StudyNameSkeleton />
+                    <TotalPointSkeleton />
+                  </>
+                ) : (
+                  <>
+                    <FocusHeader studyId={id} title={title} />
+                    <TotalPoints points={totalPoint} />
+                  </>
+                )}
               </div>
               <main className={styles.timerWrapper}>
-                <div className={styles.timerHeader}>
-                  <h2>오늘의 집중</h2>
-                  <TargetDuration
-                    targetDuration={targetDuration}
-                    toggleForm={toggleForm}
-                    error={error}
-                    setError={setError}
-                    hours={hours}
-                    setHours={setHours}
-                    minutes={minutes}
-                    setMinutes={setMinutes}
-                    seconds={seconds}
-                    setSeconds={setSeconds}
-                    onToggleForm={toggleFormHandler}
-                    onChangeHours={hoursInputHandler}
-                    onChangeMinutes={minutesInputHandler}
-                    onChangeSeconds={secondsInputHandler}
-                    onSubmitTarget={submitHandler}
-                  />
-                </div>
-                <Timer
-                  timerCount={timerCount}
-                  toggleForm={toggleForm}
-                  timerStatus={timerStatus}
-                  onStart={timerStartHandler}
-                  onPause={timerPauseHandler}
-                  onReset={timerResetHandler}
-                  onComplete={timerCompleteHandler}
-                />
+                {isLoading ? (
+                  <div className={styles.spinnerContainer}>
+                    <ContentSpinner />
+                  </div>
+                ) : (
+                  <>
+                    <div className={styles.timerHeader}>
+                      <h2>오늘의 집중</h2>
+                      <TargetDuration
+                        targetDuration={targetDuration}
+                        toggleForm={toggleForm}
+                        error={error}
+                        setError={setError}
+                        hours={hours}
+                        setHours={setHours}
+                        minutes={minutes}
+                        setMinutes={setMinutes}
+                        seconds={seconds}
+                        setSeconds={setSeconds}
+                        onToggleForm={toggleFormHandler}
+                        onChangeHours={hoursInputHandler}
+                        onChangeMinutes={minutesInputHandler}
+                        onChangeSeconds={secondsInputHandler}
+                        onSubmitTarget={submitHandler}
+                      />
+                    </div>
+                    <Timer
+                      timerCount={timerCount}
+                      toggleForm={toggleForm}
+                      timerStatus={timerStatus}
+                      onStart={timerStartHandler}
+                      onPause={timerPauseHandler}
+                      onReset={timerResetHandler}
+                      onComplete={timerCompleteHandler}
+                    />
+                  </>
+                )}
               </main>
             </div>
           </div>
