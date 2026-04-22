@@ -35,8 +35,8 @@ FE
 ```
 src/
 ├── assets/ # 이미지, 아이콘 등 정적 파일
-├── icons/
-├── images/
+    ├── icons/
+    ├── images/
 
 ├── components/ # 공통 UI 컴포넌트
 │ ├── Button/
