@@ -52,11 +52,10 @@ const Modals = ({
     e.preventDefault();
 
     const data = await validatePassword(id, password);
-    const isCorrect = data.correct;
 
-    if (!isCorrect) {
+    // 비밀번호 실패시, 토스트 메시지 출력
+    if (!data.success) {
       // toast ui 튀어나오기
-
       toastHandler(
         'error',
         '비밀번호가 일치하지 않습니다. 다시 입력해주세요.',
@@ -64,6 +63,10 @@ const Modals = ({
       );
       return;
     }
+
+    // 비밀번호 일치시, 세션스토리지에 저장
+    // 토큰을 배우지 않았기 때문에 우선 true 값으로 저장
+    sessionStorage.setItem(`isPasswordVerified${id}`, 'true');
 
     if (modalType === 'delete') {
       setModalStep('delete');
