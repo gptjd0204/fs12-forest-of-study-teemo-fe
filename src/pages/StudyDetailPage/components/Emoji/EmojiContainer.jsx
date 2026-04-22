@@ -4,30 +4,15 @@ import { useParams } from 'react-router-dom';
 import Emoji from '../../../../components/Emoji/Emoji';
 import EmojiAdd from './EmojiPopOver/EmojiAdd/EmojiAdd';
 
-import { getEmojis, updateEmojis } from '../../../../services/EmojiService';
+import { updateEmojis } from '../../../../services/EmojiService';
 
 import styles from './EmojiContainer.module.css';
 import plusIcon from '../../../../assets/icons/ic_plus.svg';
+import EmojiSkeleton from '../../../../components/Loading/EmojiSkeleton';
 
-const EmojiContainer = ({ toastHandler }) => {
+const EmojiContainer = ({ toastHandler, emojis, setEmojis, isLoading }) => {
   const { id } = useParams();
-  const [emojis, setEmojis] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-
-  const fetchEmojis = async () => {
-    try {
-      const data = await getEmojis(id);
-
-      setEmojis(data);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    fetchEmojis();
-  }, []);
 
   const emojiContent = (emoji, i) => (
     <Emoji
@@ -49,23 +34,30 @@ const EmojiContainer = ({ toastHandler }) => {
 
   return (
     <div className={styles.emojiWrapper}>
-      {emojis.slice(0, 3).map((emoji, i) => emojiContent(emoji, i))}
+      {isLoading ? (
+        <EmojiSkeleton />
+      ) : (
+        <>
+          {emojis.slice(0, 3).map((emoji, i) => emojiContent(emoji, i))}
 
-      {emojis.length > 3 && (
-        <div>
-          <button
-            className={styles.emojiMoreBtn}
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <img src={plusIcon} alt="이모지 더보기" /> {emojis.slice(3).length}
-            ..
-          </button>
-          {isOpen && (
-            <div className={styles.emojiMoreBox}>
-              {emojis.slice(3).map((emoji, i) => emojiContent(emoji, i))}
+          {emojis.length > 3 && (
+            <div>
+              <button
+                className={styles.emojiMoreBtn}
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <img src={plusIcon} alt="이모지 더보기" />{' '}
+                {emojis.slice(3).length}
+                ..
+              </button>
+              {isOpen && (
+                <div className={styles.emojiMoreBox}>
+                  {emojis.slice(3).map((emoji, i) => emojiContent(emoji, i))}
+                </div>
+              )}
             </div>
           )}
-        </div>
+        </>
       )}
 
       <EmojiAdd

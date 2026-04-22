@@ -19,12 +19,11 @@
   justify-content: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .greenText,
   .grayText {
     font-size: 12px;
   }
-
   .interContainer {
     justify-content: flex-end;
     margin-bottom: 16px;
