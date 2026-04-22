@@ -24,6 +24,14 @@ const EmojiContainer = ({ toastHandler, emojis, setEmojis, isLoading }) => {
     />
   );
 
+  const updateEmoji = async (emojiId) => {
+    const updateEmoji = await updateEmojis(id, emojiId);
+
+    setEmojis((prev) =>
+      prev.map((p) => (p.emoji !== updateEmoji.emoji ? p : updateEmoji)),
+    );
+  };
+
   return (
     <div className={styles.emojiWrapper}>
       {isLoading ? (
@@ -56,6 +64,7 @@ const EmojiContainer = ({ toastHandler, emojis, setEmojis, isLoading }) => {
         toastHandler={toastHandler}
         emojis={emojis}
         setEmojis={setEmojis}
+        updateEmoji={updateEmoji}
         id={id}
       />
     </div>

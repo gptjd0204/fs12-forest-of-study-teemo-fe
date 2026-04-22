@@ -1,15 +1,12 @@
 import { useRef, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 
-import {
-  createEmojis,
-  updateEmojis,
-} from '../../../../../../services/EmojiService';
+import { createEmojis } from '../../../../../../services/EmojiService';
 
 import styles from '../../EmojiContainer.module.css';
 import smileIcon from '../../../../../../assets/icons/ic_smile.svg';
 
-const EmojiAdd = ({ emojis, setEmojis, id, toastHandler }) => {
+const EmojiAdd = ({ emojis, setEmojis, updateEmoji, id, toastHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
   const emojiRef = useRef(null);
 
@@ -35,14 +32,6 @@ const EmojiAdd = ({ emojis, setEmojis, id, toastHandler }) => {
       //update emoji id 같이
       updateEmoji(selectEmoji.id);
     }
-  };
-
-  const updateEmoji = async (emojiId) => {
-    const updateEmoji = await updateEmojis(id, emojiId);
-
-    setEmojis((prev) =>
-      prev.map((p) => (p.emoji !== updateEmoji.emoji ? p : updateEmoji)),
-    );
   };
 
   return (
