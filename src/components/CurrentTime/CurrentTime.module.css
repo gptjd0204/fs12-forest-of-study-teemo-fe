@@ -1,7 +1,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .currentTimeLabel {
@@ -12,9 +13,14 @@
 }
 
 .currentTime {
-  width: fit-content;
+  display: flex;
   padding: 8px 12px;
+  gap: 8px;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 500;
   border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.30);
+  color: var(--black-black_414141, #414141);
 }

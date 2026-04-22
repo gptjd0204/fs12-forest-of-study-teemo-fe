@@ -13,6 +13,7 @@ import HabitConfirmModal from './HabitComponents/HabitConfirmModal';
 import HabitList from './HabitComponents/HabitList';
 import HabitListHeader from './HabitComponents/HabitListHeader';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
+import ContentSpinner from '../../components/Loading/ContentSpinner';
 
 const TodayHabitPage = () => {
   const [studyUser, setStudyUser] = useState('');
@@ -24,12 +25,15 @@ const TodayHabitPage = () => {
   const [togglingId, setTogglingId] = useState(null);
   const [editHabits, setEditHabits] = useState([]);
   const [endHabitIds, setEndHabitIds] = useState([]);
-  const [errorIndexes, setErrorIndexes] = useState([]);
+  const [errorInfos, setErrorInfos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
 
   // 오늘의 습관 조회
   const fetchHabits = async () => {
+    setIsLoading(true);
+
     try {
       const data = await getTodayHabits(id);
       setStudyName(data.studyTitle);
@@ -37,6 +41,8 @@ const TodayHabitPage = () => {
       setHabits(data.habits);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -83,15 +89,30 @@ const TodayHabitPage = () => {
   const onConfirmEditHandler = async () => {
     if (isSubmitting) return;
 
-    const emptyIndexes = editHabits
-      .map((h, index) => (!h.name.trim() ? index : -1))
-      .filter((index) => index !== -1);
+    // 습관명 오류 메세지
+    const errors = editHabits
+      .map((h, index) => {
+        const name = h.name.trim();
 
-    if (emptyIndexes.length > 0) {
-      setErrorIndexes(emptyIndexes);
-      setTimeout(() => {
-        setErrorIndexes([]);
-      }, 500);
+        if (!name) {
+          return { index, message: '이름은 필수 입력입니다.' };
+        }
+
+        if (name.length < 2) {
+          return { index, message: '2자 이상 입력해주세요' };
+        }
+
+        if (name.length > 20) {
+          return { index, message: '20자 이하로 입력해주세요' };
+        }
+
+        return null;
+      })
+
+      .filter(Boolean);
+
+    if (errors.length > 0) {
+      setErrorInfos(errors);
 
       return;
     }
@@ -111,8 +132,11 @@ const TodayHabitPage = () => {
     try {
       setIsSubmitting(true);
 
+      for (const h of newHabits) {
+        await postHabit(id, h.name.trim());
+      }
+
       await Promise.all([
-        ...newHabits.map((h) => postHabit(id, h.name.trim())),
         ...updatedHabits.map((h) => editHabit(id, h.id, h.name.trim())),
         ...endHabitIds.map((h) => deleteHabit(id, h)),
       ]);
@@ -136,6 +160,12 @@ const TodayHabitPage = () => {
         isNew: true,
       },
     ]);
+
+    setTimeout(() => {
+      const inputs = document.querySelectorAll(`.${styles.habitInput}`);
+      const lastInput = inputs[inputs.length - 1];
+      lastInput?.focus();
+    }, 0);
   };
 
   // 습관 종료
@@ -153,13 +183,27 @@ const TodayHabitPage = () => {
       <div className="wrapper">
         <div className={styles.bodyWrapper}>
           <section className={styles.header}>
-            <HabitHeader studyUser={studyUser} studyName={studyName} id={id} />
+            <HabitHeader
+              studyUser={studyUser}
+              studyName={studyName}
+              id={id}
+              isLoading={isLoading}
+            />
             <CurrentTime />
           </section>
           <section className={styles.mainSection}>
             <div className={styles.todayHabit}>
-              <HabitListHeader onOpenModal={onOpenModalHandler} />
-              <HabitList habits={habits} onToggleHabit={onToggleHabitHandler} />
+              <HabitListHeader onOpenModal={onOpenModalHandler} />{' '}
+              {isLoading ? (
+                <div className={styles.loadingBox}>
+                  <ContentSpinner />
+                </div>
+              ) : (
+                <HabitList
+                  habits={habits}
+                  onToggleHabit={onToggleHabitHandler}
+                />
+              )}
             </div>
           </section>
         </div>
@@ -172,7 +216,8 @@ const TodayHabitPage = () => {
           setEditHabits={setEditHabits}
           onAddHabit={onAddHabitHandler}
           onRemoveHabit={onRemoveHabitHandler}
-          errorIndexes={errorIndexes}
+          errorInfos={errorInfos}
+          setErrorInfos={setErrorInfos}
         />
       )}
     </>

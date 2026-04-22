@@ -1,0 +1,18 @@
+/* LogDateSelector.module.css */
+.dateSelectorContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nowDate {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gray_818181);
+}
+
+
+@media (min-width: 767px) {
+
+}
