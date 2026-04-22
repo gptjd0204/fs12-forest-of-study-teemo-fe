@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from "./LogPage.module.css";
-import LogHeader from './components/LogHeader';
-import LogDateSelector from './components/LogDateSelector';
-import LogList from './components/LogList';
+import LogHeader from './components/LogHeader/LogHeader';
+import LogDateSelector from './components/LogDateSelector/LogDateSelector';
+import LogList from './components/LogList/LogList';
 import { getLogs } from '../../services/LogService';
 import { formatDate } from '../../utils/formattedDate';
+import { getStudyDetail } from '../../services/StudyService';
 
 
 const LogPage = () => {
   const { id } = useParams();
+  const [study, setStudy] = useState([]);
   const [logType, setLogType] = useState("focus");
   const [date, setDate] = useState(new Date());
   const [pointLogs, setPointLogs] = useState([]);
@@ -22,6 +24,9 @@ const LogPage = () => {
 
         setPointLogs(data);
         setFocusLogs(data);
+
+        const studyData = await getStudyDetail(id);
+        setStudy(studyData);
       } 
 
     fetchData();
@@ -35,11 +40,11 @@ const LogPage = () => {
       {/** 헤더 */}
       <LogHeader 
         id={id}
+        study={study}
         logType={logType}
         setLogType={setLogType}
       />
 
-      {/** 현재 시간, 라디오버튼 */}
       <div className={styles.logWrapper}>
         <LogDateSelector 
           date={date}
@@ -49,6 +54,7 @@ const LogPage = () => {
 
         {/** 로그 리스트 */}
         <LogList 
+          key={`${id}-${logType}-${date}`}
           logType={logType}
           pointLogs={pointLogs}
           focusLogs={focusLogs}
