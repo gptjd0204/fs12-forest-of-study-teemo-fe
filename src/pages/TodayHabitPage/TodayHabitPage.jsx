@@ -15,31 +15,19 @@ import HabitListHeader from './HabitComponents/HabitListHeader';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 import ContentSpinner from '../../components/Loading/ContentSpinner';
 import useHabitModal from '../../hooks/useHabitModal';
+import useTodayHabits from '../../hooks/useTodayHabits';
 
 const TodayHabitPage = () => {
-  const [studyUser, setStudyUser] = useState('');
-  const [studyName, setStudyName] = useState('');
-  const [habits, setHabits] = useState([]);
-  const [togglingId, setTogglingId] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
   const { id } = useParams();
 
-  // 오늘의 습관 조회
-  const fetchHabits = async () => {
-    setIsLoading(true);
-
-    try {
-      const data = await getTodayHabits(id);
-      setStudyName(data.studyTitle);
-      setStudyUser(data.studyNickname);
-      setHabits(data.habits);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const {
+    studyUser,
+    studyName,
+    habits,
+    isLoading,
+    fetchHabits,
+    onToggleHabitHandler,
+  } = useTodayHabits(id);
 
   const {
     isModalOpen,
@@ -58,31 +46,6 @@ const TodayHabitPage = () => {
     fetchHabits,
     inputClassName: styles.habitInput,
   });
-
-  useEffect(() => {
-    fetchHabits();
-  }, [id]);
-
-  // 습관 완료 토글
-  const onToggleHabitHandler = async (habitId) => {
-    if (togglingId === habitId) return;
-
-    try {
-      setTogglingId(habitId);
-
-      await toggleHabit(id, habitId);
-
-      setHabits((prevHabits) =>
-        prevHabits.map((h) =>
-          h.id === habitId ? { ...h, isCompleted: !h.isCompleted } : h,
-        ),
-      );
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setTogglingId(null);
-    }
-  };
 
   return (
     <>
