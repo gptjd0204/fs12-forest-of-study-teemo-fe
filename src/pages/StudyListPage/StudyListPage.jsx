@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Card from './StudyComponents/Card';
-import Pagination from './StudyComponents/Pagination';
+import Pagination from '../../components/Pagination/Pagination';
 import Search from './StudyComponents/Search';
 import Sort from './StudyComponents/Sort';
 import { getRecentStudyList, getStudyList } from '../../services/StudyService';
