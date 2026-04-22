@@ -70,7 +70,7 @@
 }
 
 .pagination {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   margin-top: auto;
   padding-top: 20px;
@@ -81,9 +81,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 36px;
-  height: 36px;
-  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
   color: var(--black_414141);
 }
 
@@ -94,16 +94,16 @@
 }
 
 .pagination button.activePage {
-  background-color: var(--green_text_578246);
+  background-color: var(--brand_99C08E);
   color: var(--white_FFFFFF);
   font-weight: bold;
-  border-radius: 50%;
+  border-radius: 10px;
 }
 
-.pagination button:hover:not(:disabled):not(.activePage) {
+/* .pagination button:hover:not(:disabled):not(.activePage) {
   border-radius: 50%;
   background-color: var(--green_E1EDDE);
-}
+} */
 
 .noData {
   margin-top: 100px;
