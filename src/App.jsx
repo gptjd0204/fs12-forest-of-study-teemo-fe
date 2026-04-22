@@ -11,6 +11,7 @@ import StudyDetailPage from './pages/StudyDetailPage/StudyDetailPage';
 import StudyCreate from './pages/CreatePage/StudyCreate';
 import StudyUpdate from './pages/UpdatePage/StudyUpdate';
 import NotFound from './pages/NotFoundPage/NotFound';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   return (
@@ -18,14 +19,41 @@ const App = () => {
       <Routes>
         <Route path="/" element={<StudyLayout />}>
           <Route index element={<StudyListPage />} />
-          {/* 홈페이지는 <Route index element={<페이지 컴포넌트 />} /> 로 추가하기 */}
-          {/* 각 페이지 <Route path="url" element={<페이지 컴포넌트 />} /> 로 추가하기 */}
-          <Route path=":id/focus" element={<TodayFocus />} />
-          <Route path=":id/logs" element={<LogPage />} />
-          <Route path=":id/detail" element={<StudyDetailPage />} />
-          <Route path=":id/habit" element={<TodayHabitPage />} />
-          <Route path=":id/update" element={<StudyUpdate />} />
           <Route path="/create" element={<StudyCreate />} />
+          <Route path=":id/detail" element={<StudyDetailPage />} />
+          <Route
+            path=":id/update"
+            element={
+              <ProtectedRoute>
+                <StudyUpdate />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path=":id/habit"
+            element={
+              <ProtectedRoute>
+                <TodayHabitPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path=":id/focus"
+            element={
+              <ProtectedRoute>
+                <TodayFocus />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path=":id/logs"
+            element={
+              <ProtectedRoute>
+                <LogPage />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
