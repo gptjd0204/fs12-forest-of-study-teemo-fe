@@ -28,18 +28,6 @@ const StudyCreate = () => {
   const [redirectUrl, setRedirectUrl] = useState(null);
 
   const handleSubmit = async () => {
-    if (!nickname.trim() || !title.trim() || !background || !password.trim()) {
-      setModalMessage('필수 항목을 입력해주세요.');
-      setModalOpen(true);
-      return;
-    }
-
-    if (password !== passwordCheck) {
-      setModalMessage('비밀번호가 일치하지 않습니다');
-      setModalOpen(true);
-      return;
-    }
-
     try {
       const data = {
         nickname,
@@ -47,6 +35,7 @@ const StudyCreate = () => {
         description,
         background,
         password,
+        confirmPassword: passwordCheck,
       };
 
       const res = await postStudy(data);
@@ -125,7 +114,7 @@ const StudyCreate = () => {
               <div className={styles.confirmBtn}>
                 <Button
                   btnTxt={'확인'}
-                  btnStyle="btnCreate"
+                  btnStyle="btnDefault"
                   onClick={handleConfirm}
                   btnType={'button'}
                 />
