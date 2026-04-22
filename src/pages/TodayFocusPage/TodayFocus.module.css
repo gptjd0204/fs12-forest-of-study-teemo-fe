@@ -27,6 +27,13 @@
   gap: 24px;
 }
 
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 482px;
+}
+
 /* 태블릿 */
 @media (max-width: 1024px) {
   .focusWrapper {
@@ -35,7 +42,7 @@
 }
 
 /* 모바일 */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .focusWrapper {
     gap: 24px;
   }
@@ -47,5 +54,9 @@
 
   .timerHeader {
     gap: 16px;
+  }
+
+  .spinnerContainer {
+    min-height: 334.375px;
   }
 }

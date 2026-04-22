@@ -9,9 +9,15 @@ import useFetchTimer from '../../hooks/useFetchTimer';
 import useTargetDuration from '../../hooks/useTargetDuration';
 import useTimer from '../../hooks/useTimer';
 import NotFound from '../NotFoundPage/NotFound';
+import { useState } from 'react';
+import ContentSpinner from '../../components/Loading/ContentSpinner';
+import StudyNameSkeleton from '../../components/Loading/StudyNameSkeleton';
+import TotalPointSkeleton from '../../components/Loading/TotalPointSkeleton';
 
 const TodayFocus = () => {
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+
   const {
     targetDuration,
     setTargetDuration,
@@ -22,8 +28,7 @@ const TodayFocus = () => {
     totalPoint,
     setTotalPoint,
     title,
-    isNotFoundError,
-  } = useFetchTimer(id);
+  } = useFetchTimer(id, setIsLoading);
 
   const {
     toggleForm,
@@ -67,17 +72,28 @@ const TodayFocus = () => {
 
   return (
     <>
-      {isNotFoundError ? (
-        <NotFound />
-      ) : (
-        <>
-          <div className={`wrapper ${styles.wrapper}`}>
-            <div className={styles.focusWrapper}>
-              <div>
+      <div className={`wrapper ${styles.wrapper}`}>
+        <div className={styles.focusWrapper}>
+          <div>
+            {isLoading ? (
+              <>
+                <StudyNameSkeleton />
+                <TotalPointSkeleton />
+              </>
+            ) : (
+              <>
                 <FocusHeader studyId={id} title={title} />
                 <TotalPoints points={totalPoint} />
+              </>
+            )}
+          </div>
+          <main className={styles.timerWrapper}>
+            {isLoading ? (
+              <div className={styles.spinnerContainer}>
+                <ContentSpinner />
               </div>
-              <main className={styles.timerWrapper}>
+            ) : (
+              <>
                 <div className={styles.timerHeader}>
                   <h2>오늘의 집중</h2>
                   <TargetDuration
@@ -107,15 +123,15 @@ const TodayFocus = () => {
                   onReset={timerResetHandler}
                   onComplete={timerCompleteHandler}
                 />
-              </main>
-            </div>
-          </div>
-          {toasts.length > 0 &&
-            toasts.map((t) => {
-              return <Toast key={t.id} toastType={t.type} toastMsg={t.msg} />;
-            })}
-        </>
-      )}
+              </>
+            )}
+          </main>
+        </div>
+      </div>
+      {toasts.length > 0 &&
+        toasts.map((t) => {
+          return <Toast key={t.id} toastType={t.type} toastMsg={t.msg} />;
+        })}
     </>
   );
 };

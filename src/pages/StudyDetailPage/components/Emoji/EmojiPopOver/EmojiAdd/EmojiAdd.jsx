@@ -1,15 +1,12 @@
 import { useRef, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 
-import {
-  createEmojis,
-  updateEmojis,
-} from '../../../../../../services/EmojiService';
+import { createEmojis } from '../../../../../../services/EmojiService';
 
 import styles from '../../EmojiContainer.module.css';
 import smileIcon from '../../../../../../assets/icons/ic_smile.svg';
 
-const EmojiAdd = ({ emojis, setEmojis, id, updateEmoji, toastHandler }) => {
+const EmojiAdd = ({ emojis, setEmojis, updateEmoji, id, toastHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
   const emojiRef = useRef(null);
 

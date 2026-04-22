@@ -48,7 +48,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .btnDefault {
     width: 302px;
   }
