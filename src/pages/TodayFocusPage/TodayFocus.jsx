@@ -28,7 +28,6 @@ const TodayFocus = () => {
     totalPoint,
     setTotalPoint,
     title,
-    isNotFoundError,
   } = useFetchTimer(id, setIsLoading);
 
   const {
@@ -73,72 +72,66 @@ const TodayFocus = () => {
 
   return (
     <>
-      {isNotFoundError ? (
-        <NotFound />
-      ) : (
-        <>
-          <div className={`wrapper ${styles.wrapper}`}>
-            <div className={styles.focusWrapper}>
-              <div>
-                {isLoading ? (
-                  <>
-                    <StudyNameSkeleton />
-                    <TotalPointSkeleton />
-                  </>
-                ) : (
-                  <>
-                    <FocusHeader studyId={id} title={title} />
-                    <TotalPoints points={totalPoint} />
-                  </>
-                )}
-              </div>
-              <main className={styles.timerWrapper}>
-                {isLoading ? (
-                  <div className={styles.spinnerContainer}>
-                    <ContentSpinner />
-                  </div>
-                ) : (
-                  <>
-                    <div className={styles.timerHeader}>
-                      <h2>오늘의 집중</h2>
-                      <TargetDuration
-                        targetDuration={targetDuration}
-                        toggleForm={toggleForm}
-                        error={error}
-                        setError={setError}
-                        hours={hours}
-                        setHours={setHours}
-                        minutes={minutes}
-                        setMinutes={setMinutes}
-                        seconds={seconds}
-                        setSeconds={setSeconds}
-                        onToggleForm={toggleFormHandler}
-                        onChangeHours={hoursInputHandler}
-                        onChangeMinutes={minutesInputHandler}
-                        onChangeSeconds={secondsInputHandler}
-                        onSubmitTarget={submitHandler}
-                      />
-                    </div>
-                    <Timer
-                      timerCount={timerCount}
-                      toggleForm={toggleForm}
-                      timerStatus={timerStatus}
-                      onStart={timerStartHandler}
-                      onPause={timerPauseHandler}
-                      onReset={timerResetHandler}
-                      onComplete={timerCompleteHandler}
-                    />
-                  </>
-                )}
-              </main>
-            </div>
+      <div className={`wrapper ${styles.wrapper}`}>
+        <div className={styles.focusWrapper}>
+          <div>
+            {isLoading ? (
+              <>
+                <StudyNameSkeleton />
+                <TotalPointSkeleton />
+              </>
+            ) : (
+              <>
+                <FocusHeader studyId={id} title={title} />
+                <TotalPoints points={totalPoint} />
+              </>
+            )}
           </div>
-          {toasts.length > 0 &&
-            toasts.map((t) => {
-              return <Toast key={t.id} toastType={t.type} toastMsg={t.msg} />;
-            })}
-        </>
-      )}
+          <main className={styles.timerWrapper}>
+            {isLoading ? (
+              <div className={styles.spinnerContainer}>
+                <ContentSpinner />
+              </div>
+            ) : (
+              <>
+                <div className={styles.timerHeader}>
+                  <h2>오늘의 집중</h2>
+                  <TargetDuration
+                    targetDuration={targetDuration}
+                    toggleForm={toggleForm}
+                    error={error}
+                    setError={setError}
+                    hours={hours}
+                    setHours={setHours}
+                    minutes={minutes}
+                    setMinutes={setMinutes}
+                    seconds={seconds}
+                    setSeconds={setSeconds}
+                    onToggleForm={toggleFormHandler}
+                    onChangeHours={hoursInputHandler}
+                    onChangeMinutes={minutesInputHandler}
+                    onChangeSeconds={secondsInputHandler}
+                    onSubmitTarget={submitHandler}
+                  />
+                </div>
+                <Timer
+                  timerCount={timerCount}
+                  toggleForm={toggleForm}
+                  timerStatus={timerStatus}
+                  onStart={timerStartHandler}
+                  onPause={timerPauseHandler}
+                  onReset={timerResetHandler}
+                  onComplete={timerCompleteHandler}
+                />
+              </>
+            )}
+          </main>
+        </div>
+      </div>
+      {toasts.length > 0 &&
+        toasts.map((t) => {
+          return <Toast key={t.id} toastType={t.type} toastMsg={t.msg} />;
+        })}
     </>
   );
 };
