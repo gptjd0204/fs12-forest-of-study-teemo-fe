@@ -30,8 +30,10 @@
 
 .list {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
+  min-height: 450px;
   gap: 20px;
 }
 
@@ -39,38 +41,72 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 200px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
   height: 54px;
   padding: 10px 16px;
   border-radius: 20px;
   border: 1px solid var(--green_E1EDDE);
   background: var(--white_FFFFFF);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .rowDate {
+  flex: 1;
+  text-align: left;
   color: var(--gray_818181);
+  white-space: nowrap;
 }
 
 .rowValue {
+  flex: 1;
+  flex: 0 0 120px;
+  text-align: right;
   color: var(--green_text_578246);
   font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 20px;
+  gap: 16px;
+}
+
+.pagination button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  color: var(--black_414141);
+}
+
+.pagination button:disabled {
+  color: var(--gray_818181);
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination button.activePage {
+  background-color: var(--green_text_578246);
+  color: var(--white_FFFFFF);
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+.pagination button:hover:not(:disabled):not(.activePage) {
+  border-radius: 50%;
+  background-color: var(--green_E1EDDE);
 }
 
 .noData {
   margin-top: 100px;
+  text-align: center;
   color: var(--gray_818181);
-}
-
-@media (max-width: 1024px) {
-  .row {
-    gap: 100px;
-  }
-}
-
-@media (max-width: 500px) {
-  .row {
-    gap: 50px;
-  }
 }

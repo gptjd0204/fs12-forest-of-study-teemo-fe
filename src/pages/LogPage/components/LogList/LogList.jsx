@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './LogList.module.css';
 import { formattedTime } from '../../../../utils/formattedTime';
 import { formatKST } from "../../../../utils/formattedDate";
@@ -13,41 +13,33 @@ const LogList = ({ logType, pointLogs, focusLogs }) => {
   const hasData = logList && logList.length > 0;
   const {point, focus } = calculateDailyTotals(pointLogs, focusLogs);
 
-  
-
-  // 페이지네이션 계산
   const totalPages = Math.ceil((logList?.length || 0) / pageItems);
 
-  // 현재 페이지 데이터
   const startPageNumber = (currentPage - 1) * pageItems;
   const currentItems = logList?.slice(startPageNumber, startPageNumber + pageItems);
 
-  // 하단 페이지 번호
   const startPageBlock = Math.floor((currentPage -1) / pageLimit) * pageLimit + 1;
   const endPageBlock = Math.min(startPageBlock + pageLimit -1, totalPages);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [logType, pointLogs, focusLogs])
-
   // 페이지 이동 핸들러
-  const goToFirst = () => {
+  const goToFirstHandler = () => {
     setCurrentPage(1);
     return;
   }
 
-  const goToLast = () => {
+  const goToLastHandler = () => {
     setCurrentPage(totalPages);
   };
 
-  const gotoPrev = () => {
+  const gotoPrevHandler = () => {
     setCurrentPage((prev) => {
       const prevPage = Math.max(1, prev -1);
       return prevPage;
-    })
+    });
+    return;
   }
 
-  const goToNext = () => {
+  const goToNextHandler = () => {
     setCurrentPage((prev) => {
     const nextPage = Math.min(totalPages, prev + 1);
     return nextPage;
@@ -95,33 +87,47 @@ const LogList = ({ logType, pointLogs, focusLogs }) => {
                 </span>
                 </div>
               ))}
+            </>
+          ) : (
+            <p className={styles.noData}>해당 날짜의 기록이 없어요.</p>
+          )}
 
-              <div className={styles.pagination}>
-                {/** 맨 처음 페이지 */}
+          {hasData && (
+            <div className={styles.pagination}>
                 <button
-                  onClick={goToFirst}
+                  onClick={goToFirstHandler}
                   disabled={currentPage === 1}
                   >{"<<"} </button>
-                  {/** 이전 페이지 */}
                 <button
-                  onClick={gotoPrev}
+                  onClick={gotoPrevHandler}
                   disabled={currentPage === 1}
                   >{"<"}</button>
-                <button
-                  onClick={goToNext}
-                  disabled={currentPage === totalPages}
-                  >{">"}</button>
-                <button
-                  onClick={goToLast}
-                  disabled={currentPage === totalPages}
-                  > {">>"}</button>
-                
 
-              </div>
-            </>
-        ) : (
-          <p className={styles.noData}>해당 날짜의 기록이 없어요.</p>
-        )}
+              {[...Array(endPageBlock - startPageBlock + 1)].map((_, index) => {
+                const pageNumber = startPageBlock + index;
+                return (
+                  <button
+                  key={pageNumber}
+                  onClick={() => {
+                    setCurrentPage(pageNumber)
+                  }}
+                  className={currentPage === pageNumber ? styles.activePage : ""}
+                  >{pageNumber}</button>
+                );
+              })}
+
+              {/** 다음 페이지 */}
+              <button
+                onClick={goToNextHandler}
+                disabled={currentPage === totalPages}
+                >{">"}</button>
+              {/** 맨 끝 페이지 */}
+              <button
+                onClick={goToLastHandler}
+                disabled={currentPage === totalPages}
+                > {">>"}</button>
+            </div>
+          )}
         </div>
     </>
   );

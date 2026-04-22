@@ -45,7 +45,6 @@ const LogPage = () => {
         setLogType={setLogType}
       />
 
-      {/** 현재 시간, 라디오버튼 */}
       <div className={styles.logWrapper}>
         <LogDateSelector 
           date={date}
@@ -55,6 +54,7 @@ const LogPage = () => {
 
         {/** 로그 리스트 */}
         <LogList 
+          key={`${id}-${logType}-${date}`}
           logType={logType}
           pointLogs={pointLogs}
           focusLogs={focusLogs}

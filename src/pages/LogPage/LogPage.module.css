@@ -2,17 +2,10 @@
 .logWrapper {
   border-radius: 20px;
   border: 1px solid var(--gray_DDDDDD);
-  padding: 40px;
+  padding: 26px;
   min-height: 600px;
 }
 
-/* 필요 시 미디어 쿼리 유지 */
-@media (max-width: 1024px) {}
-@media (max-width: 768px) {}
-
-@media (max-width: 1024px) {
-}
-
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 
 }
