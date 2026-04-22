@@ -2,26 +2,17 @@ import { useEffect, useState } from 'react';
 
 import HabitItems from './HabitItems/HabitItems';
 
-import { getWeeklyHabits } from '../../../../services/HabitService';
-
 import styles from '../HabitTable/HabitTable.module.css';
+import ContentSpinner from '../../../../components/Loading/ContentSpinner';
 
-const HabitTable = ({ id }) => {
-  const [habits, setHabits] = useState([]);
-
-  const fetchData = async () => {
-    const data = await getWeeklyHabits(id);
-
-    setHabits(data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+const HabitTable = ({ id, isLoading, habits }) => {
   return (
     <>
-      {habits.length === 0 ? (
+      {isLoading ? (
+        <div className={styles.emptyTable}>
+          <ContentSpinner />
+        </div>
+      ) : habits.length === 0 ? (
         <p className={styles.emptyTable}>
           아직 습관이 없어요
           <br />
