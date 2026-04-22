@@ -58,7 +58,7 @@
   width: 100%;
   text-align: center;
 
-  color: var(--black_414141, #414141);
+  color: var(--black_414141);
   font-size: 24px;
   font-weight: 800;
 }
@@ -85,15 +85,29 @@
   gap: 20px;
 }
 
+.modifyItemWrap {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  overflow-y: auto;
+  gap: 20px;
+}
+
+.modifyItemDelBtn {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
 .modifyItem {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  flex: 1;
   gap: 8px;
 }
 
 .habitInput {
   flex: 1;
-  height: 54px;
+  min-height: 54px;
 
   border-radius: 20px;
 
@@ -110,7 +124,11 @@
 }
 
 .error {
-  border: 1px solid #ff4d4f;
+  border: 1px solid var(--error_C41013);
+}
+
+.errorMessage {
+  color: var(--error_C41013);
 }
 
 .removeBtn {
@@ -123,7 +141,7 @@
 
 .plusBtn {
   display: flex;
-  height: 54px;
+  min-height: 54px;
   justify-content: center;
   align-items: center;
 
