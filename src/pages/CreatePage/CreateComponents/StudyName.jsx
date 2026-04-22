@@ -7,10 +7,13 @@ const StudyName = ({ title, setTitle }) => {
 
   const validateTitle = (value) => {
     if (!value) {
-      return '*스터디 이름을 입력해주세요';
+      return '스터디 이름을 입력해주세요';
     }
     if (value !== value.trim()) {
       return '앞뒤 공백은 사용할 수 없습니다.';
+    }
+    if (value.length > 20) {
+      return '스터디 이름은 20자 이하이어야 합니다.';
     }
     return '';
   };
@@ -28,6 +31,7 @@ const StudyName = ({ title, setTitle }) => {
           setError(validateTitle(value));
         }}
         onBlur={() => setIsTouched(true)}
+        maxLength={20}
       />
       {isTouched && error && (
         <span className={styles.errorMessage}>{error}</span>
