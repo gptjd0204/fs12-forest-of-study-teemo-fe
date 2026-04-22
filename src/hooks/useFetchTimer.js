@@ -5,7 +5,7 @@ import { getTotalPoint } from '../services/PointService';
 /*------------------------------------------
      타이머 데이터를 받아오는 커스텀 Hook
 -------------------------------------------*/
-const useFetchTimer = (studyId) => {
+const useFetchTimer = (studyId, setIsLoading) => {
   const [targetDuration, setTargetDuration] = useState(0);
   const [timerCount, setTimerCount] = useState(targetDuration);
   const [timerStatus, setTimerStatus] = useState('CANCELED');
@@ -22,6 +22,7 @@ const useFetchTimer = (studyId) => {
 
   useEffect(() => {
     try {
+      setIsLoading(true);
       const fetchTimer = async () => {
         const data = await getTimer(studyId);
         if (!data) {
@@ -59,13 +60,15 @@ const useFetchTimer = (studyId) => {
         } else {
           setTimerCount(timer.targetDuration - timer.elapsedTime + 700);
         }
+
+        setIsLoading(false);
       };
 
       fetchTimer();
     } catch (error) {
       console.error(error);
     }
-  }, [studyId]);
+  }, [studyId, setIsLoading]);
 
   return {
     targetDuration,
