@@ -25,7 +25,7 @@ export const getWeeklyHabits = async (id) => {
 
     const days = habit.records.forEach((record) => {
       const date = new Date(record.date);
-      const day = date.getDay() - 1; // date 는 일요일 시작이라 1 빼줌
+      const day = (date.getDay() + 6) % 7; // date 는 일요일 시작이라 1 빼줌
 
       compeletedDays[day] = record.isCompleted;
       return;
