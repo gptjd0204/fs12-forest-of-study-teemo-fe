@@ -10,12 +10,17 @@ import styles from './PasswordModal.module.css';
   onClose    = 모달 나가기 버튼 클릭 시 실행될 함수
 */
 
-const PasswordModal = ({ title, onClose, children }) => {
+const PasswordModal = ({ nickname, title, onClose, children }) => {
   return (
     <>
       <ModalLayout>
         <div className={styles.header}>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.title}>
+            <span>{nickname} 의 </span>
+            <span className={nickname.length > 5 ? styles.longTitle : ''}>
+              {title}
+            </span>
+          </div>
           <button
             type="button"
             onClick={onClose}

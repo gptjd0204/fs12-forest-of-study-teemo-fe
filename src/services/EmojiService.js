@@ -5,7 +5,11 @@ export const getEmojis = async (id) => {
   const res = await fetch(`${API_URL}/api/emojis/${id}`);
   const data = await res.json();
 
-  return data.data;
+  const sortEmojis = [...data.data];
+
+  sortEmojis.sort((a, b) => b.count - a.count);
+
+  return sortEmojis;
 };
 
 export const createEmojis = async (id, emoji) => {

@@ -11,8 +11,9 @@ const StudyDetail = ({ onClick, id, study }) => {
   return (
     <>
       <div className={styles.titleContainer}>
-        <h1>
-          {study.nickname}의 {study.title}
+        <h1 className={styles.title}>
+          <span>{study.nickname}의 </span>
+          <span>{study.title}</span>
         </h1>
         <div className={styles.btnContainer}>
           <LinkButton
