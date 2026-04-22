@@ -1,16 +1,44 @@
-# React + Vite
+# [프로젝트 이름]
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 프로젝트 소개
 
-Currently, two official plugins are available:
+[이 프로젝트가 무엇인지 한두 문장으로 설명하세요]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+예)
+이 프로젝트는 스터디 그룹을 생성하고 관리할 수 있는 웹 애플리케이션입니다.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 주요 기능
 
-## Expanding the ESLint configuration
+- [기능 1]
+- [기능 2]
+- [기능 3]
+- [기능 4]
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ 기술 스택
+
+### Frontend
+
+- [예: React]
+- [예: React Router]
+- [예: Axios]
+
+### Backend
+
+- [예: Node.js]
+- [예: Express]
+
+### Database
+
+- [예: MySQL / MongoDB]
+
+### ETC
+
+- [예: Prisma / JWT / etc]
+
+---
+
+## 📁 프로젝트 구조
