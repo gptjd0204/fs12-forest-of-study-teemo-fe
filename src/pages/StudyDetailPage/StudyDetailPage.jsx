@@ -32,7 +32,7 @@ const StudyDetailPage = () => {
   const [modalStep, setModalStep] = useState(null);
   const [modalType, setModalType] = useState(null);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
 
   const fetchDatas = async () => {
@@ -52,7 +52,7 @@ const StudyDetailPage = () => {
 
       saveRecentStudy(studyData);
 
-      setIsLoading(true);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
       throw error;

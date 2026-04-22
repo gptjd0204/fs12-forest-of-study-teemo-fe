@@ -13,12 +13,12 @@ const StudyDetail = ({ onClick, id, study, isLoading }) => {
     <>
       <div className={styles.titleContainer}>
         {isLoading ? (
+          <StudyNameSkeleton />
+        ) : (
           <h1 className={styles.title}>
             <span>{study.nickname}의 </span>
             <span>{study.title}</span>
           </h1>
-        ) : (
-          <StudyNameSkeleton />
         )}
 
         <div className={styles.btnContainer}>

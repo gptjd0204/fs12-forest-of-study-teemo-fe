@@ -27,6 +27,8 @@ const EmojiContainer = ({ toastHandler, emojis, setEmojis, isLoading }) => {
   return (
     <div className={styles.emojiWrapper}>
       {isLoading ? (
+        <EmojiSkeleton />
+      ) : (
         <>
           {emojis.slice(0, 3).map((emoji, i) => emojiContent(emoji, i))}
 
@@ -48,8 +50,6 @@ const EmojiContainer = ({ toastHandler, emojis, setEmojis, isLoading }) => {
             </div>
           )}
         </>
-      ) : (
-        <EmojiSkeleton />
       )}
 
       <EmojiAdd
