@@ -101,19 +101,23 @@ export const deleteStudy = async (id) => {
 
 // 비밀번호 체크
 export const validatePassword = async (id, password) => {
-  const res = await fetch(`${API_URL}/api/studies/${id}/pw`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      password,
-    }),
-  });
+  try {
+    const res = await fetch(`${API_URL}/api/studies/${id}/pw`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password,
+      }),
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  return data.data;
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 ////////////////// 로컬 스토리지 사용하여 최근 스터디 목록 불러오기 //////////////////
