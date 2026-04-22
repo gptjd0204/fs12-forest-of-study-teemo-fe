@@ -28,6 +28,11 @@
 - emoji-picker-react
 - JavaScript
 
+## 공통 Tool
+
+- Git & Github
+- Discord
+
 ---
 
 ## 📁 프로젝트 구조
