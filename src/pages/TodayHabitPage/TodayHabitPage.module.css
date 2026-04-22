@@ -216,7 +216,7 @@
 }
 
 /* 모바일 */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .bodyWrapper {
     gap: 24px;
   }
