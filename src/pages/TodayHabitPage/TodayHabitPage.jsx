@@ -83,6 +83,7 @@ const TodayHabitPage = () => {
     setIsModalOpen(false);
     setEditHabits([]);
     setEndHabitIds([]);
+    setErrorInfos([]);
   };
 
   // 습관 수정
