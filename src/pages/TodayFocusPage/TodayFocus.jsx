@@ -5,70 +5,89 @@ import TargetDuration from './components/TargetDuration/TargetDuration';
 import Timer from './components/Timer/Timer';
 import { useParams } from 'react-router-dom';
 import Toast from '../../components/Toast/Toast';
-import useFetchTimer from '../../hooks/useFetchTimer';
-import useTargetDuration from '../../hooks/useTargetDuration';
-import useTimer from '../../hooks/useTimer';
 import NotFound from '../NotFoundPage/NotFound';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ContentSpinner from '../../components/Loading/ContentSpinner';
 import StudyNameSkeleton from '../../components/Loading/StudyNameSkeleton';
 import TotalPointSkeleton from '../../components/Loading/TotalPointSkeleton';
+import { createTimer, getTimer } from '../../services/TimerService';
+import { getTotalPoint } from '../../services/PointService';
 
 const TodayFocus = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  const [targetDuration, setTargetDuration] = useState(0);
+  const [timerCount, setTimerCount] = useState(0);
+  const [timerStatus, setTimerStatus] = useState('CANCELED');
+  const [totalPoint, setTotalPoint] = useState(0);
+  const [title, setTitle] = useState('');
+  const [toggleForm, setToggleForm] = useState('DEFAULT');
+  const [toasts, setToasts] = useState([]);
 
-  const {
-    targetDuration,
-    setTargetDuration,
-    timerCount,
-    setTimerCount,
-    timerStatus,
-    setTimerStatus,
-    totalPoint,
-    setTotalPoint,
-    title,
-  } = useFetchTimer(id, setIsLoading);
+  // 타이머 초기화 함수
+  const initTimer = () => {
+    setTargetDuration(1500000);
+    setTimerCount(1500000);
+    setTimerStatus('CANCELED');
+  };
 
-  const {
-    toggleForm,
-    hours,
-    setHours,
-    minutes,
-    setMinutes,
-    seconds,
-    setSeconds,
-    error,
-    setError,
-    toggleFormHandler,
-    hoursInputHandler,
-    minutesInputHandler,
-    secondsInputHandler,
-    submitHandler,
-  } = useTargetDuration(
-    id,
-    targetDuration,
-    timerStatus,
-    setTargetDuration,
-    setTimerCount,
-  );
+  // 토스트 메시지 추가
+  const addToast = (type, msg) => {
+    const id = Date.now();
 
-  const {
-    toasts,
-    timerStartHandler,
-    timerPauseHandler,
-    timerResetHandler,
-    timerCompleteHandler,
-  } = useTimer(
-    id,
-    targetDuration,
-    setTargetDuration,
-    setTotalPoint,
-    timerStatus,
-    setTimerStatus,
-    timerCount,
-    setTimerCount,
-  );
+    setToasts((prev) => [...prev, { id, type, msg }]);
+
+    // 3초 뒤 해당 ID의 토스트만 삭제
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((toast) => toast.id !== id));
+    }, 3000);
+  };
+
+  useEffect(() => {
+    try {
+      const fetchTodayFocus = async () => {
+        const data = await getTimer(id);
+        const timer = data.timer;
+        const total = await getTotalPoint(id);
+
+        setTitle(`${data.nickname}의 ${data.title}`);
+        if (!timer) {
+          initTimer();
+          setIsLoading(false);
+          await createTimer(id);
+          return;
+        }
+
+        setTotalPoint(total);
+        setTargetDuration(timer.targetDuration);
+        setTimerStatus(timer.status);
+        // 타이머 남은 시간 계산 로직
+        if (timer.status === 'IN_PROGRESS') {
+          const now = Date.now();
+          const lastStartedAt = new Date(timer.lastStartedAt);
+
+          const timeDiff = now - lastStartedAt;
+          const totalElapsedTime = timer.elapsedTime + timeDiff;
+          const remainingTime = timer.targetDuration - totalElapsedTime;
+
+          if (remainingTime < 0) {
+            setTimerStatus('COMPLETED');
+            setTimerCount(totalElapsedTime - timer.targetDuration + 700);
+          } else {
+            setTimerCount(remainingTime + 700);
+          }
+        } else {
+          setTimerCount(timer.targetDuration - timer.elapsedTime + 700);
+        }
+
+        setIsLoading(false);
+      };
+
+      fetchTodayFocus();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [id]);
 
   return (
     <>
@@ -97,31 +116,25 @@ const TodayFocus = () => {
                 <div className={styles.timerHeader}>
                   <h2>오늘의 집중</h2>
                   <TargetDuration
-                    targetDuration={targetDuration}
+                    studyId={id}
                     toggleForm={toggleForm}
-                    error={error}
-                    setError={setError}
-                    hours={hours}
-                    setHours={setHours}
-                    minutes={minutes}
-                    setMinutes={setMinutes}
-                    seconds={seconds}
-                    setSeconds={setSeconds}
-                    onToggleForm={toggleFormHandler}
-                    onChangeHours={hoursInputHandler}
-                    onChangeMinutes={minutesInputHandler}
-                    onChangeSeconds={secondsInputHandler}
-                    onSubmitTarget={submitHandler}
+                    setToggleForm={setToggleForm}
+                    targetDuration={targetDuration}
+                    setTargetDuration={setTargetDuration}
+                    timerStatus={timerStatus}
+                    setTimerCount={setTimerCount}
                   />
                 </div>
                 <Timer
-                  timerCount={timerCount}
+                  studyId={id}
                   toggleForm={toggleForm}
+                  targetDuration={targetDuration}
+                  timerCount={timerCount}
+                  setTimerCount={setTimerCount}
                   timerStatus={timerStatus}
-                  onStart={timerStartHandler}
-                  onPause={timerPauseHandler}
-                  onReset={timerResetHandler}
-                  onComplete={timerCompleteHandler}
+                  setTimerStatus={setTimerStatus}
+                  setTotalPoint={setTotalPoint}
+                  addToast={addToast}
                 />
               </>
             )}
