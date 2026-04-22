@@ -16,7 +16,7 @@ const PasswordModal = ({ nickname, title, onClose, children }) => {
       <ModalLayout>
         <div className={styles.header}>
           <div className={styles.title}>
-            <span>{nickname} 의 </span>
+            <span>{nickname}의 </span>
             <span className={nickname.length > 5 ? styles.longTitle : ''}>
               {title}
             </span>
