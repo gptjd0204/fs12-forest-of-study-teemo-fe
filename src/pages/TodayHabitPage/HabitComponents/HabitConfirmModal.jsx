@@ -30,9 +30,6 @@ const HabitConfirmModal = ({
           errorInfos={errorInfos}
           setErrorInfos={setErrorInfos}
         />
-        {errorInfos.length > 0 && (
-          <p className={styles.errorMessage}>{errorInfos[0].message}</p>
-        )}
       </HabitModal>
     </>
   );

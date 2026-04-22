@@ -93,15 +93,21 @@
   gap: 20px;
 }
 
+.modifyItemDelBtn {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
 .modifyItem {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  flex: 1;
   gap: 8px;
 }
 
 .habitInput {
   flex: 1;
-  height: 54px;
+  min-height: 54px;
 
   border-radius: 20px;
 
@@ -122,7 +128,6 @@
 }
 
 .errorMessage {
-  margin-top: 20px;
   color: var(--error_C41013);
 }
 
