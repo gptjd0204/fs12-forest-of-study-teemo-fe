@@ -55,6 +55,7 @@ src/
 │ ├── Modal/
 │ ├── ScrollAlwaysTop/
 │ ├── Toast/
+│ ├── CurrentTime/
 │ └── TotalPoint/
 
 ├── pages/ # 페이지 단위 컴포넌트
