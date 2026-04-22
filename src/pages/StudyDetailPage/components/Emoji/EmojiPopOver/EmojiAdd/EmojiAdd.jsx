@@ -9,7 +9,7 @@ import {
 import styles from '../../EmojiContainer.module.css';
 import smileIcon from '../../../../../../assets/icons/ic_smile.svg';
 
-const EmojiAdd = ({ emojis, setEmojis, id, updateEmoji, toastHandler }) => {
+const EmojiAdd = ({ emojis, setEmojis, id, toastHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
   const emojiRef = useRef(null);
 
@@ -35,6 +35,14 @@ const EmojiAdd = ({ emojis, setEmojis, id, updateEmoji, toastHandler }) => {
       //update emoji id 같이
       updateEmoji(selectEmoji.id);
     }
+  };
+
+  const updateEmoji = async (emojiId) => {
+    const updateEmoji = await updateEmojis(id, emojiId);
+
+    setEmojis((prev) =>
+      prev.map((p) => (p.emoji !== updateEmoji.emoji ? p : updateEmoji)),
+    );
   };
 
   return (

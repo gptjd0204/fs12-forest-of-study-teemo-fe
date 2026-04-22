@@ -6,15 +6,21 @@ import Description from '../Description/Description';
 import icArrowRight from '../../../../assets/icons/ic_arrow_right.svg';
 
 import styles from './StudyDetail.module.css';
+import StudyNameSkeleton from '../../../../components/Loading/StudyNameSkeleton';
 
-const StudyDetail = ({ onClick, id, study }) => {
+const StudyDetail = ({ onClick, id, study, isLoading }) => {
   return (
     <>
       <div className={styles.titleContainer}>
-        <h1 className={styles.title}>
-          <span>{study.nickname}의 </span>
-          <span>{study.title}</span>
-        </h1>
+        {isLoading ? (
+          <h1 className={styles.title}>
+            <span>{study.nickname}의 </span>
+            <span>{study.title}</span>
+          </h1>
+        ) : (
+          <StudyNameSkeleton />
+        )}
+
         <div className={styles.btnContainer}>
           <LinkButton
             text="로그"
@@ -35,7 +41,11 @@ const StudyDetail = ({ onClick, id, study }) => {
       </div>
 
       <div className={styles.descWrapper}>
-        <Description descTitle={'소개'} descContent={study.description} />
+        <Description
+          descTitle={'소개'}
+          descContent={study.description}
+          isLoading={isLoading}
+        />
         <Description descType={'point'} descTitle={'현재까지 획득한 포인트'} />
       </div>
     </>

@@ -13,6 +13,7 @@ const useToast = () => {
   const [toasts, setToasts] = useState([]);
 
   const addToast = (type, msg, contentType = 'toast') => {
+    // 같은 contentType 의 메시지가 5번 이상 발생했을 때 return (최대 5개 유지)
     const toastLength = toasts.filter(
       (toast) => toast.contentType === contentType,
     ).length;

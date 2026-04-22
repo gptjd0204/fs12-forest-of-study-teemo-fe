@@ -35,6 +35,30 @@
   animation: shimmer 1.4s infinite;
 }
 
+.emojiMoreBoxSkeleton {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.emojiItemSkeleton {
+  width: 60px;
+  height: 31px;
+  padding: 6px 8px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #f1f1f1 25%, #e7e7e7 37%, #f1f1f1 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.descSkeleton {
+  width: 80%;
+  height: 28px;
+  background: linear-gradient(90deg, #f1f1f1 25%, #e7e7e7 37%, #f1f1f1 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
 @keyframes shimmer {
   0% {
     background-position: 100% 0;
