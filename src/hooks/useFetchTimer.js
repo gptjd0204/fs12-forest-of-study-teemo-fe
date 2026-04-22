@@ -11,7 +11,6 @@ const useFetchTimer = (studyId, setIsLoading) => {
   const [timerStatus, setTimerStatus] = useState('CANCELED');
   const [totalPoint, setTotalPoint] = useState(0);
   const [title, setTitle] = useState('');
-  const [isNotFoundError, setIsNotFoundError] = useState(false);
 
   // 타이머 초기화 함수
   const initTimer = () => {
@@ -25,16 +24,13 @@ const useFetchTimer = (studyId, setIsLoading) => {
       setIsLoading(true);
       const fetchTimer = async () => {
         const data = await getTimer(studyId);
-        if (!data) {
-          setIsNotFoundError(true);
-          return;
-        }
         const timer = data.timer;
         const total = await getTotalPoint(studyId);
 
         setTitle(`${data.nickname}의 ${data.title}`);
         if (!timer) {
           initTimer();
+          setIsLoading(false);
           await createTimer(studyId);
           return;
         }
@@ -80,7 +76,6 @@ const useFetchTimer = (studyId, setIsLoading) => {
     totalPoint,
     setTotalPoint,
     title,
-    isNotFoundError,
   };
 };
 
