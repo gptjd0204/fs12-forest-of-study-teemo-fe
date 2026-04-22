@@ -203,9 +203,10 @@
 .loadingBox {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 40px 0;
-  min-height: 498px;
+  min-height: 558px;
 }
 
 /* 태블릿 */

@@ -8,6 +8,32 @@
   animation: shimmer 1.4s infinite;
 }
 
+.currentTimeSkeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.currentTimeTitleSkeleton {
+  width: 78px;
+  height: 27px;
+
+  border-radius: 8px;
+  background: linear-gradient(90deg, #f1f1f1 25%, #e7e7e7 37%, #f1f1f1 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.currentTimeSkeleton {
+  width: 190px;
+  height: 36px;
+
+  border-radius: 50px;
+  background: linear-gradient(90deg, #f1f1f1 25%, #e7e7e7 37%, #f1f1f1 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
 .totalPointSkeletonContainer {
   display: flex;
   flex-direction: column;

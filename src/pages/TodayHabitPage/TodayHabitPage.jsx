@@ -14,6 +14,7 @@ import HabitList from './HabitComponents/HabitList';
 import HabitListHeader from './HabitComponents/HabitListHeader';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 import ContentSpinner from '../../components/Loading/ContentSpinner';
+import CurrentTimeSkeleton from '../../components/Loading/CurrentTimeSkeleton';
 import useHabitModal from '../../hooks/useHabitModal';
 import useTodayHabits from '../../hooks/useTodayHabits';
 
@@ -58,22 +59,22 @@ const TodayHabitPage = () => {
               id={id}
               isLoading={isLoading}
             />
-            <CurrentTime />
+            {isLoading ? <CurrentTimeSkeleton /> : <CurrentTime />}
           </section>
           <section className={styles.mainSection}>
-            <div className={styles.todayHabit}>
-              <HabitListHeader onOpenModal={onOpenModalHandler} />{' '}
-              {isLoading ? (
-                <div className={styles.loadingBox}>
-                  <ContentSpinner />
-                </div>
-              ) : (
+            {isLoading ? (
+              <div className={styles.loadingBox}>
+                <ContentSpinner />
+              </div>
+            ) : (
+              <div className={styles.todayHabit}>
+                <HabitListHeader onOpenModal={onOpenModalHandler} />
                 <HabitList
                   habits={habits}
                   onToggleHabit={onToggleHabitHandler}
                 />
-              )}
-            </div>
+              </div>
+            )}
           </section>
         </div>
       </div>
