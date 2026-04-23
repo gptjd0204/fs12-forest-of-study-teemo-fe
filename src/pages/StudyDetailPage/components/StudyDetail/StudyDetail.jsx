@@ -8,7 +8,7 @@ import icArrowRight from '../../../../assets/icons/ic_arrow_right.svg';
 import styles from './StudyDetail.module.css';
 import StudyNameSkeleton from '../../../../components/Loading/StudyNameSkeleton';
 
-const StudyDetail = ({ onClick, id, study, isLoading }) => {
+const StudyDetail = ({ onClick, id, study, points, isLoading }) => {
   return (
     <>
       <div className={styles.titleContainer}>
@@ -46,7 +46,12 @@ const StudyDetail = ({ onClick, id, study, isLoading }) => {
           descContent={study.description}
           isLoading={isLoading}
         />
-        <Description descType={'point'} descTitle={'현재까지 획득한 포인트'} />
+        <Description
+          descType={'point'}
+          descTitle={'현재까지 획득한 포인트'}
+          isLoading={isLoading}
+          points={points}
+        />
       </div>
     </>
   );
