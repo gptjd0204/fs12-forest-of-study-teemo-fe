@@ -7,7 +7,7 @@ const HabitItems = ({ datas }) => {
         return (
           <tr key={`habit-${d_i}`}>
             <th>{data.title}</th>
-            {data.isCompleted.map((complete, c_i) => {
+            {data.compeletedDays.map((complete, c_i) => {
               const count = d_i % 18;
               return (
                 <td key={`complete-${c_i}`}>
