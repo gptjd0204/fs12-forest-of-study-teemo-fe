@@ -35,6 +35,9 @@ const StudyDetailPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
 
+  // 세션스토리지에 저장된 비밀번호 인증 초기화
+  sessionStorage.clear();
+
   const fetchDatas = async () => {
     try {
       const studyData = await getStudyDetail(id);
