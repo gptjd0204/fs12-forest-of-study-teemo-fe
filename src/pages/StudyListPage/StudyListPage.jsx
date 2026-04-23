@@ -22,6 +22,9 @@ const StudyList = () => {
     totalPages: 1,
   });
 
+  // 세션스토리지에 저장된 비밀번호 인증 초기화
+  sessionStorage.clear();
+
   useEffect(() => {
     const fetchStudyList = async () => {
       setIsLoading(true);

@@ -34,6 +34,8 @@
   align-items: center;
   gap: 45px;
 
+  width: 100%;
+
   padding: 40px 24px;
   border-radius: 20px;
   border: 1px solid var(--gray_DDDDDD);
@@ -46,7 +48,8 @@
   align-items: center;
   gap: 24px;
 
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .listHeader {
@@ -81,7 +84,8 @@
 .modifyList {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   gap: 20px;
 }
 
@@ -97,7 +101,9 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
+  width: 100%;
 }
+
 .modifyItem {
   display: flex;
   flex-direction: column;
@@ -232,6 +238,7 @@
     gap: 8px;
   }
   .mainSection {
+    width: 100%;
     gap: 10px;
 
     padding: 24px 16px;
@@ -255,9 +262,13 @@
     gap: 8px;
   }
   .habitInput {
-    width: 256px;
+    width: 100%;
   }
   .plusBtn {
     margin-top: 24px;
+  }
+
+  .modifyItemWrap {
+    max-height: 320px;
   }
 }
