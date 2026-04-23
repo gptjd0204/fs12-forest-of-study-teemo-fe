@@ -1,17 +1,20 @@
 import styles from "./LogHeader.module.css";
 import LinkButton from '../../../../components/LinkButton/LinkButton';
 import CurrentTime from '../../../../components/CurrentTime/CurrentTime';
+import StudyNameSkeleton from "../../../../components/Loading/StudyNameSkeleton";
 
-const LogHeader = ({ id, study, logType, setLogType }) => {
+const LogHeader = ({ id, study, logType, setLogType, isLoading }) => {
   const { nickname, title } = study || {};
 
   return (
     <div className={styles.topwrapper}>
       {/** 스터디이름, 링크 */}
       <div className={styles.top}>
-        <h1>
-          {nickname}의 {title}
-        </h1>
+        {isLoading ? (
+          <StudyNameSkeleton />
+        ) : (
+          <h1>{nickname}의 {title}</h1>
+        )}
         <div className={styles.linkContainer}>
           <LinkButton 
             className={styles.linkButton}
