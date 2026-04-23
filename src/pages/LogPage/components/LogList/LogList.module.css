@@ -85,6 +85,20 @@
   gap: 8px;
 }
 
+.noData {
+  margin: auto 0;
+  text-align: center;
+  color: var(--gray_818181);
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50vh;
+}
+
 /* .pagination button {
   display: flex;
   justify-content: center;
@@ -113,8 +127,3 @@
   background-color: var(--green_E1EDDE);
 } */
 
-.noData {
-  margin: auto 0;
-  text-align: center;
-  color: var(--gray_818181);
-}

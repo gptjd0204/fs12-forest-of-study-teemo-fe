@@ -1,8 +1,8 @@
 import styles from './LogList.module.css';
 import { formattedTime } from '../../../../utils/formattedTime';
 import { formatKST } from "../../../../utils/formattedDate";
-import { calculateDailyTotals } from '../../../../utils/logCalculator';
 import Pagination from '../../../../components/Pagination/Pagination';
+import ContentSpinner from '../../../../components/Loading/ContentSpinner'
 
 const LogList = ({ 
   logType,
@@ -10,13 +10,27 @@ const LogList = ({
   focusLogs,
   currentPage,
   totalPages,
-  onPageChange
+  onPageChange,
+  isLoading,
+  totalStats = {
+    totalPoint: 0,
+    totalFocus: 0
+  }
 }) => {
+  if (isLoading) {
+    return (
+      <div className={styles.spinnerContainer}>
+        <ContentSpinner />
+      </div>
+    );
+  }
+
   const currentItems = logType === "point" ? pointLogs : focusLogs;
   const hasData = currentItems && currentItems.length > 0;
-  
-  const { point, focus } = calculateDailyTotals(pointLogs, focusLogs);
 
+  const point = totalStats?.totalPoint || 0;
+  const focus = totalStats?.totalFocus || 0;
+  
   return (
     <>
       {/* 총합 */}
