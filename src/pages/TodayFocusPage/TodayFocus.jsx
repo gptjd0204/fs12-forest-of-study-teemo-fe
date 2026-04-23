@@ -12,6 +12,7 @@ import StudyNameSkeleton from '../../components/Loading/StudyNameSkeleton';
 import TotalPointSkeleton from '../../components/Loading/TotalPointSkeleton';
 import { createTimer, getTimer } from '../../services/TimerService';
 import { getTotalPoint } from '../../services/PointService';
+import useToast from '../../hooks/useToast';
 
 const TodayFocus = () => {
   const { id } = useParams();
@@ -22,25 +23,13 @@ const TodayFocus = () => {
   const [totalPoint, setTotalPoint] = useState(0);
   const [title, setTitle] = useState('');
   const [toggleForm, setToggleForm] = useState('DEFAULT');
-  const [toasts, setToasts] = useState([]);
+  const { addToast, toasts } = useToast();
 
   // 타이머 초기화 함수
   const initTimer = () => {
     setTargetDuration(1500000);
     setTimerCount(1500000);
     setTimerStatus('CANCELED');
-  };
-
-  // 토스트 메시지 추가
-  const addToast = (type, msg) => {
-    const id = Date.now();
-
-    setToasts((prev) => [...prev, { id, type, msg }]);
-
-    // 3초 뒤 해당 ID의 토스트만 삭제
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((toast) => toast.id !== id));
-    }, 3000);
   };
 
   useEffect(() => {

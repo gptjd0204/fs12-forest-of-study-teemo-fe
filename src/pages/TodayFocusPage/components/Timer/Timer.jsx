@@ -75,7 +75,7 @@ const Timer = ({
       clearInterval(timerRef.current);
       timerRef.current = null;
       setTimerStatus('PAUSED');
-      addToast('error', '집중이 중단되었습니다.');
+      addToast('error', '집중이 중단되었습니다.', 'stop');
       await updatePause(studyId);
       setIsUpdating(false);
     }
@@ -100,7 +100,7 @@ const Timer = ({
       timerRef.current = null;
       setTotalPoint((prev) => prev + points);
       resetTimer();
-      addToast('success', `${points}포인트를 획득했습니다!`);
+      addToast('success', `${points}포인트를 획득했습니다!`, 'complete');
       setIsUpdating(false);
     }
   };
