@@ -21,6 +21,10 @@
   text-align: right;
 }
 
+.habitTable td {
+  width: 10%;
+}
+
 .habitTable td > img {
   margin: 14px auto;
 }
