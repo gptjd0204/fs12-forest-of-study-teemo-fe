@@ -43,16 +43,19 @@ const StudyDetailPage = () => {
         setIsNotFoundPage(true);
         return;
       }
-      const emojiData = await getEmojis(id);
-      const habitData = await getWeeklyHabits(id);
-
-      setStudy(studyData);
-      setEmojis(emojiData);
-      setHabits(habitData);
 
       saveRecentStudy(studyData);
 
-      setIsLoading(false);
+      Promise.all([getEmojis(id), getWeeklyHabits(id)])
+        .then((values) => {
+          const emojiData = values[0];
+          const habitData = values[1];
+
+          setStudy(studyData);
+          setEmojis(emojiData);
+          setHabits(habitData);
+        })
+        .finally(() => setIsLoading(false));
     } catch (error) {
       console.log(error);
       throw error;
