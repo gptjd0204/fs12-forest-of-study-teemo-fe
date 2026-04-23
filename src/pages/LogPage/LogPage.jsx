@@ -47,7 +47,7 @@ const LogPage = () => {
       const fetchStudyData = async () => {
         setIsStudyLoading(true);
         const studyData = await getStudyDetail(id);
-        setStudy(studyData);
+        setStudy(studyData.study);
         setIsStudyLoading(false);
       };
       fetchStudyData();
