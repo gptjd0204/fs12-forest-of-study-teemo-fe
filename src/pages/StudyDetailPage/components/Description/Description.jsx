@@ -36,12 +36,7 @@ const Description = ({
         (isLoading ? (
           <TotalPointSkeleton isTitleOn={true} />
         ) : (
-          <TotalPoint
-            id={id}
-            size={'m'}
-            isIndividual={true}
-            points={pointsHandler()}
-          />
+          <TotalPoint size={'m'} points={pointsHandler()} />
         ))}
     </div>
   );

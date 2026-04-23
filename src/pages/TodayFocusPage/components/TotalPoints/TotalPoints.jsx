@@ -5,7 +5,7 @@ const TotalPoints = ({ points }) => {
   return (
     <div className={styles.pointContainer}>
       <p>현재까지 획득한 포인트</p>
-      <TotalPoint size={'m'} isIndividual={true} points={points} />
+      <TotalPoint size={'m'} points={points} />
     </div>
   );
 };
