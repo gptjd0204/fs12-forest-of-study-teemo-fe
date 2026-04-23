@@ -6,11 +6,20 @@ import EmojiAdd from './EmojiPopOver/EmojiAdd/EmojiAdd';
 
 import { updateEmojis } from '../../../../services/EmojiService';
 
+import useMouseOut from '../../../../hooks/useMouseOut';
+
 import styles from './EmojiContainer.module.css';
 import plusIcon from '../../../../assets/icons/ic_plus.svg';
 import EmojiSkeleton from '../../../../components/Loading/EmojiSkeleton';
 
-const EmojiContainer = ({ toastHandler, emojis, setEmojis, isLoading }) => {
+const EmojiContainer = ({
+  toastHandler,
+  emojis,
+  setEmojis,
+  isLoading,
+  setIsMouse,
+  isMouse,
+}) => {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -66,6 +75,8 @@ const EmojiContainer = ({ toastHandler, emojis, setEmojis, isLoading }) => {
         setEmojis={setEmojis}
         updateEmoji={updateEmoji}
         id={id}
+        setIsMouse={setIsMouse}
+        isMouse={isMouse}
       />
     </div>
   );
