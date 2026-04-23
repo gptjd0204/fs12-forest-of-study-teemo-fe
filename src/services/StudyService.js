@@ -36,7 +36,7 @@ const normalizeStudy = (study) => ({
   createdAt: study.createdAt ?? '',
   updatedAt: study.updatedAt ?? '',
   progressText: study.progressText || getStudyProgressText(study.createdAt),
-  rewardPoint: study.rewardPoint ?? 0,
+  rewardPoint: study.totalPoint ?? 0,
   commentCount: study.commentCount ?? 0,
   fireCount: study.fireCount ?? 0,
   heartCount: study.heartCount ?? 0,
