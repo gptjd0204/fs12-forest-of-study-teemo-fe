@@ -16,6 +16,11 @@ const LogPage = () => {
   const [logType, setLogType] = useState("focus");
   const [date, setDate] = useState(new Date());
 
+  const [totalStats, setTotalStats] = useState({
+    totalPoint: 0,
+    totalFocus: 0
+  });
+
   const [pointLogs, setPointLogs] = useState([]);
   const [focusLogs, setFocusLogs] = useState([]);
 
@@ -23,6 +28,9 @@ const LogPage = () => {
   const [pagination, setPagination] = useState({
     totalPages: 1,
   });
+  
+  const [isStudyLoading, setIsStudyLoading] = useState(true);
+  const [isLogsLoading, setIsLogsLoading] = useState(true);
 
   const pageChangeHandler = (page) => {
     if (page < 1 || page > pagination.totalPages || page === currentPage) {
@@ -37,14 +45,17 @@ const LogPage = () => {
 
   useEffect(() => {
       const fetchStudyData = async () => {
+        setIsStudyLoading(true);
         const studyData = await getStudyDetail(id);
         setStudy(studyData);
+        setIsStudyLoading(false);
       };
       fetchStudyData();
     }, [id]);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLogsLoading(true);
       const formattedDate = formatDate(date);
       const result = await getLogs(id, formattedDate, currentPage);
 
@@ -52,7 +63,12 @@ const LogPage = () => {
         setPointLogs(result.data.logs);
         setFocusLogs(result.data.logs);
         setPagination(result.data.pagination);
+
+        if (result.data.totalStats) {
+          setTotalStats(result.data.totalStats);
+        }
       }
+      setIsLogsLoading(false);
     };
     fetchData();
   }, [date, id, currentPage]);
@@ -68,6 +84,7 @@ const LogPage = () => {
         study={study}
         logType={logType}
         setLogType={setLogType}
+        isLoading={isStudyLoading}
       />
 
       <div className={styles.logWrapper}>
@@ -86,6 +103,8 @@ const LogPage = () => {
           currentPage={currentPage}
           totalPages={pagination.totalPages}
           onPageChange={pageChangeHandler}
+          totalStats={totalStats}
+          isLoading={isLogsLoading}
         />
       </div>
     </div>
