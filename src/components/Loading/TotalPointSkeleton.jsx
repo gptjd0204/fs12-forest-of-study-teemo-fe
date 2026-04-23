@@ -1,10 +1,16 @@
 import React from 'react';
 import styles from './Loading.module.css';
 
-const TotalPointSkeleton = () => {
+const TotalPointSkeleton = ({ isTitleOn = false }) => {
   return (
     <div className={styles.totalPointSkeletonContainer}>
-      <div className={styles.totalPointTitleSkeleton}></div>
+      <div
+        className={
+          isTitleOn
+            ? styles.totalPointTitleNone
+            : styles.totalPointTitleSkeleton
+        }
+      ></div>
       <div className={styles.totalPointSkeleton}></div>
     </div>
   );

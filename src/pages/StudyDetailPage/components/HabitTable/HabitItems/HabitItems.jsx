@@ -11,7 +11,9 @@ const HabitItems = ({ datas }) => {
               const count = d_i % 18;
               return (
                 <td key={`complete-${c_i}`}>
-                  {complete ? (
+                  {complete === 'none' ? (
+                    ''
+                  ) : complete ? (
                     <img src={`/stickers/ic_sticker_${count}.svg`} alt="완료" />
                   ) : (
                     <img src={stickerEmpty} alt="완료 못함" />

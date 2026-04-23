@@ -23,9 +23,20 @@ export const getWeeklyHabits = async (id) => {
     const DAYS_IN_WEEK = 7;
     const compeletedDays = new Array(DAYS_IN_WEEK).fill(false);
 
+    if (isThisWeek(habit.startDate)) {
+      const startDay = dayHandeler(habit.startDate);
+
+      compeletedDays.fill('none', 0, startDay);
+    }
+
+    if (habit.endDate !== null && isThisWeek(habit.endDate)) {
+      const endDay = dayHandeler(habit.endDate);
+
+      compeletedDays.fill('none', endDay);
+    }
+
     const days = habit.records.forEach((record) => {
-      const date = new Date(record.date);
-      const day = (date.getDay() + 6) % 7; // date 는 일요일 시작이라 1 빼줌
+      const day = dayHandeler(record.date);
 
       compeletedDays[day] = record.isCompleted;
       return;
@@ -35,6 +46,31 @@ export const getWeeklyHabits = async (id) => {
   });
 
   return weeklyHabits;
+};
+
+const isThisWeek = (date) => {
+  const now = new Date();
+  const target = new Date(date);
+
+  // 현재 주의 월요일 구하기
+  const dayOfWeek = now.getDay(); // 0(일) ~ 6(토)
+  const sundayDiff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // 일요일이면 -6, 나머지 +1
+  const startOfWeek = new Date(now.setDate(sundayDiff));
+  startOfWeek.setHours(0, 0, 0, 0);
+
+  // 현재 주의 일요일 구하기
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+  endOfWeek.setHours(23, 59, 59, 999);
+
+  return target >= startOfWeek && target <= endOfWeek;
+};
+
+const dayHandeler = (date) => {
+  const target = new Date(date);
+  const day = (target.getDay() + 6) % 7; // date 는 일요일 시작이라 1 빼줌
+
+  return day;
 };
 
 // 습관 생성

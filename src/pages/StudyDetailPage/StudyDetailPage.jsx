@@ -26,6 +26,7 @@ const StudyDetailPage = () => {
   const { toasts, addToast } = useToast();
 
   const [study, setStudy] = useState([]);
+  const [points, setPoints] = useState([]);
   const [emojis, setEmojis] = useState([]);
   const [habits, setHabits] = useState([]);
 
@@ -44,14 +45,15 @@ const StudyDetailPage = () => {
         return;
       }
 
-      saveRecentStudy(studyData);
+      saveRecentStudy(studyData.study);
 
       Promise.all([getEmojis(id), getWeeklyHabits(id)])
         .then((values) => {
           const emojiData = values[0];
           const habitData = values[1];
 
-          setStudy(studyData);
+          setStudy(studyData.study);
+          setPoints(studyData.points);
           setEmojis(emojiData);
           setHabits(habitData);
         })
@@ -100,6 +102,7 @@ const StudyDetailPage = () => {
               onClick={modalHandler}
               id={id}
               study={study}
+              points={points}
               isLoading={isLoading}
             />
           </div>
