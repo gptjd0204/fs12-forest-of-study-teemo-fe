@@ -3,7 +3,7 @@ import styles from './Input.module.css';
 import closeeye from '../../assets/icons/ic_close_eye.png';
 import openeye from '../../assets/icons/ic_eye.png';
 
-const PasswordInput = ({ password, setPassword }) => {
+const PasswordInput = ({ password, setPassword, isModal }) => {
   const [error, setError] = useState('');
   const [newpassword, setNewPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +33,7 @@ const PasswordInput = ({ password, setPassword }) => {
           onChange={(e) => {
             const value = e.target.value;
             setPassword(value);
-            setError(validatePassword(value));
+            !isModal && setError(validatePassword(value));
           }}
           onBlur={() => setNewPassword(true)}
         />

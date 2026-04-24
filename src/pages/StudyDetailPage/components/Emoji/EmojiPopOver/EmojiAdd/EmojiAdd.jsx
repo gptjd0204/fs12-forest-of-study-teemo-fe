@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 
+import useMouseOut from '../../../../../../hooks/useMouseOut';
+
 import { createEmojis } from '../../../../../../services/EmojiService';
 
 import styles from '../../EmojiContainer.module.css';
@@ -9,6 +11,8 @@ import smileIcon from '../../../../../../assets/icons/ic_smile.svg';
 const EmojiAdd = ({ emojis, setEmojis, updateEmoji, id, toastHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
   const emojiRef = useRef(null);
+
+  const { ref } = useMouseOut({ setIsOpen });
 
   const emojiHandle = async (e) => {
     // emoji 가 현재 emoji 안에 있는 지 확인
@@ -35,7 +39,7 @@ const EmojiAdd = ({ emojis, setEmojis, updateEmoji, id, toastHandler }) => {
   };
 
   return (
-    <div className={styles.emojiPickerWrapper}>
+    <div ref={ref} className={styles.emojiPickerWrapper}>
       <button className={styles.emojiAddBtn} onClick={() => setIsOpen(!isOpen)}>
         <img src={smileIcon} alt="이모지 추가 버튼" />
         <span>추가</span>
