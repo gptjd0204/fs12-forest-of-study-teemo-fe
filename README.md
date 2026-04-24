@@ -142,7 +142,7 @@ src/
 
 ## 시스템 이미지
 
-<img src="image.png" width="700"/>
+<img src="image-1.png" width="700"/>
 
 ## ⚙️ 설치 및 실행 방법
 
