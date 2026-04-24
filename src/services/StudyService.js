@@ -140,6 +140,7 @@ export const getRecentStudyList = () => {
 
 ////////////////// 로컬스토리지에 최근 조회 목록 저장 //////////////////
 export const saveRecentStudy = (study) => {
+  console.log(study);
   const recentStudyList = getRecentStudyList();
   const filteredStudyList = recentStudyList.filter(
     (recentStudy) => recentStudy.id !== study.id,

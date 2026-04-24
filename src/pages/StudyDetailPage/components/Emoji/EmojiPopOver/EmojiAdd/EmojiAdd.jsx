@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 
 import useMouseOut from '../../../../../../hooks/useMouseOut';
