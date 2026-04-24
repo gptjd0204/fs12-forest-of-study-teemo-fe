@@ -1,11 +1,12 @@
 import { useRef, useState, useEffect } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 
+import useMouseOut from '../../../../../../hooks/useMouseOut';
+
 import { createEmojis } from '../../../../../../services/EmojiService';
 
 import styles from '../../EmojiContainer.module.css';
 import smileIcon from '../../../../../../assets/icons/ic_smile.svg';
-import useMouseOut from '../../../../../../hooks/useMouseOut';
 
 const EmojiAdd = ({ emojis, setEmojis, updateEmoji, id, toastHandler }) => {
   const [isOpen, setIsOpen] = useState(false);

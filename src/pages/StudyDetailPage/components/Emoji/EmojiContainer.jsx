@@ -12,14 +12,7 @@ import styles from './EmojiContainer.module.css';
 import plusIcon from '../../../../assets/icons/ic_plus.svg';
 import EmojiSkeleton from '../../../../components/Loading/EmojiSkeleton';
 
-const EmojiContainer = ({
-  toastHandler,
-  emojis,
-  setEmojis,
-  isLoading,
-  setIsMouse,
-  isMouse,
-}) => {
+const EmojiContainer = ({ toastHandler, emojis, setEmojis, isLoading }) => {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -75,8 +68,6 @@ const EmojiContainer = ({
         setEmojis={setEmojis}
         updateEmoji={updateEmoji}
         id={id}
-        setIsMouse={setIsMouse}
-        isMouse={isMouse}
       />
     </div>
   );
