@@ -6,8 +6,6 @@ import EmojiAdd from './EmojiPopOver/EmojiAdd/EmojiAdd';
 
 import { updateEmojis } from '../../../../services/EmojiService';
 
-import useMouseOut from '../../../../hooks/useMouseOut';
-
 import styles from './EmojiContainer.module.css';
 import plusIcon from '../../../../assets/icons/ic_plus.svg';
 import EmojiSkeleton from '../../../../components/Loading/EmojiSkeleton';
