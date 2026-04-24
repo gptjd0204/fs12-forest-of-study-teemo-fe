@@ -100,7 +100,11 @@ const Modals = ({
             <p className={styles.formMessage}>권한이 필요해요!</p>
             <div className={styles.formInputField}>
               <label htmlFor="pw-id">비밀번호</label>
-              <PasswordInput password={password} setPassword={setPassword} />
+              <PasswordInput
+                password={password}
+                setPassword={setPassword}
+                isModal={true}
+              />
             </div>
 
             <Button

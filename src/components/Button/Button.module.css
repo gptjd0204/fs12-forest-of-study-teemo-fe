@@ -38,6 +38,9 @@
   background-color: var(--gray_818181);
 }
 
+.btnModification:hover,
+.btnDefault:hover,
+.btnConfirm:hover,
 .btnCreate:hover {
   background-color: var(--green_text_578246);
 }
