@@ -1,14 +1,32 @@
 # 🌳 공부의 숲
 
-# 팀이름 : TEEM-O
+## 팀이름
+
+### TEEM-O
 
 ## 📌 프로젝트 소개
 
 많은 사람들이 목표를 설정하고 꾸준한 습관을 만들고 싶어 하지만, 이것을 지속하는 것은 쉽지 않습니다. 공부의 숲은 이러한 문제를 해결하기 위해 습관을 형성하고, 집중시간에 따라 포인트를 지급하는 기능을 가지고있는 웹사이트 입니다.
 
+프로젝트 기간: 2026.04.08 ~ 2026.04.27
+
+## 구현 홈페이지
+
+https://fs12-forest-of-study-teemo-fe.vercel.app
+
+## 팀원 구성
+
+### 팀장 : 추명곤
+
+- 김나연
+- 김상우
+- 윤소정
+- 최혜성
+- 한고은
+
 ---
 
-## 🚀 주요 기능
+## 🚀 팀원별 구현 기능 상세
 
 - 스터디 목록
 - 스터디 생성
@@ -58,6 +76,15 @@ src/
 │ ├── CurrentTime/
 │ └── TotalPoint/
 
+├── hooks/
+│    ├── useHabitModal.js
+│    ├── useMouseOut.js
+│    ├── useToast.js
+│    └── useTodayHabits.js
+
+├── layouts/
+    └── StudyLayout.jsx
+
 ├── pages/ # 페이지 단위 컴포넌트
 
 │ ├── CreatePage/
@@ -104,7 +131,6 @@ src/
 │ └── TimerService.js
 
 ├── styles/ # 전역 스타일
-│ ├── .gitkeep
 │ ├── pattern.css
 │ └── reset.css
 
