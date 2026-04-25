@@ -14,15 +14,6 @@ const Description = ({
 }) => {
   const { id } = useParams();
 
-  const pointsHandler = () => {
-    if (!points) {
-      return;
-    }
-    const sum = points.map((point) => point.points).reduce((a, b) => a + b, 0);
-
-    return sum;
-  };
-
   return (
     <div className={styles.descContainer}>
       <p className={styles.descTitle}>{descTitle}</p>
@@ -36,7 +27,7 @@ const Description = ({
         (isLoading ? (
           <TotalPointSkeleton isTitleOn={true} />
         ) : (
-          <TotalPoint size={'m'} points={pointsHandler()} />
+          <TotalPoint size={'m'} points={points} />
         ))}
     </div>
   );
