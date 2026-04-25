@@ -148,8 +148,6 @@ export const saveRecentStudy = (study) => {
     ...filteredStudyList,
   ].slice(0, 3);
 
-  console.log('nextRecentStudyList=>', nextRecentStudyList);
-
   localStorage.setItem(
     RECENT_STUDY_LIST_KEY,
     JSON.stringify(nextRecentStudyList),
