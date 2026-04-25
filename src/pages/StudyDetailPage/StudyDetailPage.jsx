@@ -26,7 +26,6 @@ const StudyDetailPage = () => {
   const { toasts, addToast } = useToast();
 
   const [study, setStudy] = useState([]);
-  const [points, setPoints] = useState([]);
   const [emojis, setEmojis] = useState([]);
   const [habits, setHabits] = useState([]);
 
@@ -48,15 +47,18 @@ const StudyDetailPage = () => {
         return;
       }
 
-      saveRecentStudy(studyData.study);
+      const totalPoint = pointsHandler(studyData.points);
+
+      const study = { ...studyData.study, totalPoint };
+
+      saveRecentStudy(study);
 
       Promise.all([getEmojis(id), getWeeklyHabits(id)])
         .then((values) => {
           const emojiData = values[0];
           const habitData = values[1];
 
-          setStudy(studyData.study);
-          setPoints(studyData.points);
+          setStudy(study);
           setEmojis(emojiData);
           setHabits(habitData);
         })
@@ -84,6 +86,15 @@ const StudyDetailPage = () => {
     addToast('success', '링크가 복사되었습니다!', 'link');
   };
 
+  const pointsHandler = (points) => {
+    if (!points) {
+      return;
+    }
+    const sum = points.map((point) => point.points).reduce((a, b) => a + b, 0);
+
+    return sum;
+  };
+
   return (
     <>
       {isNotFoundPage ? (
@@ -105,7 +116,7 @@ const StudyDetailPage = () => {
               onClick={modalHandler}
               id={id}
               study={study}
-              points={points}
+              points={study.totalPoint}
               isLoading={isLoading}
             />
           </div>

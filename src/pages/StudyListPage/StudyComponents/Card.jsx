@@ -62,7 +62,7 @@ const Card = ({ study }) => {
                 의 {study.title}
               </h3>
               {/* 획득 포인트 연결 */}
-              <TotalPoint theme={pointTheme} points={study.rewardPoint} />
+              <TotalPoint theme={pointTheme} points={study.totalPoint} />
             </div>
 
             {/* N일째 진행 중 */}
