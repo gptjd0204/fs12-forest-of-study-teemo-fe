@@ -45,6 +45,11 @@
 }
 
 @media (max-width: 767px) {
+  .tableWrapper {
+    overflow-x: auto;
+    min-height: 430px;
+  }
+
   .habitTable {
     width: 1024px;
   }
