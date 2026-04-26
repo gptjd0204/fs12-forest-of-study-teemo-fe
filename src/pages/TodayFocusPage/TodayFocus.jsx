@@ -57,16 +57,16 @@ const TodayFocus = () => {
 
           const timeDiff = now - lastStartedAt;
           const totalElapsedTime = timer.elapsedTime + timeDiff;
-          const remainingTime = timer.targetDuration - totalElapsedTime;
+          const remainingTime = timer.targetDuration - totalElapsedTime + 500;
 
           if (remainingTime < 0) {
             setTimerStatus('COMPLETED');
-            setTimerCount(totalElapsedTime - timer.targetDuration + 700);
+            setTimerCount(totalElapsedTime - timer.targetDuration + 500);
           } else {
-            setTimerCount(remainingTime + 700);
+            setTimerCount(remainingTime);
           }
         } else {
-          setTimerCount(timer.targetDuration - timer.elapsedTime + 700);
+          setTimerCount(timer.targetDuration - timer.elapsedTime + 500);
         }
 
         setIsLoading(false);
