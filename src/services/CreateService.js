@@ -25,9 +25,3 @@ export const patchService = async (id, data) => {
   const result = await response.json();
   return result;
 };
-
-export const getStudy = async (id) => {
-  const response = await fetch(`${API_URL}/api/studies/${id}`);
-  const result = await response.json();
-  return result;
-};
