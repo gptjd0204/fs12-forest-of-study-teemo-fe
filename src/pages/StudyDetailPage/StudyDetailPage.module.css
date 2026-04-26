@@ -29,10 +29,6 @@
 }
 
 @media (max-width: 767px) {
-  .innerWrapper {
-    overflow-x: auto;
-  }
-
   .tableTitle {
     font-size: 18px;
   }

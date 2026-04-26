@@ -7,7 +7,7 @@ import ContentSpinner from '../../../../components/Loading/ContentSpinner';
 
 const HabitTable = ({ id, isLoading, habits }) => {
   return (
-    <>
+    <div className={styles.tableWrapper}>
       {isLoading ? (
         <div className={styles.emptyTable}>
           <ContentSpinner />
@@ -37,7 +37,7 @@ const HabitTable = ({ id, isLoading, habits }) => {
           </tbody>
         </table>
       )}
-    </>
+    </div>
   );
 };
 

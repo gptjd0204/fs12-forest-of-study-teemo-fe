@@ -10,9 +10,8 @@ import Introduce from '../CreatePage/CreateComponents/Introduce/Introduce';
 import BackGround from '../CreatePage/CreateComponents/BackGround/BackGround';
 import ModalLayout from '../../components/Modal/ModalLayout';
 
-import { getStudy } from '../../services/CreateService';
 import { patchService } from '../../services/CreateService';
-import { updateRecentStudy } from '../../services/StudyService';
+import { getStudyDetail, updateRecentStudy } from '../../services/StudyService';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const StudyUpdate = () => {
@@ -30,9 +29,9 @@ const StudyUpdate = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getStudy(id);
+        const res = await getStudyDetail(id);
 
-        const data = res?.data;
+        const data = res?.study;
 
         setNickname(data?.nickname || '');
         setTitle(data?.title || '');
