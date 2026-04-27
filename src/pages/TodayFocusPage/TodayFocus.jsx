@@ -63,7 +63,7 @@ const TodayFocus = () => {
             setTimerStatus('COMPLETED');
             setTimerCount(totalElapsedTime - timer.targetDuration + 500);
           } else {
-            setTimerCount(remainingTime + 500);
+            setTimerCount(remainingTime);
           }
         } else {
           setTimerCount(timer.targetDuration - timer.elapsedTime + 500);
