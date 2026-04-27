@@ -46,6 +46,7 @@ const Timer = ({
         setTimerCount((prev) => {
           if (prev - 1000 < 1000) {
             setTimerStatus('COMPLETED');
+            return (prev = 0);
           }
           return prev - 1000;
         });
