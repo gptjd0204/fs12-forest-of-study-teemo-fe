@@ -55,11 +55,7 @@ const TodayFocus = () => {
           const now = Date.now();
           const lastStartedAt = new Date(timer.lastStartedAt);
 
-          const timeDiff = now - lastStartedAt;
-          if (timeDiff < 0) {
-            setTimerCount(timer.targetDuration - timer.elapsedTime + 700);
-            return;
-          }
+          const timeDiff = now - lastStartedAt < 0 ? 0 : now - lastStartedAt;
           const totalElapsedTime = timer.elapsedTime + timeDiff;
           const remainingTime = timer.targetDuration - totalElapsedTime;
 
