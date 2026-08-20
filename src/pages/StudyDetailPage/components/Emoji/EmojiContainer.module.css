@@ -1,0 +1,80 @@
+/* 이모지 */
+.emojiWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  position: relative;
+}
+
+.emojiContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.emojiMoreBox {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+
+  position: absolute;
+  top: 40px;
+  left: -20px;
+
+  padding: 12px;
+
+  border-radius: 15px;
+  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+}
+
+.emojiMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  height: 31px;
+  padding: 7px 8px;
+
+  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.emojiMoreBtn:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.emojiAddBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 8px;
+}
+
+.emojiPickerWrapper {
+  position: relative;
+}
+
+.emojiPickerBox {
+  position: absolute;
+  top: 40px;
+  left: 0px;
+}
+
+@media (max-width: 660px) {
+  .emojiPickerWrapper {
+    position: unset;
+  }
+
+  .emojiPickerBox {
+    left: auto;
+    right: 0;
+  }
+}

@@ -1,16 +1,174 @@
-# React + Vite
+# 🌳 공부의 숲
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 팀이름
 
-Currently, two official plugins are available:
+### TEEM-O
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 프로젝트 소개
 
-## React Compiler
+많은 사람들이 목표를 설정하고 꾸준한 습관을 만들고 싶어 하지만, 이것을 지속하는 것은 쉽지 않습니다. 공부의 숲은 이러한 문제를 해결하기 위해 습관을 형성하고, 집중시간에 따라 포인트를 지급하는 기능을 가지고있는 웹사이트 입니다.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+프로젝트 기간: 2026.04.08 ~ 2026.04.27
 
-## Expanding the ESLint configuration
+## 구현 홈페이지
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+https://fs12-forest-of-study-teemo-fe.vercel.app
+
+## 팀원 구성
+
+### 팀장 : 추명곤
+
+- 김나연
+- 김상우
+- 윤소정
+- 최혜성
+- 한고은
+
+---
+
+## 🚀 팀원별 구현 기능 상세
+
+- 스터디 목록
+- 스터디 생성
+- 오늘의 습관
+- 오늘의 집중
+- 스터디 로그
+
+---
+
+## 🛠️ 기술 스택
+
+### Frontend
+
+- React
+- React Router DOM
+- Vite
+- emoji-picker-react
+- JavaScript
+
+## 공통 Tool
+
+- Git & Github
+- Discord
+
+---
+
+## 📁 프로젝트 구조
+
+FE
+
+```
+src/
+├── assets/ # 이미지, 아이콘 등 정적 파일
+    ├── icons/
+    ├── images/
+
+├── components/ # 공통 UI 컴포넌트
+│ ├── Button/
+│ ├── CurrentTime/
+│ ├── Emoji/
+│ ├── Header/
+│ ├── Input/
+│ ├── LinkButton/
+│ ├── Modal/
+│ ├── ScrollAlwaysTop/
+│ ├── Toast/
+│ ├── CurrentTime/
+│ └── TotalPoint/
+
+├── hooks/
+│    ├── useHabitModal.js
+│    ├── useMouseOut.js
+│    ├── useToast.js
+│    └── useTodayHabits.js
+
+├── layouts/
+    └── StudyLayout.jsx
+
+├── pages/ # 페이지 단위 컴포넌트
+
+│ ├── CreatePage/
+│ │ ├── CreateComponents/ #각자 페이지에 필요한 컴포넌트들
+│ │ ├── StudyCreate.jsx
+│ │ └── Create.module.css
+
+│ ├── LogPage/
+│ │ ├── components/
+│ │ ├── LogPage.jsx
+│ │ └── LogPage.module.css
+
+│ ├── NotFoundPage/
+
+│ ├── StudyDetailPage/
+│ │ ├── components/
+│ │ ├── StudyDetailPage.jsx
+│ │ └── StudyDetailPage.module.css
+
+│ ├── StudyListPage/
+│ │ ├── StudyComponents/
+│ │ ├── StudyListPage.jsx
+│ │ └── StudyListPage.module.css
+
+│ ├── TodayFocusPage/
+│ │ ├── components/
+│ │ ├── TodayFocus.jsx
+│ │ └── TodayFocus.module.css
+
+│ ├── TodayHabitPage/
+│ │ ├── HabitComponents/
+│ │ ├── TodayHabitPage.jsx
+│ │ └── TodayHabitPage.module.css
+
+│ └── UpdatePage/
+
+├── services/ # API 요청 로직 (비즈니스 로직)
+│ ├── CreateService.js
+│ ├── EmojiService.js
+│ ├── HabitService.js
+│ ├── LogService.js
+│ ├── PointService.js
+│ ├── StudyService.js
+│ └── TimerService.js
+
+├── styles/ # 전역 스타일
+│ ├── pattern.css
+│ └── reset.css
+
+├── utils/ # 공통 유틸 함수
+│ ├── formattedDate.js
+│ ├── formattedTime.js
+│ └── logCalculator.js
+```
+
+## 시스템 이미지
+
+<img src="image-1.png" width="700"/>
+
+## ⚙️ 설치 및 실행 방법
+
+### 1. 프로젝트 주소
+
+FE 레포지토리 주소
+https://github.com/gptjd0204/fs12-forest-of-study-teemo-fe.git
+
+### 2. 패키지 설치
+
+npm install
+
+- React DOM
+- React Router DOM
+- emoji-picker-react
+
+### 3. 실행
+
+npm run dev
+
+## 🌐 API 연동
+
+- 백엔드 서버: http://localhost:8080
+- API 통신은 services 폴더에서 관리
+
+## 📌 기타
+
+- 컴포넌트 기반 구조로 설계
+- 페이지별 기능 분리

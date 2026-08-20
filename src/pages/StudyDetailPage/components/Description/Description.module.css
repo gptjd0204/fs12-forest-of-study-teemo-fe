@@ -1,0 +1,40 @@
+/* 소개말 및 포인트 */
+
+.descContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+
+  width: 100%;
+}
+
+.descTitle {
+  font-size: 18px;
+  color: var(--gray_818181);
+}
+
+.descContent {
+  width: 100%;
+  overflow-wrap: break-word;
+  font-size: 18px;
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 767px) {
+  .descTitle {
+    font-size: 16px;
+  }
+
+  .descContent {
+    font-size: 14px;
+  }
+
+  .titleContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

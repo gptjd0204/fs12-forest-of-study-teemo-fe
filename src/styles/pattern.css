@@ -1,0 +1,94 @@
+/* pallate colors */
+
+:root {
+  --black_414141: #414141;
+
+  --white_FFFFFF: #fff;
+
+  --gray_EEEEEE: #eee;
+  --gray_DDDDDD: #ddd;
+  --gray_818181: #818181;
+
+  --bg_F6F4EF: #f6f4ef;
+  --brand_99C08E: #99c08e;
+
+  --error_C41013: #c41013;
+  --error_bg_FFA3A5: #ffa3a5;
+
+  --red_F50E0E: #f50e0e;
+
+  --green_E1EDDE: #e1edde;
+  --yellow_FFF1CC: #fff1cc;
+  --blue_E0FF1F5: #e0f1f5;
+  --pink_FDE0E9: #fde0e9;
+
+  --green_text_578246: #578246;
+  --yellow_text_C18E1B: #c18e1b;
+  --blue_text_418099: #418099;
+  --pink_text_FDE0E9: #fde0e9;
+}
+
+/* btns */
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--brand_99C08E);
+  color: var(--white_FFFFFF);
+  cursor: pointer;
+  font-family: 'JejuStoneWall';
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.btn:hover {
+  background-color: var(--green_text_578246);
+}
+
+.btn:active {
+  background-color: var(--green_text_578246);
+}
+
+.btn.error {
+  background-color: var(--error_C41013);
+}
+
+/* layout */
+.layout {
+  background: var(--bg_F6F4EF);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+/* wrapper */
+.wrapper {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px;
+  flex-direction: column;
+  border-radius: 20px;
+  background: var(--white_FFFFFF);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 24px;
+  }
+  .layout {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    padding: 16px;
+  }
+  .layout {
+    padding: 16px;
+  }
+}

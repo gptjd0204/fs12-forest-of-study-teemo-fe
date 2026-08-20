@@ -1,0 +1,39 @@
+/* 인터랙션 */
+.ixWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+/* 스터디 */
+.introWrapper {
+  width: 100%;
+  margin-bottom: 40px;
+  margin-top: 24px;
+}
+
+/* 습관 기록표 */
+.innerWrapper {
+  width: 100%;
+  min-height: 510px;
+  border-radius: 20px;
+  border: 1px solid var(--gray_DDDDDD);
+  background: var(--white_FFFFFF);
+
+  padding: 24px;
+}
+
+.tableTitle {
+  font-size: 24px;
+}
+
+@media (max-width: 767px) {
+  .tableTitle {
+    font-size: 18px;
+  }
+
+  .ixWrapper {
+    display: block;
+  }
+}

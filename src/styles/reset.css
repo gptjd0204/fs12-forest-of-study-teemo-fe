@@ -1,0 +1,99 @@
+/* 기본 폰트 */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+/* 버튼 폰트 */
+@font-face {
+  font-family: 'JejuStoneWall';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   Reset CSS
+   브라우저마다 다른 기본 스타일을 통일해, 동일한 기준에서 디자인할 수 있게 합니다.
+   ============================================================ */
+
+/* 모든 요소의 margin, padding 제거 + box-sizing으로 padding 포함한 너비 계산 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; /* rem 단위의 기준이 됨 */
+}
+
+body {
+  font-family:
+    'Pretendard',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+  line-height: 1.5;
+  background-color: var(--bg_F6F4EF);
+  color: var(--black_414141);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 리스트 기본 불릿/숫자 제거 (ul, ol 공통) */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 링크 밑줄 제거, 부모 색상 상속 (스타일은 style.css에서 개별 지정) */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 이미지: 가로를 100%로 제한해 레이아웃 깨짐 방지, block으로 하단 여백 제거 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 버튼 기본 테두리·배경 제거, 클릭 시 포인터 */
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* 입력/선택 요소가 body 폰트를 따르도록 */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* 테이블 셀 간격·테두리 통일 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input,
+textarea,
+select,
+button {
+  outline: none;
+}

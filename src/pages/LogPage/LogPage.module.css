@@ -1,0 +1,11 @@
+/* LogPage.module.css */
+.logWrapper {
+  border-radius: 20px;
+  border: 1px solid var(--gray_DDDDDD);
+  padding: 26px;
+  min-height: 600px;
+}
+
+@media (max-width: 767px) {
+
+}

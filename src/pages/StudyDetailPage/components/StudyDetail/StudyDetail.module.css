@@ -1,0 +1,45 @@
+/* 타이틀 */
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 20px;
+}
+
+.title {
+  flex: 1;
+
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 소개 및 포인트 */
+.descWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+@media (max-width: 767px) {
+  .titleContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .title {
+    width: 100%;
+  }
+
+  .title > span:last-child {
+    display: block;
+  }
+}

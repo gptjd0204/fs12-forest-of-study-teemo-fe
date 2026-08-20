@@ -1,0 +1,86 @@
+.timerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+}
+.timerContainer > h3 {
+  font-size: 120px;
+  font-weight: 800;
+}
+
+.inProgress {
+  color: var(--red_F50E0E);
+}
+
+.complete {
+  color: var(--gray_818181);
+}
+
+.timerControlContainer {
+  display: flex;
+  gap: 24px;
+}
+
+.startBtn {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 16px;
+  border-radius: 50px;
+  background: var(--brand_99C08E);
+  padding: 8px 105px 8px 78px;
+  color: var(--white_FFFFFF);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.ctrlBtn {
+  padding: 14px;
+  background: var(--brand_99C08E);
+  border-radius: 50%;
+}
+
+.startBtn:hover,
+.ctrlBtn:hover {
+  background: var(--green_text_578246);
+}
+
+.startBtn:disabled,
+.ctrlBtn:disabled {
+  background: var(--gray_818181);
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .timerContainer {
+    gap: 64px;
+  }
+
+  .timerContainer > h3 {
+    font-size: 80px;
+  }
+
+  .timerControlContainer {
+    gap: 8px;
+  }
+
+  .startBtn {
+    height: 48.39px;
+    gap: 8px;
+    padding: 11px 28px 11px 20px;
+    font-size: 18px;
+  }
+  .startBtn > img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ctrlBtn {
+    padding: 11px;
+  }
+  .ctrlBtn > img {
+    width: 26.4px;
+    height: 26.4px;
+  }
+}

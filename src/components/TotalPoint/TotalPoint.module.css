@@ -1,0 +1,31 @@
+.point {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  padding: 1px 9px;
+  gap: 4px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--black_414141);
+  font-size: 12px;
+  font-weight: 500;
+}
+.point > img {
+  width: 12px;
+  height: 12px;
+}
+
+.medium {
+  padding: 5px 12px;
+  font-size: 16px;
+}
+.medium > img {
+  width: 19px;
+  height: 19px;
+}
+
+.dark {
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--white_FFFFFF);
+}

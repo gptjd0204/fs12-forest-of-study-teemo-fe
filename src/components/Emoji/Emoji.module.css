@@ -1,0 +1,21 @@
+.item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+
+  height: 31px;
+  padding: 6px 8px;
+
+  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--white_FFFFFF);
+}
+
+.small {
+  font-size: 12px;
+}
+
+.large {
+  font-size: 16px;
+}

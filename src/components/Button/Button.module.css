@@ -1,0 +1,63 @@
+.btnConfirm,
+.btnDefault,
+.btnCreate {
+  padding: 10px;
+  height: 58px;
+  border-radius: 16px;
+  text-shadow: 0px -2px 0px var(--green_text_578246);
+  border: none;
+}
+
+.btnConfirm,
+.btnDefault {
+  width: 680px;
+}
+
+.btnCreate {
+  width: 100%;
+}
+
+.btnModification,
+.btnCancel {
+  width: 278px;
+  padding: 10px;
+  height: 58px;
+  border-radius: 16px;
+}
+
+.btnModification {
+  text-shadow: 0px -2px 0px var(--green_text_578246);
+}
+
+.btnCancel {
+  background-color: var(--gray_DDDDDD);
+  text-shadow: 0px -2px 0px var(--gray_818181);
+}
+
+.btnCancel:hover {
+  background-color: var(--gray_818181);
+}
+
+.btnModification:hover,
+.btnDefault:hover,
+.btnConfirm:hover,
+.btnCreate:hover {
+  background-color: var(--green_text_578246);
+}
+
+@media (max-width: 1024px) {
+  .btnConfirm {
+    width: 302px;
+  }
+}
+
+@media (max-width: 767px) {
+  .btnDefault {
+    width: 302px;
+  }
+  .btnModification,
+  .btnConfirm,
+  .btnCancel {
+    width: 130px;
+  }
+}

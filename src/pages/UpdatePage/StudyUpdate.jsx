@@ -1,0 +1,130 @@
+import React, { useEffect, useState } from 'react';
+import '../../styles/reset.css';
+import styles from '../CreatePage/Create.module.css';
+
+import NicknameInput from '../../components/input/NicknameInput';
+import Button from '../../components/Button/Button';
+
+import StudyName from '../CreatePage/CreateComponents/StudyName';
+import Introduce from '../CreatePage/CreateComponents/Introduce/Introduce';
+import BackGround from '../CreatePage/CreateComponents/BackGround/BackGround';
+import ModalLayout from '../../components/Modal/ModalLayout';
+
+import { patchService } from '../../services/CreateService';
+import { getStudyDetail, updateRecentStudy } from '../../services/StudyService';
+import { useNavigate, useParams } from 'react-router-dom';
+
+const StudyUpdate = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const [nickname, setNickname] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [background, setBackground] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getStudyDetail(id);
+
+        const data = res?.study;
+
+        setNickname(data?.nickname || '');
+        setTitle(data?.title || '');
+        setDescription(data?.description || '');
+        setBackground(data?.background || '');
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  const handleSubmit = async () => {
+    try {
+      const data = {
+        nickname,
+        title,
+        description,
+        background,
+      };
+
+      const res = await patchService(id, data);
+
+      if (!res.success) {
+        setModalMessage(res.message);
+        setModalOpen(true);
+        return;
+      }
+      await patchService(id, data);
+      updateRecentStudy(id, data);
+
+      setModalMessage('수정이 완료되었습니다');
+      setIsSuccess(true);
+      setModalOpen(true);
+    } catch (error) {
+      console.error(error);
+      setModalMessage('수정 실패');
+      setModalOpen(true);
+    }
+  };
+
+  const handleConfirm = () => {
+    setModalOpen(false);
+
+    if (isSuccess) {
+      navigate(`/${id}/detail`);
+    }
+  };
+
+  return (
+    <div className={styles.layoutCreate}>
+      <div className={styles.wrapperCreate}>
+        <h2 className={styles.bigTitle}>스터디 수정</h2>
+
+        <h3 className={styles.title}>닉네임</h3>
+        <NicknameInput nickname={nickname} setNickname={setNickname} />
+
+        <h3 className={styles.title}>스터디 이름</h3>
+        <StudyName title={title} setTitle={setTitle} />
+
+        <h3 className={styles.title}>소개</h3>
+        <Introduce description={description} setDescription={setDescription} />
+
+        <h3 className={styles.title}>배경</h3>
+        <BackGround setBackground={setBackground} />
+
+        <Button
+          btnTxt="수정"
+          onClick={handleSubmit}
+          btnType="button"
+          btnStyle="btnCreate"
+        />
+
+        {modalOpen && (
+          <ModalLayout className={styles.modalBox}>
+            <div className={styles.modalText}>
+              <p>{modalMessage}</p>
+            </div>
+
+            <div className={styles.confirmBtn}>
+              <Button
+                btnTxt={'확인'}
+                btnStyle="btnDefault"
+                onClick={handleConfirm}
+                btnType={'button'}
+              />
+            </div>
+          </ModalLayout>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default StudyUpdate;

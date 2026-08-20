@@ -1,0 +1,18 @@
+.linkBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px 12px 24px;
+  border-radius: 15px;
+  border: 1px solid var(--gray_DDDDDD);
+  background: var(--white_FFFFFF);
+  color: var(--gray_818181);
+  font-weight: 500;
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .linkBtn {
+    padding: 8px 6px 8px 10px;
+  }
+}

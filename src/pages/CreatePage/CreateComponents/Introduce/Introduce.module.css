@@ -1,0 +1,32 @@
+.inputIntroduce {
+  width: 100%;
+  height: 98px;
+  border-radius: 15px;
+  border: 1px solid var(--gray_DDDDDD);
+  background: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  resize: none;
+}
+
+.inputIntroduce:hover {
+  border: 1px solid var(--gray_DDDDDD);
+}
+
+.inputIntroduce:focus {
+  border: 1px solid var(--gray_DDDDDD);
+  outline: none;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

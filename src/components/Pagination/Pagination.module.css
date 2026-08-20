@@ -1,0 +1,54 @@
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px auto 0;
+}
+
+.button {
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black_414141);
+  font-size: 18px;
+  line-height: normal;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pageButton {
+  font-weight: 500;
+}
+
+.active {
+  background: var(--brand_99C08E);
+  color: var(--white_FFFFFF);
+}
+
+@media (max-width: 767px) {
+  .pagination,
+  .pageNumbers {
+    gap: 4px;
+  }
+
+  .button {
+    min-width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+}

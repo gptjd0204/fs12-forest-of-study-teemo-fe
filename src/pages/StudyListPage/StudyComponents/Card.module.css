@@ -1,0 +1,180 @@
+:root {
+  --card_black_opacity_10: rgba(0, 0, 0, 0.1);
+  --card_black_opacity_40: rgba(0, 0, 0, 0.4);
+  --card_black_opacity_50: rgba(0, 0, 0, 0.5);
+}
+
+.cardLink {
+  display: block;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardBackground {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 243px;
+  border-radius: 20px;
+  border: 1px solid var(--card_black_opacity_10);
+  background-color: var(--green_E1EDDE);
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.solidBackground {
+  background-size: 100% 100%;
+}
+
+.imageBackground {
+  background-size: cover;
+  height: 243px;
+}
+
+.imageBackground::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, #41414180 0%, #41414180 100%),
+    linear-gradient(0deg, #0000001a 0%, #0000001a 100%);
+}
+
+.cardInner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 30px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.titleDate {
+  display: grid;
+  row-gap: 10px;
+  width: 100%;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 12px;
+}
+
+.cardTitle {
+  min-width: 0;
+  max-width: 100%;
+  flex: 1;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.nickname {
+  color: inherit;
+}
+
+.cardPoint {
+  display: flex;
+  min-width: 86px;
+  height: 22px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  color: var(--white_FFFFFF);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 50px;
+  border: 1px solid var(--card_black_opacity_10);
+  background: var(--card_black_opacity_50);
+}
+
+.pointIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.cardProgressText {
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.cardDescription {
+  align-self: start;
+  max-width: 100%;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px; /* 150% */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  margin: 0;
+}
+
+.lightTextTheme .cardTitle,
+.lightTextTheme .cardDescription {
+  color: var(--white_FFFFFF);
+}
+
+.lightTextTheme .cardProgressText {
+  color: var(--gray_EEEEEE);
+}
+
+.darkTextTheme .cardTitle {
+  color: var(--black_414141);
+}
+
+.darkTextTheme .cardProgressText {
+  color: var(--gray_818181);
+}
+
+.darkTextTheme .cardDescription {
+  color: var(--black_414141);
+}
+
+.cardEmojiTagDiv {
+  display: inline-flex;
+  align-items: flex-start;
+  align-self: flex-start;
+  gap: 5px;
+}
+.cardEmojiTag {
+  display: flex;
+  padding: 6px 8px;
+  align-items: center;
+  gap: 5px;
+  border-radius: 50px;
+  background: var(--card_black_opacity_40);
+  color: var(--white_FFFFFF);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

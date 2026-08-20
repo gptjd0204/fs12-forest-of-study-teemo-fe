@@ -1,0 +1,64 @@
+/* 습관 기록표 - table */
+.habitTable {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.habitTable th {
+  font-size: 18px;
+}
+
+.habitTable > thead th {
+  color: var(--gray_818181);
+  font-weight: 400;
+}
+
+.habitTable > thead th:first-child {
+  width: 25%;
+}
+
+.habitTable > tbody th {
+  text-align: right;
+}
+
+.habitTable td {
+  width: 10%;
+}
+
+.habitTable td > img {
+  margin: 14px auto;
+}
+
+.emptyTable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .emptyTable {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .tableWrapper {
+    overflow-x: auto;
+    min-height: 430px;
+  }
+
+  .habitTable {
+    width: 1024px;
+  }
+
+  .habitTable th {
+    font-size: 14px;
+  }
+
+  .emptyTable {
+    font-size: 16px;
+  }
+}

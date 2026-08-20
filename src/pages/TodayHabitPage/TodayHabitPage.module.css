@@ -1,0 +1,274 @@
+.bodyWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.navContainer {
+  display: flex;
+  gap: 16px;
+}
+
+/* 오늘의 습관 리스트 헤더 */
+
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 45px;
+
+  width: 100%;
+
+  padding: 40px 24px;
+  border-radius: 20px;
+  border: 1px solid var(--gray_DDDDDD);
+  background: var(--white_FFFFFF);
+}
+
+.todayHabit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+
+  width: 100%;
+  max-width: 400px;
+}
+
+.listHeader {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+.listTitle {
+  width: 100%;
+  text-align: center;
+
+  color: var(--black_414141);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.listConfirmBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  padding: 8px 12px;
+  color: var(--gray_818181);
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  background: none;
+  border: none;
+}
+
+/* 습관 수정 모달 */
+.modifyList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 20px;
+}
+
+.modifyItemWrap {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  overflow-y: auto;
+  gap: 20px;
+}
+
+.modifyItemDelBtn {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.modifyItem {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+}
+
+.habitInput {
+  flex: 1;
+  min-height: 54px;
+
+  border-radius: 20px;
+
+  border: 1px solid #ccc;
+  transition: all 0.2s ease;
+
+  background: var(--gray_EEEEEE);
+
+  color: var(--gray_818181);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.error {
+  border: 1px solid var(--error_C41013);
+}
+
+.errorMessage {
+  color: var(--error_C41013);
+}
+
+.removeBtn {
+  display: flex;
+  padding: 12px;
+
+  border-radius: 35px;
+  background: var(--pink_FDE0E9);
+}
+
+.plusBtn {
+  display: flex;
+  min-height: 54px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 20px;
+  border: 2px solid var(--black_414141);
+  background: rgba(255, 255, 255, 0);
+}
+
+/* 오늘의 습관 조회 */
+
+.habitList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  min-height: 498px;
+}
+
+.habitItem {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 20px;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.completed {
+  background-color: var(--brand_99C08E);
+  color: var(--white_FFFFFF);
+}
+
+.notComplete {
+  background-color: var(--gray_EEEEEE);
+  color: var(--gray_818181);
+}
+
+/* 빈 습관 조회 */
+
+.emptyMessage {
+  display: flex;
+  width: 100%;
+  min-height: 498px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  color: var(--gray_818181);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* 로딩 화면 */
+
+.loadingBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+  min-height: 558px;
+}
+
+/* 태블릿 */
+@media (max-width: 1024px) {
+  .bodyWrapper {
+    gap: 40px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .bodyWrapper {
+    gap: 24px;
+  }
+  .top {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .navContainer {
+    gap: 8px;
+  }
+  .mainSection {
+    width: 100%;
+    gap: 10px;
+
+    padding: 24px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--gray_DDDDDD);
+    background: var(--white_FFFFFF);
+  }
+  .listTitle {
+    font-size: 18px;
+  }
+  .habitList {
+    gap: 12px;
+    min-height: 450px;
+  }
+  .emptyMessage {
+    min-height: 474px;
+
+    font-size: 16px;
+  }
+  .modifyList {
+    gap: 8px;
+  }
+  .habitInput {
+    width: 100%;
+  }
+  .plusBtn {
+    margin-top: 24px;
+  }
+
+  .modifyItemWrap {
+    max-height: 320px;
+  }
+}
